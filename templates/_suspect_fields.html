@@ -1,0 +1,12 @@
+{# Shared by "add suspect" and "edit dossier". `s` may be undefined when adding. #}
+{% set s = s if s is defined else None %}
+<div class="form-grid">
+  <div class="field"><label>Name</label><input type="text" name="name" required value="{{ s.name if s else '' }}"></div>
+  <div class="field"><label>Photograph (JPG/PNG, fictional)</label><input type="file" name="photo" accept=".jpg,.jpeg,.png,.gif,.webp"></div>
+  <div class="field full"><label>Relationship to the incident</label><input type="text" name="relationship" value="{{ s.relationship if s else '' }}"></div>
+  <div class="field full"><label>Background</label><textarea name="background" rows="2">{{ s.background if s else '' }}</textarea></div>
+  <div class="field"><label>Possible motive</label><textarea name="motive" rows="2">{{ s.motive if s else '' }}</textarea></div>
+  <div class="field"><label>Alibi</label><textarea name="alibi" rows="2">{{ s.alibi if s else '' }}</textarea></div>
+  <div class="field full"><label>Recorded statements</label><textarea name="statements" rows="3">{{ s.statements if s else '' }}</textarea></div>
+  <div class="field full"><label>Investigation notes</label><textarea name="notes" rows="2">{{ s.notes if s else '' }}</textarea></div>
+</div>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar, csrf %}
+{% block title %}Login{% endblock %}
+{% block public %}
+<div class="tape"></div>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('auth.index') }}"><span class="brand-mark">TX</span> TRACE X</a>
+  <div class="spacer"></div>
+  <a class="btn small ghost" href="{{ url_for('auth.index') }}#detectives">All detectives</a>
+</header>
+<div class="login-wrap">
+  {% include "_flashes.html" %}
+  <div class="card login-card">
+    <div class="tape"></div>
+    <div class="inner">
+      {% if detective %}
+        <div class="login-who">
+          {{ avatar(detective.full_name, detective.profile_image, "lg", square=True) }}
+          <div>
+            <div class="eyebrow" style="margin-bottom:.3rem">{{ detective.badge_id }}</div>
+            <h1 style="font-size:1.35rem;margin:0">{{ detective.full_name }}</h1>
+            <div class="muted" style="font-size:.88rem">{{ detective.specialization }}</div>
+          </div>
+        </div>
+      {% elif portal == 'admin' %}
+        <div class="eyebrow">Restricted</div>
+        <h1 style="font-size:1.4rem">Administrator login</h1>
+      {% else %}
+        <div class="eyebrow">Secure access</div>
+        <h1 style="font-size:1.4rem">Log in to TRACE X</h1>
+      {% endif %}
+
+      <form method="post" action="{{ url_for('auth.login') }}" autocomplete="on">
+        {{ csrf() }}
+        <input type="hidden" name="portal" value="{{ portal }}">
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" required autocapitalize="off" spellcheck="false"
+                 value="{{ detective.username if detective else '' }}"
+                 {% if not detective %}autofocus{% endif %}>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required {% if detective %}autofocus{% endif %}>
+        </div>
+        <button class="btn primary block" type="submit">Log in</button>
+      </form>
+      <p class="hint" style="margin:1rem 0 0">Credentials are checked on the server. Every successful and failed login is recorded in the activity log.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

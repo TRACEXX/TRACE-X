@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_chip, integrity_chip %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Search</div><h1>Search case records</h1>
+    <p class="muted" style="margin:.3rem 0 0">Only cases you are allowed to open are searched. Try <span class="mono">CASE-002</span>, <span class="mono">EV-0003</span>, a name or a keyword.</p></div>
+</div>
+<form method="get" class="card row" style="margin-bottom:1rem">
+  <input type="search" name="q" value="{{ query }}" placeholder="e.g. access card, Kamran, EV-0002, case 3" style="flex:1;min-width:220px" autofocus aria-label="Search">
+  <button class="btn primary" type="submit">Search</button>
+</form>
+
+{% if results is not none %}
+  {% if algorithm_notes %}
+    <div class="notice" style="margin-bottom:1rem">{% for n in algorithm_notes %}<div>{{ n }}</div>{% endfor %}</div>
+  {% endif %}
+  {% if results.exact %}
+    <section class="card" style="margin-bottom:1rem"><h2>Exact match</h2>
+      <ul class="list">{% for r in results.exact %}<li><span class="type-tag">{{ r.kind }}</span> <a href="{{ r.url }}">{{ r.label }}</a></li>{% endfor %}</ul>
+    </section>
+  {% endif %}
+  <div class="grid grid-2">
+    <section class="card"><h2>Cases ({{ results.cases|length }})</h2>
+      <ul class="list">{% for c in results.cases %}
+        <li class="item-row"><div class="grow"><a href="{{ url_for('cases.view_case', case_number=c.case_number) }}"><span class="mono">{{ c.case_number }}</span> {{ c.title }}</a></div>{{ status_chip(c.status) }}</li>
+      {% else %}<li class="muted">No matches</li>{% endfor %}</ul>
+    </section>
+    <section class="card"><h2>Suspects ({{ results.suspects|length }})</h2>
+      <ul class="list">{% for s in results.suspects %}
+        <li><a href="{{ url_for('cases.suspect_dossier', suspect_id=s.id) }}">{{ s.code }} {{ s.name }}</a> <span class="muted">&middot; {{ s.case_number }}</span></li>
+      {% else %}<li class="muted">No matches</li>{% endfor %}</ul>
+    </section>
+    <section class="card"><h2>Evidence ({{ results.evidence|length }})</h2>
+      <ul class="list">{% for e in results.evidence %}
+        <li class="item-row"><div class="grow"><a href="{{ url_for('evidence.view', evidence_id=e.id) }}"><span class="mono">{{ e.evidence_code }}</span> {{ e.filename }}</a>
+          <div class="muted" style="font-size:.8rem">{{ e.case_number }}</div></div>{{ integrity_chip(e.integrity_status) }}</li>
+      {% else %}<li class="muted">No matches</li>{% endfor %}</ul>
+    </section>
+    <section class="card"><h2>Witness statements ({{ results.witnesses|length }})</h2>
+      <ul class="list">{% for w in results.witnesses %}
+        <li><a href="{{ url_for('cases.view_case', case_number=w.case_number, tab='witnesses') }}">{{ w.code }} {{ w.name }}</a>
+          <div class="muted" style="font-size:.85rem">{{ w.statement[:140] }}{{ '…' if w.statement|length > 140 }}</div></li>
+      {% else %}<li class="muted">No matches</li>{% endfor %}</ul>
+    </section>
+    <section class="card"><h2>Notes ({{ results.notes|length }})</h2>
+      <ul class="list">{% for n in results.notes %}
+        <li><a href="{{ url_for('cases.view_case', case_number=n.case_number, tab='notes') }}">{{ n.title }}</a> <span class="muted">&middot; {{ n.case_number }}</span></li>
+      {% else %}<li class="muted">No matches</li>{% endfor %}</ul>
+    </section>
+  </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Custody {{ evidence.evidence_code }}{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+  <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='forensics') }}">{{ case.case_number }}</a> /
+  <a href="{{ url_for('evidence.view', evidence_id=evidence.id) }}">{{ evidence.evidence_code }}</a> / chain of custody
+</div>
+<div class="page-head">
+  <div><div class="eyebrow">Chain of custody &middot; {{ evidence.evidence_code }}</div><h1>{{ evidence.filename }}</h1></div>
+  <form method="get" class="row">
+    <select name="action" style="width:auto" aria-label="Search actions">
+      <option value="">All actions</option>
+      {% for a in actions %}<option {{ 'selected' if a == action_filter }}>{{ a }}</option>{% endfor %}
+    </select>
+    <button class="btn" type="submit">Search linked list</button>
+  </form>
+</div>
+
+<div class="grid grid-2" style="margin-bottom:1rem">
+  <section class="card {{ '' if verification.valid else 'alert' }}">
+    <h2>Audit hash chain</h2>
+    <div class="result-banner {{ 'MATCH' if verification.valid else 'MISMATCH' }}" style="font-size:1.05rem">
+      {{ 'INTACT' if verification.valid else 'BROKEN AT RECORD #' ~ verification.broken_at }}</div>
+    <p class="muted" style="margin:.7rem 0 0;font-size:.9rem">{{ verification.reason }} {{ verification.checked }} record(s) re-hashed.
+      Each record stores the SHA-256 of the previous one, so editing or deleting a stored record breaks the chain.
+      This protects the history; the file itself is checked separately with "Verify integrity".</p>
+  </section>
+  <section class="card">
+    <h2>Linked list</h2>
+    <p class="mono" style="font-size:.8rem;overflow-wrap:anywhere;margin:0">head &rarr; {{ chain_text }}</p>
+    <p class="hint" style="margin:.6rem 0 0">Loaded from SQLite into dsa/linked_list.py and traversed head to tail.</p>
+  </section>
+</div>
+
+{% if found is not none %}
+  <div class="notice" style="margin-bottom:1rem">Linear search through the list for "{{ action_filter }}": {{ found|length }} matching event(s).</div>
+{% endif %}
+
+<section class="card table-wrap">
+  <table class="table">
+    <thead><tr><th>#</th><th>Time</th><th>Action</th><th>User</th><th>Description</th><th>Record hash</th></tr></thead>
+    <tbody>
+    {% for ev in (found if found is not none else events) %}
+      <tr>
+        <td class="num">{{ ev.id }}</td>
+        <td class="num" style="white-space:nowrap">{{ ev.timestamp }}</td>
+        <td><strong>{{ ev.action }}</strong></td>
+        <td>{{ ev.user_name or 'system' }}{% if ev.badge_id %}<div class="faint mono" style="font-size:.76rem">{{ ev.badge_id }}</div>{% endif %}</td>
+        <td style="max-width:380px;overflow-wrap:anywhere">{{ ev.description }}</td>
+        <td class="mono faint" style="font-size:.72rem" title="prev {{ ev.prev_hash }}">{{ ev.record_hash[:16] }}…</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="muted">No events.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

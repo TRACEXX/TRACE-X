@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar, integrity_chip, csrf %}
+{% block title %}{{ code }} {{ suspect.name }}{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+  <a href="{{ url_for('detectives.case_list') }}">Cases</a> /
+  <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='suspects') }}">{{ case.case_number }}</a> / {{ code }}
+</div>
+<div class="page-head">
+  <div class="item-row">
+    {{ avatar(suspect.name, suspect.photo_path, "xl", square=True) }}
+    <div>
+      <div class="eyebrow">Suspect dossier &middot; {{ code }}</div>
+      <h1>{{ suspect.name }}</h1>
+      <div class="muted">{{ suspect.relationship }}</div>
+      <div class="faint" style="font-size:.8rem;margin-top:.3rem">Last updated {{ suspect.updated_at }}</div>
+    </div>
+  </div>
+  <a class="btn" href="{{ url_for('cases.graph_page', case_number=case.case_number, start='suspect:' ~ suspect.id) }}">Explore connections</a>
+</div>
+
+<div class="split">
+  <div class="stack">
+    <section class="card">
+      <h2>Dossier</h2>
+      <dl class="kv">
+        <dt>Background</dt><dd style="white-space:pre-line">{{ suspect.background or 'Not recorded' }}</dd>
+        <dt>Possible motive</dt><dd style="white-space:pre-line">{{ suspect.motive or 'Not recorded' }}</dd>
+        <dt>Alibi</dt><dd style="white-space:pre-line">{{ suspect.alibi or 'Not recorded' }}</dd>
+        <dt>Statements</dt><dd style="white-space:pre-line">{{ suspect.statements or 'None recorded' }}</dd>
+        <dt>Notes</dt><dd style="white-space:pre-line">{{ suspect.notes or '—' }}</dd>
+      </dl>
+    </section>
+
+    <section class="card">
+      <h2>Evidence explicitly linked ({{ linked|length }})</h2>
+      {% if linked %}
+        <ul class="list">
+          {% for l in linked %}
+            <li class="item-row">
+              <span class="type-tag">{{ l.evidence.file_type }}</span>
+              <div class="grow"><a class="mono" href="{{ url_for('evidence.view', evidence_id=l.evidence.id) }}">{{ l.evidence.evidence_code }}</a> {{ l.evidence.filename }}
+                <div class="muted" style="font-size:.84rem"><span class="chip plain">{{ l.relationship_type }}</span> {{ l.description }}</div></div>
+              {{ integrity_chip(l.evidence.integrity_status) }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="muted" style="margin:0">No evidence is linked to this suspect. Links are recorded in Forensic Tools &rarr; relationships, with their basis.</p>
+      {% endif %}
+    </section>
+
+    {% if other_links %}
+    <section class="card">
+      <h2>Other recorded connections</h2>
+      <ul class="list" style="font-size:.88rem">
+        {% for r in other_links %}
+          <li><strong>{{ r.source_label }}</strong> <span class="chip plain">{{ r.relationship_type }}</span> <strong>{{ r.target_label }}</strong>
+            <div class="muted" style="font-size:.8rem">{{ r.description }}</div></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if witnesses %}
+    <section class="card">
+      <h2>Witness statements mentioning this suspect</h2>
+      <ul class="list">{% for w in witnesses %}
+        <li><a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='witnesses') }}#w{{ w.id }}">{{ w.id|wcode }} {{ w.name }}</a>
+          <div class="muted" style="font-size:.86rem">{{ w.statement }}</div></li>{% endfor %}</ul>
+    </section>
+    {% endif %}
+  </div>
+
+  {% if editable %}
+    <section class="card">
+      <h2>Update dossier</h2>
+      <form method="post" action="{{ url_for('cases.edit_suspect', suspect_id=suspect.id) }}" enctype="multipart/form-data">
+        {{ csrf() }}
+        {% set s = suspect %}{% include "_suspect_fields.html" %}
+        <button class="btn primary block" type="submit">Save dossier</button>
+      </form>
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

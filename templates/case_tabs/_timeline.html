@@ -1,0 +1,44 @@
+{% from "_macros.html" import csrf %}
+<div class="split">
+  <section class="card">
+    <div class="card-head">
+      <h2>Investigation timeline ({{ events|length }})</h2>
+      <a class="btn small" href="{{ url_for('cases.view_case', case_number=case.case_number, tab='timeline', system='0' if include_system else '1') }}">
+        {{ 'Hide' if include_system else 'Show' }} system upload times</a>
+    </div>
+    <p class="hint">Sorted with merge sort (dsa/sorting.py). Grey entries are when files were uploaded to TRACE X, which is not when anything happened.</p>
+    {% if events %}
+      <ul class="timeline">
+        {% for e in events %}
+          <li class="cat-{{ e.category }}">
+            <div class="when">{{ e.time }}</div>
+            <div class="what">{{ e.type }}</div>
+            <div>{{ e.description }}</div>
+            <div class="src">Source: {{ e.source }}
+              {% if e.evidence_id %} &middot; <a href="{{ url_for('evidence.view', evidence_id=e.evidence_id) }}">open related evidence{% if e.evidence_code %} {{ e.evidence_code }}{% endif %}</a>{% endif %}</div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="empty">No events recorded.</div>
+    {% endif %}
+  </section>
+
+  {% if editable %}
+    <section class="card">
+      <h2>Add a recorded event</h2>
+      <form method="post" action="{{ url_for('cases.add_timeline_event', case_number=case.case_number) }}">
+        {{ csrf() }}
+        <div class="field"><label>When it happened</label><input type="datetime-local" name="event_time" required step="1"></div>
+        <div class="field"><label>Event type</label><input type="text" name="event_type" placeholder="e.g. CCTV sighting" required></div>
+        <div class="field"><label>Description</label><textarea name="description" rows="3" required></textarea></div>
+        <div class="field"><label>Source of this time</label><input type="text" name="source" placeholder="e.g. Witness W-002, CCTV EV-0013 at 00:04:12"></div>
+        <div class="field"><label>Related evidence</label>
+          <select name="source_evidence_id"><option value="">None</option>
+            {% for e in evidence %}<option value="{{ e.id }}">{{ e.evidence_code }} {{ e.filename }}</option>{% endfor %}</select></div>
+        <button class="btn primary block" type="submit">Add event</button>
+      </form>
+      <p class="hint" style="margin:.8rem 0 0">CSV activity logs can be imported row by row from <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='forensics') }}">Forensic Tools &rarr; analysis queue</a>.</p>
+    </section>
+  {% endif %}
+</div>

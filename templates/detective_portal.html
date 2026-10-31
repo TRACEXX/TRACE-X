@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar, case_card, integrity_chip %}
+{% block title %}{{ user.full_name }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="item-row">
+    {{ avatar(user.full_name, user.profile_image, "lg", square=True) }}
+    <div>
+      <div class="eyebrow">{{ user.badge_id }} &middot; Detective portal</div>
+      <h1>{{ user.full_name }}</h1>
+      <div class="muted">{{ user.specialization }}</div>
+    </div>
+  </div>
+  <form method="get" action="{{ url_for('detectives.search') }}" class="row" style="min-width:min(100%,360px)">
+    <input type="search" name="q" placeholder="Search my cases, suspects, evidence…" style="flex:1" aria-label="Search">
+    <button class="btn" type="submit">Search</button>
+  </form>
+</div>
+
+<div class="split">
+  <div class="stack">
+    <section>
+      <h2>Assigned cases ({{ assigned|length }})</h2>
+      {% if assigned %}
+        <div class="grid grid-2">{% for c in assigned %}{{ case_card(c, c.my_role) }}{% endfor %}</div>
+      {% else %}
+        <div class="empty">No cases are assigned to you yet. The administrator assigns cases from the dashboard.</div>
+      {% endif %}
+    </section>
+    <section>
+      <h2>Shared with me ({{ shared|length }})</h2>
+      {% if shared %}
+        <div class="grid grid-2">{% for c in shared %}{{ case_card(c, c.my_role) }}{% endfor %}</div>
+      {% else %}
+        <div class="empty">No cases are shared with you.</div>
+      {% endif %}
+    </section>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <div class="card-head"><h2>TRACE AI</h2><a class="btn small primary" href="{{ url_for('ai.page') }}">Open</a></div>
+      <p class="muted" style="margin:0;font-size:.9rem">Ask about your cases: "Summarize Case 001", "What evidence is in Case 002?"</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Evidence awaiting verification</h2></div>
+      {% if awaiting %}
+        <ul class="list">
+          {% for e in awaiting %}
+            <li class="item-row">
+              <div class="grow"><a class="mono" href="{{ url_for('evidence.view', evidence_id=e.id) }}">{{ e.evidence_code }}</a> {{ e.filename }}
+                <div class="muted" style="font-size:.8rem">{{ e.case_number }}</div></div>
+              {{ integrity_chip(e.integrity_status) }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="muted" style="margin:0">All evidence in your cases has a MATCH result.</p>
+      {% endif %}
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Recent investigation activity</h2></div>
+      {% if activity %}
+        <ul class="list" style="font-size:.87rem">
+          {% for a in activity %}
+            <li><strong>{{ a.action }}</strong> &middot; <a class="mono" href="{{ url_for('evidence.view', evidence_id=a.evidence_id) }}">{{ a.evidence_code }}</a>
+              <div class="muted" style="font-size:.78rem">{{ a.timestamp }} &middot; {{ a.full_name or 'system' }} &middot; {{ a.case_number }}</div></li>
+          {% endfor %}
+        </ul>
+      {% else %}<p class="muted" style="margin:0">No activity yet.</p>{% endif %}
+    </section>
+  </div>
+</div>
+{% endblock %}

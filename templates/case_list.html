@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "_macros.html" import case_card %}
+{% block title %}Cases{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Investigation</div><h1>{{ 'All cases' if user_is_admin else 'Cases I can open' }}</h1></div>
+  <form method="get" class="row">
+    <select name="status" style="width:auto" aria-label="Status filter">
+      <option value="">All statuses</option>
+      {% for s in ['Open', 'Under Investigation', 'Pending Review', 'Closed'] %}<option {{ 'selected' if status == s }}>{{ s }}</option>{% endfor %}
+    </select>
+    <button class="btn" type="submit">Filter</button>
+    {% if user_is_admin %}<a class="btn primary" href="{{ url_for('admin.new_case') }}">+ New case</a>{% endif %}
+  </form>
+</div>
+{% if cases %}
+  <div class="grid grid-2">{% for c in cases %}{{ case_card(c, c.my_role) }}{% endfor %}</div>
+{% else %}
+  <div class="empty">No cases to show.</div>
+{% endif %}
+{% endblock %}

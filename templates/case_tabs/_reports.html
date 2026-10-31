@@ -1,0 +1,60 @@
+{% from "_macros.html" import csrf %}
+<div class="split">
+  <div class="stack">
+    <section class="card">
+      <div class="card-head"><h2>Investigation report</h2>
+        <a class="btn small" href="{{ url_for('reports.preview', case_number=case.case_number) }}">Preview report</a></div>
+      <p class="muted">The PDF compiles case details, suspects, statements, evidence with SHA-256 results, the timeline,
+        custody summary, notes and findings. Automated summaries are labelled as such.</p>
+      <form method="post" action="{{ url_for('reports.generate', case_number=case.case_number) }}" class="row">
+        {{ csrf() }}
+        <label class="check"><input type="checkbox" name="use_ai" value="1"> Include AI summary (if an AI provider is configured)</label>
+        <button class="btn primary" type="submit">Generate &amp; download PDF</button>
+      </form>
+      {% if reports %}
+        <ul class="list" style="margin-top:1rem;font-size:.88rem">
+          {% for r in reports %}
+            <li class="item-row"><div class="grow"><a href="{{ url_for('reports.download', report_id=r.id) }}">{{ r.report_path }}</a>
+              <div class="muted" style="font-size:.78rem">{{ r.created_at }} &middot; {{ r.generated_by_name }} &middot; summary: {{ r.summary_source }}</div></div></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </section>
+
+    <section class="card">
+      <h2>Submitted findings ({{ findings|length }})</h2>
+      {% for f in findings %}
+        <article style="padding:.8rem 0;border-bottom:1px solid var(--line)">
+          <div class="muted" style="font-size:.82rem">{{ f.submitted_by_name }} &middot; {{ f.submitted_at }}
+            {% if f.suspect_name %} &middot; suspect referenced: <a href="{{ url_for('cases.suspect_dossier', suspect_id=f.selected_suspect_id) }}">{{ f.suspect_name }}</a>{% endif %}</div>
+          <p style="white-space:pre-line;margin:.4rem 0">{{ f.findings_text }}</p>
+          {% if f.evidence %}<div class="row">{% for e in f.evidence %}<a class="chip plain mono" href="{{ url_for('evidence.view', evidence_id=e.id) }}">{{ e.evidence_code }}</a>{% endfor %}</div>{% endif %}
+        </article>
+      {% else %}
+        <p class="muted" style="margin:0">No findings submitted yet.</p>
+      {% endfor %}
+    </section>
+  </div>
+
+  {% if editable %}
+    <section class="card">
+      <h2>Submit investigation findings</h2>
+      <p class="hint">Your findings are saved to the case record as written. TRACE X does not compare them with any answer.</p>
+      <form method="post" action="{{ url_for('cases.submit_findings', case_number=case.case_number) }}">
+        {{ csrf() }}
+        <div class="field"><label>Suspect referenced (optional)</label>
+          <select name="selected_suspect_id"><option value="">None</option>
+            {% for s in suspects %}<option value="{{ s.id }}">{{ s.id|scode }} {{ s.name }}</option>{% endfor %}</select></div>
+        <div class="field"><label>Findings</label><textarea name="findings_text" rows="7" required></textarea></div>
+        <div class="field"><label>Supporting evidence</label>
+          <div style="max-height:180px;overflow:auto;border:1px solid var(--line);border-radius:6px;padding:.5rem">
+            {% for e in evidence %}<label class="check"><input type="checkbox" name="evidence_ids" value="{{ e.id }}"> <span class="mono">{{ e.evidence_code }}</span> {{ e.filename }}</label>{% endfor %}
+          </div></div>
+        {% if case.status != 'Closed' %}
+          <label class="check" style="margin-bottom:.9rem"><input type="checkbox" name="mark_pending_review" value="1"> Set case status to Pending Review</label>
+        {% endif %}
+        <button class="btn primary block" type="submit">Save findings</button>
+      </form>
+    </section>
+  {% endif %}
+</div>

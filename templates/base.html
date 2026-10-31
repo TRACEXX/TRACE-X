@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{% block title %}TRACE X{% endblock %} | TRACE X</title>
+  <link rel="icon" href="{{ url_for('static', filename='assets/favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+{% from "_macros.html" import avatar %}
+{% if current_user and not public_page %}
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('admin.dashboard') if user_is_admin else url_for('detectives.portal') }}">
+      <span class="brand-mark">TX</span> TRACE X <small>Investigation System</small>
+    </a>
+    <div class="spacer"></div>
+    <div class="user-chip">
+      {{ avatar(current_user.full_name, current_user.profile_image) }}
+      <div>
+        <div>{{ current_user.full_name }}</div>
+        <div class="role">{{ current_user.badge_id }} &middot; {{ 'Administrator' if user_is_admin else 'Detective' }}</div>
+      </div>
+      <form method="post" action="{{ url_for('auth.logout') }}" class="inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn small ghost" type="submit">Log out</button>
+      </form>
+    </div>
+  </header>
+  <div class="shell">
+    <nav class="sidebar" aria-label="Main">
+      {% set ep = request.endpoint or '' %}
+      {% if user_is_admin %}
+        <div class="nav-title">Administration</div>
+        <a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if ep == 'admin.dashboard' }}"><span class="ico">##</span>Dashboard</a>
+        <a href="{{ url_for('admin.cases') }}" class="{{ 'active' if ep in ('admin.cases', 'admin.new_case', 'admin.edit_case') }}"><span class="ico">[]</span>Cases &amp; assignments</a>
+        <a href="{{ url_for('admin.detectives') }}" class="{{ 'active' if ep.startswith('admin.detective') }}"><span class="ico">@</span>Detectives</a>
+        <a href="{{ url_for('admin.users') }}" class="{{ 'active' if ep == 'admin.users' }}"><span class="ico">*</span>User accounts</a>
+        <a href="{{ url_for('admin.logs') }}" class="{{ 'active' if ep == 'admin.logs' }}"><span class="ico">&gt;_</span>Activity logs</a>
+        <a href="{{ url_for('admin.integrity_demo') }}" class="{{ 'active' if ep == 'admin.integrity_demo' }}"><span class="ico">#!</span>Integrity demo</a>
+      {% else %}
+        <div class="nav-title">Detective</div>
+        <a href="{{ url_for('detectives.portal') }}" class="{{ 'active' if ep == 'detectives.portal' }}"><span class="ico">##</span>My portal</a>
+      {% endif %}
+      <div class="nav-title">Investigation</div>
+      <a href="{{ url_for('detectives.case_list') }}" class="{{ 'active' if ep in ('detectives.case_list', 'cases.view_case') }}"><span class="ico">[]</span>{{ 'All cases' if user_is_admin else 'My cases' }}</a>
+      <a href="{{ url_for('detectives.search') }}" class="{{ 'active' if ep == 'detectives.search' }}"><span class="ico">?</span>Search</a>
+      <a href="{{ url_for('ai.page', case=case.case_number if case is defined and case else None) }}" class="{{ 'active' if ep == 'ai.page' }}"><span class="ico">AI</span>TRACE AI</a>
+      <a href="{{ url_for('inspector.page') }}" class="{{ 'active' if ep == 'inspector.page' }}"><span class="ico">{}</span>DSA Inspector</a>
+    </nav>
+    <main class="main">
+      {% include "_flashes.html" %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+{% else %}
+  {% block public %}{% endblock %}
+{% endif %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar %}
+{% block title %}Detectives{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Administrator</div><h1>Detective accounts</h1></div>
+  <a class="btn" href="{{ url_for('admin.users') }}">Manage accounts</a>
+</div>
+<div class="grid grid-2">
+  {% for d in detectives %}
+    <a class="card case-card" href="{{ url_for('admin.detective_cases', user_id=d.id) }}">
+      <div class="item-row">
+        {{ avatar(d.full_name, d.profile_image, "lg", square=True) }}
+        <div class="grow">
+          <span class="case-id">{{ d.badge_id }}</span>
+          <h3>{{ d.full_name }}</h3>
+          <div class="muted" style="font-size:.88rem">{{ d.specialization }}</div>
+          <div class="row" style="margin-top:.6rem;font-size:.85rem">
+            <span><b class="mono">{{ d.assigned_count }}</b> assigned</span>
+            <span><b class="mono">{{ d.shared_count }}</b> shared</span>
+            <span class="muted">username: <span class="mono">{{ d.username }}</span></span>
+            {% if not d.is_active %}<span class="chip int-mismatch">disabled</span>{% endif %}
+          </div>
+        </div>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

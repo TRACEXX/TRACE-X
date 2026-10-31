@@ -1,0 +1,26 @@
+{# Expects: case, nodes (list of (key, (type, label))). Optional: back, fixed_source #}
+{% from "_macros.html" import csrf %}
+<form method="post" action="{{ url_for('cases.add_relationship', case_number=case.case_number) }}">
+  {{ csrf() }}
+  {% if back is defined and back %}<input type="hidden" name="back" value="{{ back }}">{% endif %}
+  <div class="field"><label>From</label>
+    <select name="source_node" required>
+      {% for key, info in nodes %}<option value="{{ key }}" {{ 'selected' if fixed_source is defined and fixed_source == key }}>[{{ info[0] }}] {{ info[1] }}</option>{% endfor %}
+    </select></div>
+  <div class="field"><label>Relationship</label>
+    <input type="text" name="relationship_type" required list="rel-types" placeholder="e.g. appears in">
+    <datalist id="rel-types"><option>appears in</option><option>author of</option><option>mentions</option><option>taken at</option>
+      <option>owned by</option><option>registered holder</option><option>observed activity at</option><option>contradicts</option></datalist></div>
+  <div class="field"><label>To</label>
+    <select name="target_node" required data-new-toggle="#new-node-fields">
+      {% for key, info in nodes %}<option value="{{ key }}">[{{ info[0] }}] {{ info[1] }}</option>{% endfor %}
+      <option value="__new__">+ New location or device…</option>
+    </select></div>
+  <div id="new-node-fields" class="form-grid" hidden>
+    <div class="field"><label>Type</label><select name="new_type"><option value="location">Location</option><option value="device">Device</option></select></div>
+    <div class="field"><label>Name</label><input type="text" name="new_label" placeholder="e.g. Side Entrance"></div>
+  </div>
+  <div class="field"><label>Recorded basis (required)</label>
+    <textarea name="description" rows="2" required placeholder="Which record supports this link?"></textarea></div>
+  <button class="btn primary" type="submit">Record relationship</button>
+</form>

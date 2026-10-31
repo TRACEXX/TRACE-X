@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf %}
+{% block title %}{{ 'New case' if is_new else 'Edit ' ~ values.case_number }}{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('admin.cases') }}">Cases</a> / {{ 'New case' if is_new else values.case_number }}</div>
+<div class="page-head"><h1>{{ 'Create a case' if is_new else 'Edit ' ~ values.case_number }}</h1></div>
+<form method="post" class="card" style="max-width:900px">
+  {{ csrf() }}
+  <div class="form-grid">
+    <div class="field full"><label for="title">Case title</label>
+      <input id="title" name="title" type="text" required value="{{ values.title or '' }}"></div>
+    <div class="field"><label for="category">Category</label>
+      <input id="category" name="category" type="text" required list="categories" value="{{ values.category or '' }}">
+      <datalist id="categories"><option>Homicide</option><option>Missing Person</option><option>Theft</option>
+        <option>Cybercrime</option><option>Fraud</option><option>Assault</option></datalist></div>
+    <div class="field"><label for="status">Status</label>
+      <select id="status" name="status">{% for s in statuses %}<option {{ 'selected' if values.status == s }}>{{ s }}</option>{% endfor %}</select></div>
+    <div class="field"><label for="incident_date">Incident date</label>
+      <input id="incident_date" name="incident_date" type="date" value="{{ values.incident_date or '' }}"></div>
+    <div class="field"><label for="location">Location</label>
+      <input id="location" name="location" type="text" value="{{ values.location or '' }}"></div>
+    <div class="field full"><label for="description">Detailed description (incident report)</label>
+      <textarea id="description" name="description" rows="6">{{ values.description or '' }}</textarea></div>
+    <div class="field full"><label for="summary">Case summary</label>
+      <textarea id="summary" name="summary" rows="3">{{ values.summary or '' }}</textarea></div>
+    {% if is_new %}
+      <div class="field"><label for="lead_id">Lead detective (optional)</label>
+        <select id="lead_id" name="lead_id"><option value="">Assign later</option>
+          {% for d in detectives %}<option value="{{ d.id }}">{{ d.full_name }}</option>{% endfor %}</select></div>
+    {% endif %}
+  </div>
+  <div class="row">
+    <button class="btn primary" type="submit">{{ 'Create case' if is_new else 'Save changes' }}</button>
+    <a class="btn ghost" href="{{ url_for('admin.cases') }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

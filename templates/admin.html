@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar, status_chip, integrity_chip %}
+{% block title %}Administrator dashboard{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <div class="eyebrow">Administrator</div>
+    <h1>Investigation headquarters</h1>
+  </div>
+  <div class="row">
+    <a class="btn" href="{{ url_for('detectives.search') }}">Search all cases</a>
+    <a class="btn primary" href="{{ url_for('admin.new_case') }}">+ New case</a>
+  </div>
+</div>
+
+<div class="grid grid-4">
+  <div class="card stat"><span class="value">{{ stats.detectives }}</span><span class="label">Detectives</span></div>
+  <div class="card stat"><span class="value">{{ stats.cases }}</span><span class="label">Total cases</span></div>
+  <div class="card stat"><span class="value">{{ stats.active }}</span><span class="label">Active investigations</span></div>
+  <div class="card stat"><span class="value">{{ stats.closed }}</span><span class="label">Closed investigations</span></div>
+  <div class="card stat"><span class="value">{{ stats.evidence }}</span><span class="label">Registered evidence files</span></div>
+  <div class="card stat {{ 'warn' if stats.alerts else 'good' }}"><span class="value">{{ stats.alerts }}</span><span class="label">Integrity alerts</span></div>
+  <div class="card stat"><span class="value">{{ stats.unverified }}</span><span class="label">Awaiting verification</span></div>
+  <div class="card stat {{ 'warn' if stats.unassigned }}"><span class="value">{{ stats.unassigned }}</span><span class="label">Unassigned cases</span></div>
+</div>
+
+<div class="split" style="margin-top:1rem">
+  <div class="stack">
+    <section class="card">
+      <div class="card-head"><h2>Cases</h2><a class="btn small" href="{{ url_for('admin.cases') }}">Assign &amp; manage</a></div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th>Case</th><th>Status</th><th>Lead</th><th>Evidence</th></tr></thead>
+          <tbody>
+          {% for c in cases %}
+            <tr>
+              <td><a href="{{ url_for('cases.view_case', case_number=c.case_number) }}"><span class="mono">{{ c.case_number }}</span></a><br>{{ c.title }}</td>
+              <td>{{ status_chip(c.status) }}</td>
+              <td>{{ c.lead_name or '—' }}{% if not c.lead_name %} <span class="chip plain status-pending-review">unassigned</span>{% endif %}</td>
+              <td class="num">{{ c.evidence_count }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card {{ 'alert' if alerts }}">
+      <div class="card-head"><h2>Evidence integrity alerts</h2></div>
+      {% if alerts %}
+        <ul class="list">
+          {% for e in alerts %}
+            <li class="item-row">
+              <div class="grow"><a href="{{ url_for('evidence.view', evidence_id=e.id) }}" class="mono">{{ e.evidence_code }}</a> {{ e.filename }}
+                <div class="muted" style="font-size:.82rem">{{ e.case_number }} &middot; last checked {{ e.last_verified_at }}</div></div>
+              {{ integrity_chip(e.integrity_status) }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="muted" style="margin:0">No evidence has failed its latest SHA-256 verification.</p>
+      {% endif %}
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Recent evidence uploads</h2></div>
+      <ul class="list">
+        {% for e in recent_uploads %}
+          <li class="item-row">
+            <span class="type-tag">{{ e.file_type }}</span>
+            <div class="grow"><a href="{{ url_for('evidence.view', evidence_id=e.id) }}" class="mono">{{ e.evidence_code }}</a> {{ e.filename }}
+              <div class="muted" style="font-size:.82rem">{{ e.case_number }} &middot; {{ e.uploaded_by_name }} &middot; {{ e.uploaded_at }}</div></div>
+            {{ integrity_chip(e.integrity_status) }}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <div class="card-head"><h2>Detectives</h2><a class="btn small" href="{{ url_for('admin.detectives') }}">View all</a></div>
+      <ul class="list">
+        {% for d in detectives %}
+          <li class="item-row">
+            {{ avatar(d.full_name, d.profile_image) }}
+            <div class="grow"><a href="{{ url_for('admin.detective_cases', user_id=d.id) }}">{{ d.full_name }}</a>
+              <div class="muted" style="font-size:.82rem">{{ d.badge_id }} &middot; {{ d.assigned_count }} assigned, {{ d.shared_count }} shared</div></div>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Cases by status</h2></div>
+      {% for status, n in status_counts.items() %}
+        <div style="margin-bottom:.7rem">
+          <div class="row between" style="font-size:.88rem"><span>{{ status }}</span><span class="mono">{{ n }}</span></div>
+          <div class="bar"><i style="width: {{ (100 * n / stats.cases) if stats.cases else 0 }}%"></i></div>
+        </div>
+      {% endfor %}
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Recent system activity</h2><a class="btn small" href="{{ url_for('admin.logs') }}">All logs</a></div>
+      <ul class="list" style="font-size:.86rem">
+        {% for log in recent_activity %}
+          <li><strong>{{ log.action }}</strong> {% if log.target_id %}<span class="mono">{{ log.target_id }}</span>{% endif %}
+            <div class="muted" style="font-size:.78rem">{{ log.timestamp }} &middot; {{ log.full_name or 'unknown user' }}</div></li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_chip, integrity_chip, csrf %}
+{% block title %}Report {{ case.case_number }}{% endblock %}
+{% block content %}
+<div class="breadcrumb no-print">
+  <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='reports') }}">{{ case.case_number }}</a> / report preview
+</div>
+<div class="page-head">
+  <div><div class="eyebrow">Investigation report preview</div><h1>{{ case.case_number }}: {{ case.title }}</h1></div>
+  <form method="post" action="{{ url_for('reports.generate', case_number=case.case_number) }}" class="row no-print">
+    {{ csrf() }}
+    <label class="check"><input type="checkbox" name="use_ai" value="1" {{ 'disabled' if not ai.configured }}> AI summary{% if not ai.configured %} (no provider){% endif %}</label>
+    <button class="btn primary" type="submit">Download PDF</button>
+  </form>
+</div>
+
+<div class="stack">
+  <section class="card">
+    <dl class="kv">
+      <dt>Status</dt><dd>{{ status_chip(case.status) }}</dd>
+      <dt>Category</dt><dd>{{ case.category }}</dd>
+      <dt>Incident</dt><dd>{{ case.incident_date or 'Not recorded' }} &middot; {{ case.location or 'Location not recorded' }}</dd>
+      <dt>Detectives</dt><dd>{% for t in bundle.team %}{{ t.full_name }} ({{ t.permission_level }}){{ ', ' if not loop.last }}{% else %}None assigned{% endfor %}</dd>
+    </dl>
+  </section>
+  <section class="card" style="border-color:var(--accent)">
+    <div class="eyebrow">Automated summary &middot; rule-based from stored records (no AI)</div>
+    {% for line in summary.split('\n') %}<p style="margin:.3rem 0">{{ line }}</p>{% endfor %}
+  </section>
+  <div class="grid grid-2">
+    <section class="card"><h2>Suspects</h2>
+      <ul class="list">{% for s in bundle.suspects %}<li><strong>{{ s.code }} {{ s.name }}</strong><div class="muted" style="font-size:.86rem">Alibi: {{ s.alibi or 'not recorded' }}</div></li>{% else %}<li class="muted">None</li>{% endfor %}</ul></section>
+    <section class="card"><h2>Witness statements</h2>
+      <ul class="list">{% for w in bundle.witnesses %}<li><strong>{{ w.code }} {{ w.name }}</strong> <span class="faint">{{ w.recorded_at }}</span><div class="muted" style="font-size:.86rem">{{ w.statement }}</div></li>{% else %}<li class="muted">None</li>{% endfor %}</ul></section>
+  </div>
+  <section class="card table-wrap"><h2>Evidence &amp; SHA-256 results</h2>
+    <table class="table"><thead><tr><th>ID</th><th>File</th><th>Original SHA-256</th><th>Status</th><th>Custody events</th></tr></thead>
+      <tbody>{% for e in bundle.evidence %}<tr><td class="mono">{{ e.evidence_code }}</td><td>{{ e.filename }}</td>
+        <td class="mono" style="font-size:.74rem;word-break:break-all">{{ e.original_sha256 }}</td><td>{{ integrity_chip(e.integrity_status) }}</td><td class="num">{{ e.custody_count }}</td></tr>{% endfor %}</tbody></table></section>
+  <section class="card"><h2>Timeline (merge-sorted)</h2>
+    <ul class="timeline">{% for t in bundle.timeline %}<li class="cat-{{ t.category }}"><div class="when">{{ t.time }}</div><div class="what">{{ t.type }}</div><div>{{ t.description }}</div><div class="src">{{ t.source }}</div></li>{% else %}<li class="muted">No events.</li>{% endfor %}</ul></section>
+  <section class="card"><h2>Previously generated reports</h2>
+    <ul class="list">{% for r in reports %}<li><a href="{{ url_for('reports.download', report_id=r.id) }}">{{ r.report_path }}</a> <span class="muted">&middot; {{ r.created_at }} &middot; {{ r.summary_source }}</span></li>{% else %}<li class="muted">None yet.</li>{% endfor %}</ul></section>
+  <p class="hint">This report compiles recorded information only. It does not declare guilt.</p>
+</div>
+{% endblock %}

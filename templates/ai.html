@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}TRACE AI{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Investigation assistant</div><h1>TRACE AI</h1>
+    <p class="muted" style="margin:.3rem 0 0;max-width:760px">Answers come from TRACE X records you are authorised to see. Stored facts are shown first;
+      any AI-generated interpretation is labelled separately. TRACE AI never changes records and never names a culprit.</p></div>
+</div>
+
+<div class="ai-shell">
+  <section class="card">
+    <div class="chat-log" id="chat-log" aria-live="polite">
+      <div class="msg bot">
+        <div class="sec"><h4>Ready</h4>
+          <ul><li>Ask about a case, a detective's assignments, evidence, integrity results, a suspect, or the timeline.</li>
+            {% if case %}<li>Questions without a case number will use <strong>{{ case.case_number }}</strong> ({{ case.title }}).</li>{% endif %}</ul></div>
+      </div>
+    </div>
+    <form class="chat-form" id="chat-form" data-url="{{ url_for('ai.ask') }}" data-case="{{ case.case_number if case else '' }}">
+      <input type="text" id="question" name="question" autocomplete="off" required maxlength="1000"
+             placeholder="e.g. Summarize Case 001" aria-label="Question">
+      <button class="btn primary" type="submit" id="ask-btn">Ask</button>
+    </form>
+  </section>
+
+  <aside class="stack">
+    <section class="card">
+      <h3>Try asking</h3>
+      {% for q in examples %}<button class="btn small example-btn" type="button" data-example="{{ q }}">{{ q }}</button>{% endfor %}
+    </section>
+    <section class="card">
+      <h3>AI provider</h3>
+      <p style="margin:0 0 .4rem"><span class="chip {{ 'int-match' if provider.configured else 'int-unverified' }}">{{ provider.name }}</span>
+        {% if provider.model %}<span class="mono faint" style="font-size:.8rem">{{ provider.model }}</span>{% endif %}</p>
+      <p class="muted" style="font-size:.86rem;margin:0">{{ provider.message }}</p>
+      <p class="hint" style="margin:.6rem 0 0">Configure with AI_PROVIDER and AI_API_KEY in .env (see README). Basic search works without any provider.</p>
+    </section>
+  </aside>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/ai.js') }}"></script>{% endblock %}

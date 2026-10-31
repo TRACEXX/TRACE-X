@@ -1,0 +1,96 @@
+{% from "_macros.html" import integrity_chip, csrf %}
+<section class="card">
+  <div class="card-head"><h2>Integrity verification</h2>{{ integrity_chip(evidence.integrity_status) }}</div>
+  <div class="label">Original SHA-256 (registered {{ evidence.uploaded_at }})</div>
+  <code class="hash" data-copy title="Click to copy">{{ evidence.original_sha256 }}</code>
+  {% if checks %}
+    {% set last = checks[0] %}
+    <div class="result-banner {{ last.result|replace(' ', '-') }}" style="margin-top:.9rem;font-size:1.1rem">{{ last.result }}</div>
+    <div class="label" style="margin-top:.7rem">Hash calculated at last check ({{ last.checked_at }}, {{ last.checked_by_name }})</div>
+    <code class="hash {{ 'ok' if last.result == 'MATCH' else 'bad' }}">{{ last.current_sha256 or 'File not found in evidence storage' }}</code>
+  {% endif %}
+  <form method="post" action="{{ url_for('evidence.verify', evidence_id=evidence.id) }}" style="margin-top:.9rem">
+    {{ csrf() }}
+    <button class="btn primary block" type="submit">Verify integrity now</button>
+  </form>
+  {% if checks|length > 1 %}
+    <details style="margin-top:.8rem"><summary class="muted" style="cursor:pointer">Verification history ({{ checks|length }})</summary>
+      <ul class="list" style="font-size:.84rem">{% for c in checks %}
+        <li class="item-row"><div class="grow">{{ c.checked_at }} &middot; {{ c.checked_by_name }}</div>{{ integrity_chip(c.result) }}</li>{% endfor %}</ul>
+    </details>
+  {% endif %}
+  <p class="hint" style="margin:.8rem 0 0">MISMATCH means the stored bytes differ from the registered fingerprint. It does not show who changed them. The original hash is never overwritten.</p>
+</section>
+
+<section class="card">
+  <div class="card-head"><h2>Chain of custody</h2><a class="btn small" href="{{ url_for('evidence.custody', evidence_id=evidence.id) }}">Full history</a></div>
+  <ul class="list" style="font-size:.85rem">
+    {% for ev in custody|reverse %}
+      <li><strong>{{ ev.action }}</strong> &middot; {{ ev.user_name or 'system' }}<div class="muted" style="font-size:.78rem">{{ ev.timestamp }}</div></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Details</h2>
+  <dl class="kv" style="font-size:.9rem">
+    <dt>Evidence ID</dt><dd class="mono">{{ evidence.evidence_code }}</dd>
+    <dt>Case</dt><dd><a href="{{ url_for('cases.view_case', case_number=evidence.case_number, tab='evidence') }}">{{ evidence.case_number }}</a></dd>
+    <dt>Original name</dt><dd>{{ evidence.filename }}</dd>
+    <dt>Stored as</dt><dd class="mono" style="font-size:.78rem">{{ evidence.storage_path }}</dd>
+    <dt>Type</dt><dd>{{ evidence.file_type }} ({{ evidence.mime_type or 'unknown' }})</dd>
+    <dt>Size</dt><dd>{{ evidence.file_size|filesize }} ({{ '{:,}'.format(evidence.file_size) }} bytes)</dd>
+    <dt>Uploaded</dt><dd>{{ evidence.uploaded_at }} by {{ evidence.uploaded_by_name }}</dd>
+    <dt>Custodian</dt><dd>{{ evidence.custodian_name or '—' }}</dd>
+  </dl>
+  {% if not exists %}<p class="flash danger" style="margin:.8rem 0 0">The registered file is missing from evidence storage.</p>{% endif %}
+  <div class="row" style="margin-top:.9rem">
+    {% if exists %}<a class="btn small" href="{{ url_for('evidence.file', evidence_id=evidence.id, download=1) }}">Download (logged)</a>{% endif %}
+  </div>
+</section>
+
+{% if links %}
+<section class="card">
+  <h2>Recorded relationships</h2>
+  <ul class="list" style="font-size:.86rem">
+    {% for r in links %}
+      <li><strong>{{ r.source_label }}</strong> <span class="chip plain">{{ r.relationship_type }}</span> <strong>{{ r.target_label }}</strong>
+        <div class="muted" style="font-size:.8rem">{{ r.description }}</div></li>
+    {% endfor %}
+  </ul>
+  <a class="btn small" style="margin-top:.6rem" href="{{ url_for('cases.graph_page', case_number=case.case_number, start='evidence:' ~ evidence.id) }}">Explore in graph</a>
+</section>
+{% endif %}
+
+{% if editable %}
+<section class="card">
+  <h2>Investigator notes</h2>
+  <form method="post" action="{{ url_for('evidence.update_notes', evidence_id=evidence.id) }}">
+    {{ csrf() }}
+    <textarea name="notes" rows="3" aria-label="Notes">{{ evidence.notes }}</textarea>
+    <button class="btn small" type="submit" style="margin-top:.5rem">Save notes</button>
+  </form>
+  {% if can_transfer %}
+    <hr>
+    <h3>Transfer custody</h3>
+    <form method="post" action="{{ url_for('evidence.transfer', evidence_id=evidence.id) }}">
+      {{ csrf() }}
+      <select name="custodian_id" required aria-label="New custodian">
+        {% for t in team %}<option value="{{ t.id }}" {{ 'selected' if t.id == evidence.custodian_id }}>{{ t.full_name }}</option>{% endfor %}
+      </select>
+      <input type="text" name="reason" placeholder="Reason (recorded in custody chain)" style="margin-top:.5rem">
+      <button class="btn small" type="submit" style="margin-top:.5rem">Transfer</button>
+    </form>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if demo_allowed %}
+<section class="card">
+  <h2>Integrity demonstration</h2>
+  <p class="muted" style="font-size:.88rem">Shows a MISMATCH using a temporary copy. The registered original is not modified.</p>
+  <form method="post" action="{{ url_for('evidence.tamper_demo', evidence_id=evidence.id) }}">
+    {{ csrf() }}<button class="btn small" type="submit" {{ 'disabled' if not exists }}>Run demo on a temporary copy</button>
+  </form>
+</section>
+{% endif %}

@@ -1,0 +1,1 @@
+"""PDF investigation report generation."""

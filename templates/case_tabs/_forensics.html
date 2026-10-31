@@ -1,0 +1,88 @@
+{% from "_macros.html" import integrity_chip, csrf %}
+<div class="stack">
+  <section class="card">
+    <div class="card-head"><h2>Integrity &amp; chain of custody</h2></div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Evidence</th><th>Original SHA-256</th><th>Last result</th><th>Custody audit chain</th><th></th></tr></thead>
+        <tbody>
+        {% for e in evidence %}
+          {% set chain = chains[e.id] %}
+          <tr>
+            <td><a class="mono" href="{{ url_for('evidence.view', evidence_id=e.id) }}">{{ e.evidence_code }}</a><div class="muted" style="font-size:.8rem">{{ e.filename }}</div></td>
+            <td class="mono" style="font-size:.76rem;word-break:break-all;max-width:240px">{{ e.original_sha256 }}</td>
+            <td>{{ integrity_chip(e.integrity_status) }}<div class="faint" style="font-size:.76rem">{{ e.last_verified_at or 'never checked' }}</div></td>
+            <td>{% if chain.valid %}<span class="chip int-match">intact &middot; {{ chain.checked }}</span>{% else %}<span class="chip int-mismatch">broken at #{{ chain.broken_at }}</span>{% endif %}</td>
+            <td style="white-space:nowrap">
+              <form method="post" action="{{ url_for('evidence.verify', evidence_id=e.id) }}" class="inline">
+                {{ csrf() }}<input type="hidden" name="back" value="{{ url_for('cases.view_case', case_number=case.case_number, tab='forensics') }}">
+                <button class="btn small primary" type="submit">Verify</button>
+              </form>
+              <a class="btn small" href="{{ url_for('evidence.custody', evidence_id=e.id) }}">Custody</a>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="muted">No evidence registered.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="grid grid-2">
+    <section class="card">
+      <div class="card-head"><h2>Evidence analysis queue</h2><span class="chip plain">{{ pending }} pending</span></div>
+      <p class="hint">FIFO queue (dsa/queue.py): the oldest request is processed first.</p>
+      {% if editable %}
+        <form method="post" action="{{ url_for('cases.enqueue_task', case_number=case.case_number) }}">
+          {{ csrf() }}
+          <div class="form-grid">
+            <div class="field"><label>Evidence</label>
+              <select name="evidence_id" required>{% for e in evidence %}<option value="{{ e.id }}">{{ e.evidence_code }} {{ e.filename }}</option>{% endfor %}</select></div>
+            <div class="field"><label>Task</label>
+              <select name="task_type">{% for key, label in task_types.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}</select></div>
+          </div>
+          <div class="row">
+            <button class="btn" type="submit">Enqueue task</button>
+          </div>
+        </form>
+        <div class="row" style="margin-top:.6rem">
+          <form method="post" action="{{ url_for('cases.process_tasks', case_number=case.case_number) }}" class="inline">
+            {{ csrf() }}<button class="btn primary" type="submit" {{ 'disabled' if not pending }}>Process next task</button>
+          </form>
+          <form method="post" action="{{ url_for('cases.process_tasks', case_number=case.case_number) }}" class="inline">
+            {{ csrf() }}<input type="hidden" name="all" value="1"><button class="btn" type="submit" {{ 'disabled' if not pending }}>Process all</button>
+          </form>
+        </div>
+      {% endif %}
+      <ul class="list" style="margin-top:.8rem;font-size:.86rem">
+        {% for t in tasks %}
+          <li><span class="chip plain {{ 'int-unverified' if t.status == 'pending' else ('int-match' if t.status == 'done' else 'int-mismatch') }}">{{ t.status }}</span>
+            #{{ t.id }} {{ task_types[t.task_type] }} &middot; <span class="mono">{{ t.evidence_code }}</span>
+            <div class="muted" style="font-size:.78rem">requested {{ t.created_at }} by {{ t.requested_by_name }}{% if t.result %} &middot; {{ t.result }}{% endif %}</div></li>
+        {% else %}<li class="muted">No tasks yet.</li>{% endfor %}
+      </ul>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Recorded relationships ({{ relationships|length }})</h2>
+        <a class="btn small primary" href="{{ url_for('cases.graph_page', case_number=case.case_number) }}">Open graph (BFS/DFS)</a></div>
+      <ul class="list" style="font-size:.86rem;max-height:320px;overflow:auto">
+        {% for r in relationships %}
+          <li class="item-row"><div class="grow"><strong>{{ r.source_label }}</strong> <span class="chip plain">{{ r.relationship_type }}</span> <strong>{{ r.target_label }}</strong>
+            <div class="muted" style="font-size:.8rem">{{ r.description }}</div></div>
+            {% if editable %}
+              <form method="post" action="{{ url_for('cases.delete_relationship', rel_id=r.id) }}" class="inline" data-confirm="Remove this recorded relationship?">
+                {{ csrf() }}<button class="btn small ghost" type="submit" title="Remove">&times;</button></form>
+            {% endif %}</li>
+        {% else %}<li class="muted">No relationships recorded.</li>{% endfor %}
+      </ul>
+      {% if editable %}
+        <details class="drawer" style="margin-top:.8rem">
+          <summary>Record a relationship</summary>
+          {% include "_relationship_form.html" %}
+        </details>
+      {% endif %}
+    </section>
+  </div>
+</div>

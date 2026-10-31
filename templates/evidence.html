@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ evidence.evidence_code }} {{ evidence.filename }}{% endblock %}
+{% block content %}
+{% set file_url = url_for('evidence.file', evidence_id=evidence.id) %}
+<div class="breadcrumb">
+  <a href="{{ url_for('detectives.case_list') }}">Cases</a> /
+  <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='evidence') }}">{{ case.case_number }}</a> / {{ evidence.evidence_code }}
+</div>
+<div class="page-head">
+  <div>
+    <div class="eyebrow">{{ evidence.evidence_code }} &middot; {{ {'image': 'Image viewer', 'pdf': 'Document viewer', 'text': 'Text viewer', 'csv': 'Activity log viewer', 'audio': 'Audio player'}.get(evidence.file_type, 'File') }}</div>
+    <h1 style="overflow-wrap:anywhere">{{ evidence.filename }}</h1>
+    {% if evidence.description %}<p class="muted" style="margin:0;max-width:760px">{{ evidence.description }}</p>{% endif %}
+  </div>
+</div>
+
+{% if demo %}<div style="margin-bottom:1rem">{% set result = demo %}{% include "_demo_result.html" %}</div>{% endif %}
+
+<div class="split">
+  <div>
+    <div class="viewer">
+      {% if not exists %}
+        <p class="muted">File missing from evidence storage.</p>
+      {% elif evidence.file_type == 'image' %}
+        <img src="{{ file_url }}" alt="{{ evidence.description or evidence.filename }}">
+      {% elif evidence.file_type == 'pdf' %}
+        <iframe src="{{ file_url }}" title="{{ evidence.filename }}"></iframe>
+      {% elif evidence.file_type == 'audio' %}
+        <audio controls preload="metadata" src="{{ file_url }}"></audio>
+      {% elif evidence.file_type == 'csv' and csv_rows %}
+        <div class="table-wrap" style="width:100%;align-self:stretch;max-height:70vh">
+          <table class="table" style="background:var(--surface)">
+            <thead><tr>{% for h in csv_rows[0] %}<th>{{ h }}</th>{% endfor %}</tr></thead>
+            <tbody>{% for row in csv_rows[1:] %}<tr>{% for cell in row %}<td class="{{ 'num' if loop.first }}">{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+          </table>
+        </div>
+      {% elif evidence.file_type in ('text', 'csv') %}
+        <pre class="text-view">{{ text_preview }}</pre>
+      {% else %}
+        <div style="text-align:center;padding:2rem">
+          <p class="muted">This file type cannot be previewed in the browser.</p>
+          <a class="btn" href="{{ url_for('evidence.file', evidence_id=evidence.id, download=1) }}">Download (logged in custody)</a>
+        </div>
+      {% endif %}
+    </div>
+    {% if truncated %}<p class="hint">Preview shows the first 200 KB. Download for the full file.</p>{% endif %}
+    {% if evidence.notes %}<div class="notice" style="margin-top:1rem"><strong>Investigator notes:</strong> {{ evidence.notes }}</div>{% endif %}
+  </div>
+  <div class="stack">{% include "_evidence_side.html" %}</div>
+</div>
+{% endblock %}

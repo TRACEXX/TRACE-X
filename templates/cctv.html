@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}CCTV {{ evidence.evidence_code }}{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+  <a href="{{ url_for('detectives.case_list') }}">Cases</a> /
+  <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='evidence') }}">{{ case.case_number }}</a> / {{ evidence.evidence_code }}
+</div>
+<div class="page-head">
+  <div>
+    <div class="eyebrow">CCTV viewer &middot; {{ evidence.evidence_code }}</div>
+    <h1 style="overflow-wrap:anywhere">{{ evidence.filename }}</h1>
+    {% if evidence.description %}<p class="muted" style="margin:0">{{ evidence.description }}</p>{% endif %}
+  </div>
+</div>
+
+{% if demo %}<div style="margin-bottom:1rem">{% set result = demo %}{% include "_demo_result.html" %}</div>{% endif %}
+
+<div class="split">
+  <div class="stack">
+    <div class="viewer" style="display:block">
+      {% if exists %}
+        <div class="cctv-overlay">
+          <div class="osd"><span class="rec">{{ evidence.camera_id or 'CAMERA ID NOT RECORDED' }}</span><br>
+            <span id="cctv-clock" data-start="{{ evidence.recorded_at or '' }}">{{ evidence.recorded_at or 'recording time not recorded' }}</span></div>
+          <video id="cctv-video" controls preload="metadata" src="{{ url_for('evidence.file', evidence_id=evidence.id) }}"></video>
+        </div>
+        <div class="cctv-bar no-print">
+          <button class="btn small" type="button" data-cctv="step" data-amount="-1">&laquo; 1s</button>
+          <button class="btn small" type="button" data-cctv="frame" data-amount="-0.04">&lsaquo; frame</button>
+          <button class="btn small" type="button" data-cctv="frame" data-amount="0.04">frame &rsaquo;</button>
+          <button class="btn small" type="button" data-cctv="step" data-amount="1">1s &raquo;</button>
+          <select id="cctv-rate" style="width:auto" aria-label="Playback speed">
+            <option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="1" selected>1x</option>
+            <option value="2">2x</option><option value="4">4x</option></select>
+          <span class="mono muted" id="cctv-pos">00:00:00.00</span>
+          <span class="hint">Position in the file{% if evidence.recorded_at %}; clock above adds it to the recorded start time{% endif %}.</span>
+        </div>
+      {% else %}
+        <p class="muted" style="padding:3rem;text-align:center">The registered video file is missing from evidence storage.</p>
+      {% endif %}
+    </div>
+
+    <section class="card">
+      <h2>Recording details</h2>
+      <dl class="kv">
+        <dt>Camera ID</dt><dd class="mono">{{ evidence.camera_id or 'Not recorded' }}</dd>
+        <dt>Evidence ID</dt><dd class="mono">{{ evidence.evidence_code }}</dd>
+        <dt>Associated case</dt><dd><a href="{{ url_for('cases.view_case', case_number=case.case_number) }}">{{ case.case_number }} {{ case.title }}</a></dd>
+        <dt>Recording time</dt><dd>{{ evidence.recorded_at or 'Not recorded (upload time is not used as a substitute)' }}</dd>
+        <dt>Investigator notes</dt><dd>{{ evidence.notes or '—' }}</dd>
+      </dl>
+    </section>
+  </div>
+  <div class="stack">{% include "_evidence_side.html" %}</div>
+</div>
+{% endblock %}

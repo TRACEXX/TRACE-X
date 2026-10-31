@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar %}
+{% block title %}Digital Evidence Integrity & Investigation System{% endblock %}
+{% block public %}
+<div class="tape"></div>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('auth.index') }}"><span class="brand-mark">TX</span> TRACE X</a>
+  <div class="spacer"></div>
+  {% if current_user %}
+    <a class="btn small primary" href="{{ url_for('admin.dashboard') if user_is_admin else url_for('detectives.portal') }}">Back to my portal</a>
+  {% else %}
+    <a class="btn small" href="#detectives">Detectives</a>
+    <a class="btn small ghost" href="{{ url_for('auth.login', portal='admin') }}">Administrator login</a>
+  {% endif %}
+</header>
+
+<div class="wrap">
+  <section class="landing-hero">
+    <span class="tape-label">Digital Evidence Integrity &amp; Investigation System</span>
+    <h1 class="wordmark">TRACE<span>&nbsp;X</span></h1>
+    <p class="lede">One secure workspace for an investigation: case files, suspects, witness statements and
+      digital evidence, with SHA-256 integrity checks, a chain of custody for every file, and TRACE AI
+      to find and summarise what is on record.</p>
+    <div class="row" style="margin-top:1.6rem">
+      <a class="btn primary" href="#detectives">Choose a detective portal</a>
+      <a class="btn" href="{{ url_for('auth.login', portal='admin') }}">Administrator login</a>
+    </div>
+
+    <div class="feature-list">
+      <div class="card"><span class="k">01 / CASE FILES</span><h3>Every case in one record</h3>
+        <p>Overview, suspects, witnesses, evidence, timeline and notes, opened only by assigned investigators.</p></div>
+      <div class="card"><span class="k">02 / INTEGRITY</span><h3>SHA-256 fingerprints</h3>
+        <p>Each upload is hashed on arrival. Re-verify at any time to see MATCH, MISMATCH or FILE MISSING.</p></div>
+      <div class="card"><span class="k">03 / CUSTODY</span><h3>Who touched what, when</h3>
+        <p>Views, downloads, checks and transfers form a hash-linked custody chain per evidence item.</p></div>
+      <div class="card"><span class="k">04 / ANALYSIS</span><h3>Graphs, timelines, TRACE AI</h3>
+        <p>BFS/DFS over recorded links, merge-sorted timelines, and an assistant that answers from the records.</p></div>
+    </div>
+  </section>
+
+  <section id="detectives">
+    <div class="section-title">
+      <div>
+        <div class="eyebrow">Investigation unit</div>
+        <h2 style="margin:0">Detective profiles</h2>
+      </div>
+      <p class="muted" style="margin:0">Select a detective to open their secure login.</p>
+    </div>
+    <div class="grid grid-4">
+      {% for d in detectives %}
+        <article class="card badge-card">
+          <div class="badge-top"></div>
+          <div class="badge-body">
+            <div class="row">
+              {{ avatar(d.full_name, d.profile_image, "xl", square=True) }}
+            </div>
+            <div>
+              <div class="badge-id">{{ d.badge_id }}</div>
+              <h3>{{ d.full_name }}</h3>
+              <div class="spec">{{ d.specialization or 'General investigations' }}</div>
+            </div>
+            <div class="meta">
+              <span><b>{{ d.assigned_count }}</b> assigned</span>
+              <span><b>{{ d.shared_count }}</b> shared</span>
+            </div>
+            <a class="btn primary block" href="{{ url_for('auth.login', portal=d.username) }}">Access Portal</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <p class="footer">TRACE X is an academic Data Structures &amp; Algorithms project. All cases, people, places and files are fictional.
+    It is a record-keeping tool, not a game: it never decides who is responsible.</p>
+</div>
+{% endblock %}

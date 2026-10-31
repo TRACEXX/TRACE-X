@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}DSA Inspector{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Data Structures &amp; Algorithms</div><h1>DSA Inspector</h1>
+    <p class="muted" style="margin:.3rem 0 0;max-width:780px">Pick an algorithm. It runs the Python code in <span class="mono">dsa/</span> on live
+      TRACE X records you can access and shows the input, the operation, the result and the processing order.</p></div>
+</div>
+
+<form method="get" class="card" style="margin-bottom:1rem">
+  <div class="form-grid">
+    <div class="field"><label for="algo">Algorithm</label>
+      <select id="algo" name="algo" data-autosubmit>
+        <option value="">Choose…</option>
+        {% for key, info in algorithms.items() %}<option value="{{ key }}" {{ 'selected' if key == algo }}>{{ info[0] }}</option>{% endfor %}
+      </select></div>
+    {% if algo in ('queue', 'bfs', 'dfs', 'merge_sort') %}
+      <div class="field"><label for="case">Case</label>
+        <select id="case" name="case" data-autosubmit>{% for c in cases %}<option value="{{ c.case_number }}" {{ 'selected' if case and case.case_number == c.case_number }}>{{ c.case_number }} {{ c.title }}</option>{% endfor %}</select></div>
+    {% endif %}
+    {% if algo in ('bfs', 'dfs') %}
+      <div class="field"><label for="start">Start node</label>
+        <select id="start" name="start">{% for n in graph_nodes %}<option value="{{ n.id }}" {{ 'selected' if run and run.extra and run.extra.start == n.id }}>[{{ n.type }}] {{ n.label }}</option>{% endfor %}</select></div>
+    {% elif algo == 'linked_list' %}
+      <div class="field"><label for="evidence_id">Evidence</label>
+        <select id="evidence_id" name="evidence_id">{% for e in evidence %}<option value="{{ e.id }}" {{ 'selected' if run and run.extra and run.extra.evidence_id == e.id }}>{{ e.evidence_code }} {{ e.filename }}</option>{% endfor %}</select></div>
+      <div class="field"><label for="search">Search action containing</label><input id="search" type="text" name="search" value="{{ run.extra.search if run and run.extra else 'verified' }}"></div>
+    {% elif algo == 'stack' %}
+      <div class="field"><label for="note_id">Note</label>
+        <select id="note_id" name="note_id">{% for n in notes %}<option value="{{ n.id }}" {{ 'selected' if run and run.extra and run.extra.note_id == n.id }}>{{ n.case_number }}: {{ n.title }} ({{ n.versions }} saved)</option>{% endfor %}</select></div>
+    {% elif algo == 'hash_table' %}
+      <div class="field"><label for="key">Look up evidence ID</label><input id="key" type="text" name="key" value="{{ run.extra.key if run and run.extra else '' }}" placeholder="EV-0003"></div>
+    {% elif algo == 'binary_search' %}
+      <div class="field"><label for="target">Case number</label><input id="target" type="text" name="target" value="{{ run.extra.target if run and run.extra else '' }}" placeholder="CASE-003"></div>
+    {% elif algo == 'linear_search' %}
+      <div class="field"><label for="word">Keyword</label><input id="word" type="text" name="word" value="{{ run.extra.word if run and run.extra else '' }}" placeholder="log"></div>
+    {% endif %}
+  </div>
+  <button class="btn primary" type="submit">Run</button>
+</form>
+
+{% if run %}
+  <div class="grid grid-2">
+    <section class="card">
+      <div class="eyebrow">Selected algorithm</div>
+      <h2>{{ run.title }}</h2>
+      <dl class="kv"><dt>Source</dt><dd class="mono">{{ run.source }}</dd><dt>Complexity</dt><dd>{{ run.complexity }}</dd></dl>
+      <div class="label" style="margin-top:.9rem">Operation performed</div>
+      <p style="margin:.2rem 0 0">{{ run.operation }}</p>
+    </section>
+    <section class="card">
+      <div class="label">Input data ({{ run.input|length }})</div>
+      <pre class="steps">{% for line in run.input %}{{ line }}
+{% else %}(empty){% endfor %}</pre>
+    </section>
+    <section class="card">
+      <div class="label">Result</div>
+      <pre class="steps" style="color:var(--text)">{% for line in run.result %}{{ line }}
+{% endfor %}</pre>
+    </section>
+    <section class="card">
+      <div class="label">Processing order / steps ({{ run.steps|length }})</div>
+      <pre class="steps">{% for line in run.steps %}{{ line }}
+{% else %}(no steps){% endfor %}</pre>
+    </section>
+  </div>
+{% else %}
+  <div class="grid grid-3">
+    {% for key, info in algorithms.items() %}
+      <a class="card case-card" href="{{ url_for('inspector.page', algo=key) }}">
+        <span class="case-id">{{ info[1] }}</span><h3>{{ info[0] }}</h3><div class="muted" style="font-size:.85rem">{{ info[2] }}</div></a>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

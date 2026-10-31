@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_chip, role_chip %}
+{% block title %}{{ case.case_number }} {{ case.title }}{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+  <a href="{{ url_for('detectives.case_list') }}">Cases</a> / {{ case.case_number }}
+</div>
+<div class="page-head">
+  <div>
+    <div class="eyebrow">{{ case.case_number }} &middot; {{ case.category }}</div>
+    <h1>{{ case.title }}</h1>
+    <div class="row" style="margin-top:.5rem">
+      {{ status_chip(case.status) }}
+      <span class="muted" style="font-size:.88rem">Your access: </span>{{ role_chip(permission) }}
+      {% if not editable %}<span class="hint">Read-only share: you can view and verify, but not add records.</span>{% endif %}
+    </div>
+  </div>
+  <div class="row no-print">
+    <a class="btn" href="{{ url_for('ai.page', case=case.case_number) }}">Ask TRACE AI</a>
+    <a class="btn" href="{{ url_for('cases.graph_page', case_number=case.case_number) }}">Relationship graph</a>
+    {% if user_is_admin %}<a class="btn" href="{{ url_for('admin.edit_case', case_number=case.case_number) }}">Edit case</a>{% endif %}
+  </div>
+</div>
+
+<nav class="tabs no-print" aria-label="Case sections">
+  {% for key, label in tabs %}
+    <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab=key) }}" class="{{ 'active' if key == tab }}">{{ label }}</a>
+  {% endfor %}
+</nav>
+
+{% include "case_tabs/_" ~ tab ~ ".html" %}
+{% endblock %}

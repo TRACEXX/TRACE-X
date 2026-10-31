@@ -1,0 +1,47 @@
+{% from "_macros.html" import csrf %}
+<div class="split">
+  <div class="stack">
+    {% for n in notes %}
+      <section class="card">
+        <div class="card-head">
+          <div><strong>{{ n.title }}</strong>
+            <div class="muted" style="font-size:.82rem">{{ n.author_name }} &middot; updated {{ n.updated_at }}</div></div>
+          <span class="chip plain" title="Previous versions available to Undo">{{ n.version_count }} saved version(s)</span>
+        </div>
+        <p style="white-space:pre-line;margin:0">{{ n.content }}</p>
+        {% if editable and (n.user_id == current_user.id or permission in ('admin', 'lead')) %}
+          <div class="row" style="margin-top:.8rem">
+            <details class="drawer" style="flex:1">
+              <summary>Edit</summary>
+              <form method="post" action="{{ url_for('cases.edit_note', note_id=n.id) }}">
+                {{ csrf() }}
+                <div class="field"><label>Title</label><input type="text" name="title" value="{{ n.title }}"></div>
+                <div class="field"><label>Note</label><textarea name="content" rows="5" required>{{ n.content }}</textarea></div>
+                <button class="btn primary" type="submit">Save (previous version is pushed to the undo stack)</button>
+              </form>
+            </details>
+            <form method="post" action="{{ url_for('cases.undo_note', note_id=n.id) }}" class="inline">
+              {{ csrf() }}
+              <button class="btn" type="submit" {{ 'disabled' if not n.version_count }}>Undo last change</button>
+            </form>
+          </div>
+        {% endif %}
+      </section>
+    {% else %}
+      <div class="empty">No investigation notes yet.</div>
+    {% endfor %}
+  </div>
+
+  {% if editable %}
+    <section class="card">
+      <h2>New note</h2>
+      <form method="post" action="{{ url_for('cases.add_note', case_number=case.case_number) }}">
+        {{ csrf() }}
+        <div class="field"><label>Title</label><input type="text" name="title"></div>
+        <div class="field"><label>Note</label><textarea name="content" rows="6" required></textarea></div>
+        <button class="btn primary block" type="submit">Save note</button>
+      </form>
+      <p class="hint" style="margin:.8rem 0 0">Undo uses a Stack (dsa/stack.py): every edit pushes the old version; Undo pops the newest one.</p>
+    </section>
+  {% endif %}
+</div>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Activity logs{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Administrator</div><h1>Activity logs</h1>
+    <p class="muted" style="margin:.3rem 0 0">Logins, failed logins, case and evidence actions. Passwords and API keys are never logged.</p></div>
+</div>
+<form method="get" class="card row" style="margin-bottom:1rem">
+  <select name="user_id" style="width:auto" aria-label="User">
+    <option value="">All users</option>
+    {% for u in users %}<option value="{{ u.id }}" {{ 'selected' if user_filter == u.id }}>{{ u.full_name }}</option>{% endfor %}
+  </select>
+  <input type="search" name="q" value="{{ text_filter }}" placeholder="Action, case or evidence ID…" style="flex:1;min-width:200px">
+  <button class="btn" type="submit">Filter</button>
+  {% if user_filter or text_filter %}<a class="btn ghost" href="{{ url_for('admin.logs') }}">Clear</a>{% endif %}
+</form>
+<div class="card table-wrap">
+  <table class="table">
+    <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Target</th><th>Details</th><th>IP</th></tr></thead>
+    <tbody>
+    {% for log in logs %}
+      <tr>
+        <td class="num" style="white-space:nowrap">{{ log.timestamp }}</td>
+        <td>{{ log.full_name or '—' }}</td>
+        <td><strong>{{ log.action }}</strong></td>
+        <td class="mono">{{ log.target_type or '' }} {{ log.target_id or '' }}</td>
+        <td class="muted" style="max-width:340px;overflow-wrap:anywhere">{{ log.details or '' }}</td>
+        <td class="num faint">{{ log.ip_address or '' }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="muted">No log entries match.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

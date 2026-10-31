@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Graph {{ case.case_number }}{% endblock %}
+{% block content %}
+<div class="breadcrumb">
+  <a href="{{ url_for('detectives.case_list') }}">Cases</a> /
+  <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='forensics') }}">{{ case.case_number }}</a> / relationship graph
+</div>
+<div class="page-head">
+  <div><div class="eyebrow">Evidence relationship graph &middot; {{ case.case_number }}</div><h1>{{ case.title }}</h1>
+    <p class="muted" style="margin:.3rem 0 0">{{ node_count }} nodes, {{ edge_count }} recorded relationships. The traversal runs in Python
+      (dsa/graph.py, adjacency list + BFS/DFS); the browser only draws the result.</p></div>
+</div>
+
+<div class="split">
+  <div class="stack">
+    <div class="graph-wrap">
+      <svg id="graph-svg" role="img" aria-label="Relationship graph"></svg>
+    </div>
+    <div class="legend">
+      <span style="--c:#ec6553">Suspect</span><span style="--c:#f2b33d">Evidence</span><span style="--c:#62b6dc">Witness</span>
+      <span style="--c:#3fbf8f">Location</span><span style="--c:#a48bea">Device</span><span style="--c:#8d9aa8">Event</span>
+      <span class="hint">Drag nodes to rearrange. Click a node to make it the start.</span>
+    </div>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <h2>Explore connections</h2>
+      <form id="traverse-form" data-url="{{ url_for('cases.graph_traverse', case_number=case.case_number) }}">
+        <div class="field"><label for="start">Start node</label>
+          <select id="start" name="start" required></select></div>
+        <div class="field"><label>Algorithm</label>
+          <div class="row">
+            <label class="check"><input type="radio" name="algorithm" value="bfs" checked> BFS (by distance)</label>
+            <label class="check"><input type="radio" name="algorithm" value="dfs"> DFS (follow chains)</label>
+          </div></div>
+        <div class="field"><label for="target">Explain connection to (optional)</label>
+          <select id="target" name="target"><option value="">—</option></select></div>
+        <button class="btn primary block" type="submit">Run traversal in Python</button>
+      </form>
+    </section>
+    <section class="card" id="traverse-result" hidden>
+      <h2 id="result-title">Traversal</h2>
+      <div id="path-box"></div>
+      <div class="label" style="margin-top:.6rem">Directly connected</div>
+      <ul class="list" id="direct-list" style="font-size:.86rem"></ul>
+      <div class="label" style="margin-top:.8rem">Visit order</div>
+      <ol class="order-list" id="order-list"></ol>
+      <details style="margin-top:.8rem"><summary class="muted" style="cursor:pointer">Algorithm steps</summary><pre class="steps" id="steps"></pre></details>
+    </section>
+  </div>
+</div>
+<script type="application/json" id="graph-data">{{ graph|tojson }}</script>
+<script type="application/json" id="graph-start">{{ start|tojson }}</script>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/graph.js') }}"></script>{% endblock %}

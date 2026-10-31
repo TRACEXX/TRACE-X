@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="card" style="max-width:640px">
+  <div class="eyebrow">Error {{ code }}</div>
+  <h1>{{ title }}</h1>
+  {% if text %}<p class="muted">{{ text }}</p>{% endif %}
+  <a class="btn" href="{{ url_for('auth.index') }}">Go to start</a>
+</div>
+{% endblock %}
+{% block public %}
+<div class="tape"></div>
+<div class="login-wrap">
+  <div class="card">
+    <div class="eyebrow">Error {{ code }}</div>
+    <h1>{{ title }}</h1>
+    {% if text %}<p class="muted">{{ text }}</p>{% endif %}
+    <a class="btn" href="{{ url_for('auth.login') }}">Log in</a>
+  </div>
+</div>
+{% endblock %}

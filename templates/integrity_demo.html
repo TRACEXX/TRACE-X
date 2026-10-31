@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf %}
+{% block title %}Integrity demonstration{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Administrator tool</div><h1>Safe integrity demonstration</h1>
+    <p class="muted" style="margin:.3rem 0 0;max-width:760px">Copies a registered file to a temporary location, hashes the copy, changes one line
+      in the <strong>copy only</strong>, hashes it again and deletes it. The registered original is never opened for writing.</p></div>
+</div>
+<form method="post" class="card row" style="margin-bottom:1rem">
+  {{ csrf() }}
+  <select name="evidence_id" required style="flex:1;min-width:240px" aria-label="Evidence">
+    <option value="">Choose evidence…</option>
+    {% for e in evidence %}<option value="{{ e.id }}" {{ 'selected' if selected and selected.id == e.id }}>{{ e.evidence_code }} [{{ e.case_number }}] {{ e.filename }}</option>{% endfor %}
+  </select>
+  <button class="btn primary" type="submit">Run demonstration</button>
+</form>
+{% if result %}{% include "_demo_result.html" %}{% endif %}
+{% endblock %}

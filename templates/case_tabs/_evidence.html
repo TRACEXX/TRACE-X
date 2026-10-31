@@ -1,0 +1,53 @@
+{% from "_macros.html" import integrity_chip, tree_node, csrf %}
+<div class="split">
+  <section class="card">
+    <div class="card-head"><h2>Evidence vault ({{ evidence|length }})</h2></div>
+    {% if evidence %}
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th>ID</th><th>File</th><th>Type</th><th>Size</th><th>Registered</th><th>Integrity</th></tr></thead>
+          <tbody>
+          {% for e in evidence %}
+            <tr>
+              <td><a class="mono" href="{{ url_for('evidence.view', evidence_id=e.id) }}">{{ e.evidence_code }}</a></td>
+              <td><a href="{{ url_for('evidence.view', evidence_id=e.id) }}">{{ e.filename }}</a>
+                <div class="muted" style="font-size:.8rem">{{ e.description[:90] }}{{ '…' if e.description|length > 90 }}</div></td>
+              <td><span class="type-tag">{{ 'CCTV' if e.file_type == 'video' else e.file_type }}</span></td>
+              <td class="num" style="white-space:nowrap">{{ e.file_size|filesize }}</td>
+              <td style="font-size:.82rem;white-space:nowrap">{{ e.uploaded_at }}<div class="muted">{{ e.uploaded_by_name }}</div></td>
+              <td>{{ integrity_chip(e.integrity_status) }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="empty">No evidence registered yet.</div>
+    {% endif %}
+  </section>
+
+  <div class="stack">
+    {% if editable %}
+      <section class="card">
+        <h2>Register new evidence</h2>
+        <form method="post" action="{{ url_for('evidence.upload', case_number=case.case_number) }}" enctype="multipart/form-data">
+          {{ csrf() }}
+          <div class="field"><label for="file">File</label>
+            <input id="file" type="file" name="file" required data-video-toggle="#cctv-fields">
+            <span class="hint">Images, CCTV video, audio, PDF, text, CSV logs, DOCX/XLSX/ZIP. The SHA-256 fingerprint is calculated on arrival.</span></div>
+          <div class="field"><label for="description">Description</label><textarea id="description" name="description" rows="2"></textarea></div>
+          <div id="cctv-fields" class="form-grid">
+            <div class="field"><label>Camera ID (CCTV)</label><input type="text" name="camera_id" placeholder="CAM-03"></div>
+            <div class="field"><label>Recording time, if known</label><input type="datetime-local" name="recorded_at" step="1"></div>
+          </div>
+          <div class="field"><label>Investigator notes</label><input type="text" name="notes"></div>
+          <button class="btn primary block" type="submit">Upload &amp; register</button>
+        </form>
+      </section>
+    {% endif %}
+    <section class="card">
+      <div class="card-head"><h2>Evidence tree</h2><span class="hint">dsa/tree.py &middot; {{ tree_size }} nodes</span></div>
+      {% if tree %}<ul class="tree">{{ tree_node(tree) }}</ul>{% endif %}
+    </section>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{% from "_macros.html" import avatar, csrf %}
+<div class="stack">
+  {% if suspects %}
+    <div class="grid grid-3">
+      {% for s in suspects %}
+        <a class="card case-card" href="{{ url_for('cases.suspect_dossier', suspect_id=s.id) }}">
+          <div class="item-row">
+            {{ avatar(s.name, s.photo_path, "lg", square=True) }}
+            <div class="grow">
+              <span class="case-id">{{ s.id|scode }}</span>
+              <h3 style="margin:.3rem 0 .2rem">{{ s.name }}</h3>
+              <div class="muted" style="font-size:.85rem">{{ s.relationship or 'Relationship not recorded' }}</div>
+            </div>
+          </div>
+          <p class="faint" style="font-size:.84rem;margin:.8rem 0 0">Alibi: {{ s.alibi[:110] or 'not recorded' }}{{ '…' if s.alibi|length > 110 }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty">No suspects recorded for this case.</div>
+  {% endif %}
+
+  {% if editable %}
+    <details class="drawer">
+      <summary>Add a suspect</summary>
+      <form method="post" action="{{ url_for('cases.add_suspect', case_number=case.case_number) }}" enctype="multipart/form-data">
+        {{ csrf() }}
+        {% include "_suspect_fields.html" %}
+        <button class="btn primary" type="submit">Add suspect</button>
+      </form>
+    </details>
+  {% endif %}
+</div>

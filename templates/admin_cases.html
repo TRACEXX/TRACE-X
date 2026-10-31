@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_chip, role_chip, csrf %}
+{% block title %}Cases & assignments{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Administrator</div><h1>Cases &amp; assignments</h1>
+    <p class="muted" style="margin:.3rem 0 0">Assignments are stored in the <span class="mono">case_assignments</span> table.
+      <strong>Lead</strong> and <strong>investigator</strong> can add records; <strong>viewer</strong> is a read-only share.</p></div>
+  <a class="btn primary" href="{{ url_for('admin.new_case') }}">+ New case</a>
+</div>
+
+<div class="stack">
+{% for c in cases %}
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <a href="{{ url_for('cases.view_case', case_number=c.case_number) }}" class="mono">{{ c.case_number }}</a>
+        <h3 style="margin:.2rem 0 0">{{ c.title }}</h3>
+        <div class="muted" style="font-size:.85rem">{{ c.category }} &middot; {{ c.location }}</div>
+      </div>
+      <div class="row">
+        {{ status_chip(c.status) }}
+        <a class="btn small" href="{{ url_for('admin.edit_case', case_number=c.case_number) }}">Edit details</a>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div>
+        <div class="label" style="margin-bottom:.4rem">Current team</div>
+        {% set team = teams[c.id] %}
+        {% if team %}
+          <ul class="list">
+            {% for t in team %}
+              <li class="item-row">
+                <div class="grow">{{ t.full_name }} <span class="faint mono" style="font-size:.8rem">{{ t.badge_id }}</span></div>
+                {{ role_chip(t.permission_level) }}
+                <form method="post" action="{{ url_for('admin.unassign', case_number=c.case_number, user_id=t.id) }}" class="inline"
+                      data-confirm="Remove {{ t.full_name }} from {{ c.case_number }}?">
+                  {{ csrf() }}<button class="btn small ghost" type="submit">Remove</button>
+                </form>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <div class="empty" style="padding:.8rem">Unassigned. Choose a detective on the right.</div>
+        {% endif %}
+      </div>
+
+      <div class="stack">
+        <form method="post" action="{{ url_for('admin.assign', case_number=c.case_number) }}" class="row">
+          {{ csrf() }}
+          <select name="user_id" required style="flex:1;min-width:160px" aria-label="Detective">
+            <option value="">Detective…</option>
+            {% for d in detectives %}<option value="{{ d.id }}">{{ d.full_name }} ({{ d.badge_id }})</option>{% endfor %}
+          </select>
+          <select name="permission_level" style="width:auto" aria-label="Permission">
+            <option value="lead">Assign as lead</option>
+            <option value="investigator">Assign as investigator</option>
+            <option value="viewer">Share (read-only)</option>
+          </select>
+          <button class="btn primary small" type="submit">Save</button>
+        </form>
+        {% if c.lead_name %}
+          <form method="post" action="{{ url_for('admin.reassign', case_number=c.case_number) }}" class="row">
+            {{ csrf() }}
+            <select name="user_id" required style="flex:1;min-width:160px" aria-label="New lead">
+              <option value="">Reassign lead from {{ c.lead_name }} to…</option>
+              {% for d in detectives %}{% if d.full_name != c.lead_name %}<option value="{{ d.id }}">{{ d.full_name }}</option>{% endif %}{% endfor %}
+            </select>
+            <button class="btn small" type="submit">Reassign</button>
+          </form>
+          <p class="hint" style="margin:0">Reassigning removes the previous lead and transfers custody of the evidence they held (recorded in each item's chain of custody).</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endfor %}
+</div>
+{% endblock %}

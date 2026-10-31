@@ -1,0 +1,27 @@
+{# Expects `result` from forensics.integrity.run_tamper_demo #}
+<section class="card">
+  {% if not result.ok %}
+    <p class="flash danger" style="margin:0">{{ result.error }}</p>
+  {% else %}
+    <div class="card-head"><h2>Integrity demonstration on a temporary copy</h2></div>
+    <div class="grid grid-2">
+      <div>
+        <div class="label">Reference hash of temporary copy</div>
+        <code class="hash ok">{{ result.reference }}</code>
+        <div class="label" style="margin-top:.8rem">Hash after changing the copy</div>
+        <code class="hash bad">{{ result.modified }}</code>
+        <div class="result-banner {{ result.result }}" style="margin-top:1rem">{{ result.result }}</div>
+      </div>
+      <div>
+        <ol class="order-list">{% for step in result.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+        <div class="notice" style="margin-top:1rem">
+          Registered original re-hashed afterwards:
+          <code class="hash {{ 'ok' if result.original_untouched else 'bad' }}" style="margin:.4rem 0">{{ result.original_now }}</code>
+          {% if result.original_untouched %}<strong style="color:var(--ok)">Unchanged.</strong> It still matches the registered SHA-256.
+          {% else %}<strong style="color:var(--bad)">Does not match the registered SHA-256.</strong> This was not caused by the demo (the copy was changed, not the original).{% endif %}
+        </div>
+      </div>
+    </div>
+    <p class="hint" style="margin:1rem 0 0">A mismatch shows the bytes differ from the reference. It does not prove hacking or show who changed the file.</p>
+  {% endif %}
+</section>

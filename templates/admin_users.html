@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar, csrf, role_chip %}
+{% block title %}User accounts{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><div class="eyebrow">Administrator</div><h1>User accounts</h1>
+    <p class="muted" style="margin:.3rem 0 0">TRACE X has exactly five accounts: one administrator and four detectives.
+      Passwords are stored only as Werkzeug hashes and are never shown.</p></div>
+</div>
+<div class="stack">
+  {% for u in users %}
+    <form method="post" action="{{ url_for('admin.update_user', user_id=u.id) }}" class="card">
+      {{ csrf() }}
+      <div class="card-head">
+        <div class="item-row">
+          {{ avatar(u.full_name, u.profile_image) }}
+          <div><strong>{{ u.full_name }}</strong> <span class="mono faint">{{ u.badge_id }}</span>
+            <div class="muted" style="font-size:.84rem">username <span class="mono">{{ u.username }}</span></div></div>
+        </div>
+        {{ role_chip(u.role) }}
+      </div>
+      <div class="form-grid">
+        <div class="field"><label>Full name</label><input type="text" name="full_name" value="{{ u.full_name }}"></div>
+        <div class="field"><label>Specialization</label><input type="text" name="specialization" value="{{ u.specialization or '' }}"></div>
+        <div class="field"><label>Profile photo (path inside static/)</label>
+          <input type="text" name="profile_image" value="{{ u.profile_image or '' }}" placeholder="assets/detectives/{{ u.username }}.jpg">
+          <span class="hint">Copy the photo into static/assets/detectives/ first. Leave empty for initials.</span></div>
+        <div class="field"><label>New password (optional, 8+ characters)</label>
+          <input type="password" name="new_password" autocomplete="new-password"></div>
+      </div>
+      <div class="row between">
+        <label class="check"><input type="checkbox" name="is_active" value="1" {{ 'checked' if u.is_active }}
+          {{ 'disabled' if u.id == current_user.id }}> Account active</label>
+        <button class="btn small primary" type="submit">Save {{ u.username }}</button>
+      </div>
+    </form>
+  {% endfor %}
+</div>
+{% endblock %}

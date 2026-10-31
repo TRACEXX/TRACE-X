@@ -1,0 +1,6 @@
+# TRACE X dependencies (tested with Python 3.12, Flask 3.1, ReportLab 5.1, pytest 9.2)
+# Everything else (sqlite3, hashlib, urllib, csv, zlib) is part of Python's standard library.
+Flask>=3.0,<4
+reportlab>=4.0,<6
+pytest>=8
+gunicorn>=21.0,<22

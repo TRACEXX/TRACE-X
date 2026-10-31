@@ -1,0 +1,53 @@
+{# Small reusable pieces of HTML used across many templates. #}
+
+{% macro avatar(name, image=None, size="", square=False) -%}
+  <span class="avatar {{ size }} {{ 'square' if square }}" aria-hidden="true">
+    {%- if image -%}<img src="{{ url_for('static', filename=image) }}" alt="">{%- else -%}{{ name|initials }}{%- endif -%}
+  </span>
+{%- endmacro %}
+
+{% macro status_chip(status) -%}
+  <span class="chip status-{{ status|slug }}">{{ status }}</span>
+{%- endmacro %}
+
+{% macro integrity_chip(status) -%}
+  <span class="chip int-{{ status|slug }}">{{ status }}</span>
+{%- endmacro %}
+
+{% macro role_chip(role) -%}
+  <span class="chip plain role-{{ role }}">{{ role }}</span>
+{%- endmacro %}
+
+{% macro csrf() -%}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+{%- endmacro %}
+
+{% macro tree_node(node) -%}
+  <li>
+    <span class="node-kind">{{ node.kind }}</span>
+    {%- if node.kind == 'evidence' -%}
+      <a href="{{ url_for('evidence.view', evidence_id=node.ref) }}">{{ node.name }}</a>
+    {%- else -%}
+      <strong>{{ node.name }}</strong>
+    {%- endif -%}
+    {% if node.children %}
+      <ul>{% for child in node.children %}{{ tree_node(child) }}{% endfor %}</ul>
+    {% endif %}
+  </li>
+{%- endmacro %}
+
+{% macro case_card(c, role=None) -%}
+  <a class="card case-card" href="{{ url_for('cases.view_case', case_number=c.case_number) }}">
+    <div class="row between">
+      <span class="case-id">{{ c.case_number }}</span>
+      {{ status_chip(c.status) }}
+    </div>
+    <h3>{{ c.title }}</h3>
+    <div class="muted" style="font-size:.86rem">{{ c.category }} &middot; {{ c.incident_date or 'date not recorded' }}</div>
+    <div class="row" style="margin-top:.7rem;font-size:.82rem">
+      <span class="muted">Lead: {{ c.lead_name or 'unassigned' }}</span>
+      <span class="faint">&middot; {{ c.evidence_count }} evidence &middot; {{ c.suspect_count }} suspects</span>
+      {% if role %}{{ role_chip(role) }}{% endif %}
+    </div>
+  </a>
+{%- endmacro %}

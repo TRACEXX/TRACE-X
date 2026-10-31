@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_macros.html" import avatar, case_card %}
+{% block title %}{{ detective.full_name }}{% endblock %}
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('admin.detectives') }}">Detectives</a> / {{ detective.full_name }}</div>
+<div class="page-head">
+  <div class="item-row">
+    {{ avatar(detective.full_name, detective.profile_image, "lg", square=True) }}
+    <div>
+      <div class="eyebrow">{{ detective.badge_id }}</div>
+      <h1>{{ detective.full_name }}</h1>
+      <div class="muted">{{ detective.specialization }}</div>
+    </div>
+  </div>
+  <a class="btn" href="{{ url_for('admin.cases') }}">Assign a case</a>
+</div>
+
+<h2>Cases this detective can open ({{ cases|length }})</h2>
+{% if cases %}
+  <div class="grid grid-2">
+    {% for c in cases %}{{ case_card(c, c.my_role) }}{% endfor %}
+  </div>
+{% else %}
+  <div class="empty">No cases assigned or shared yet.</div>
+{% endif %}
+
+<section class="card" style="margin-top:1.4rem">
+  <h2>Recent activity</h2>
+  {% if recent %}
+    <ul class="list" style="font-size:.88rem">
+      {% for log in recent %}
+        <li><strong>{{ log.action }}</strong> {% if log.target_id %}<span class="mono">{{ log.target_id }}</span>{% endif %}
+          <span class="muted">&middot; {{ log.timestamp }}</span></li>
+      {% endfor %}
+    </ul>
+  {% else %}<p class="muted" style="margin:0">No recorded activity.</p>{% endif %}
+</section>
+{% endblock %}

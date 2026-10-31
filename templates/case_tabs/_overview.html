@@ -1,0 +1,75 @@
+{% from "_macros.html" import avatar, role_chip, csrf %}
+<div class="split">
+  <div class="stack">
+    <section class="card">
+      <h2>Incident report</h2>
+      <dl class="kv" style="margin-bottom:1rem">
+        <dt>Case ID</dt><dd class="mono">{{ case.case_number }}</dd>
+        <dt>Incident date</dt><dd>{{ case.incident_date or 'Not recorded' }}</dd>
+        <dt>Location</dt><dd>{{ case.location or 'Not recorded' }}</dd>
+        <dt>Opened</dt><dd>{{ case.created_at }}</dd>
+      </dl>
+      <p style="white-space:pre-line">{{ case.description or 'No description recorded.' }}</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Investigation summary &amp; status</h2></div>
+      {% if editable %}
+        <form method="post" action="{{ url_for('cases.update_case', case_number=case.case_number) }}">
+          {{ csrf() }}
+          <div class="field"><label for="summary">Summary</label>
+            <textarea id="summary" name="summary" rows="4">{{ case.summary }}</textarea></div>
+          <div class="row">
+            <select name="status" style="width:auto" aria-label="Status">
+              {% for s in statuses %}
+                {% if s != 'Closed' or permission == 'admin' or case.status == 'Closed' %}
+                  <option {{ 'selected' if case.status == s }}>{{ s }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+            <button class="btn primary" type="submit">Save</button>
+            {% if permission != 'admin' %}<span class="hint">Only the administrator can close a case.</span>{% endif %}
+          </div>
+        </form>
+      {% else %}
+        <p style="white-space:pre-line">{{ case.summary or 'No summary recorded.' }}</p>
+      {% endif %}
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Latest recorded events</h2>
+        <a class="btn small" href="{{ url_for('cases.view_case', case_number=case.case_number, tab='timeline') }}">Full timeline</a></div>
+      {% if recent_events %}
+        <ul class="timeline">
+          {% for e in recent_events %}
+            <li class="cat-{{ e.category }}"><div class="when">{{ e.time }}</div><div class="what">{{ e.type }}</div>
+              <div>{{ e.description }}</div></li>
+          {% endfor %}
+        </ul>
+      {% else %}<p class="muted" style="margin:0">No events recorded yet.</p>{% endif %}
+    </section>
+  </div>
+
+  <div class="stack">
+    <div class="grid grid-2">
+      <a class="card stat case-card" href="{{ url_for('cases.view_case', case_number=case.case_number, tab='suspects') }}"><span class="value">{{ counts.suspects }}</span><span class="label">Suspects</span></a>
+      <a class="card stat case-card" href="{{ url_for('cases.view_case', case_number=case.case_number, tab='witnesses') }}"><span class="value">{{ counts.witnesses }}</span><span class="label">Witnesses</span></a>
+      <a class="card stat case-card" href="{{ url_for('cases.view_case', case_number=case.case_number, tab='evidence') }}"><span class="value">{{ counts.evidence }}</span><span class="label">Evidence</span></a>
+      <a class="card stat case-card {{ 'warn' if counts.alerts else 'good' }}" href="{{ url_for('cases.view_case', case_number=case.case_number, tab='forensics') }}"><span class="value">{{ counts.alerts }}</span><span class="label">Integrity alerts</span></a>
+    </div>
+    <section class="card">
+      <h2>Assigned investigators</h2>
+      {% if team %}
+        <ul class="list">
+          {% for t in team %}
+            <li class="item-row">{{ avatar(t.full_name, t.profile_image) }}
+              <div class="grow">{{ t.full_name }}<div class="muted mono" style="font-size:.78rem">{{ t.badge_id }}</div></div>
+              {{ role_chip(t.permission_level) }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="muted" style="margin:0">No detective assigned.{% if user_is_admin %} <a href="{{ url_for('admin.cases') }}">Assign one</a>.{% endif %}</p>
+      {% endif %}
+    </section>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+{% from "_macros.html" import csrf %}
+<div class="stack">
+  {% for w in witnesses %}
+    <section class="card" id="w{{ w.id }}">
+      <div class="card-head">
+        <div><span class="mono" style="color:var(--accent)">{{ w.id|wcode }}</span> <strong>{{ w.name }}</strong>
+          <div class="muted" style="font-size:.84rem">{{ w.contact }}</div></div>
+        <div class="muted" style="font-size:.82rem;text-align:right">Recorded {{ w.recorded_at }}<br>by {{ w.recorded_by_name or 'unknown' }}</div>
+      </div>
+      <blockquote style="margin:0 0 .8rem;padding-left:.9rem;border-left:3px solid var(--line-strong);white-space:pre-line">{{ w.statement }}</blockquote>
+      <div class="row" style="font-size:.85rem">
+        {% if w.related_suspect_id %}<span class="chip plain">Mentions <a href="{{ url_for('cases.suspect_dossier', suspect_id=w.related_suspect_id) }}">&nbsp;{{ w.related_suspect_name }}</a></span>{% endif %}
+        {% if w.related_evidence_id %}<span class="chip plain">Evidence <a class="mono" href="{{ url_for('evidence.view', evidence_id=w.related_evidence_id) }}">&nbsp;{{ w.related_evidence_code }}</a></span>{% endif %}
+        {% if w.updated_at %}<span class="faint">Last edited {{ w.updated_at }}</span>{% endif %}
+      </div>
+
+      {% if history[w.id] %}
+        <details style="margin-top:.8rem">
+          <summary class="muted" style="cursor:pointer">Audit history: {{ history[w.id]|length }} earlier version(s)</summary>
+          <ul class="list" style="margin-top:.5rem">
+            {% for h in history[w.id] %}
+              <li style="font-size:.88rem"><div class="faint">Replaced {{ h.edited_at }} by {{ h.edited_by_name }}{% if h.reason %}: "{{ h.reason }}"{% endif %}</div>
+                <s class="muted">{{ h.previous_statement }}</s></li>
+            {% endfor %}
+          </ul>
+        </details>
+      {% endif %}
+
+      {% if editable %}
+        <details class="drawer" style="margin-top:.8rem">
+          <summary>Update statement</summary>
+          <form method="post" action="{{ url_for('cases.edit_witness', witness_id=w.id) }}">
+            {{ csrf() }}
+            <div class="field"><label>Statement</label><textarea name="statement" rows="4" required>{{ w.statement }}</textarea></div>
+            <div class="form-grid">
+              <div class="field"><label>Mentions suspect</label>
+                <select name="related_suspect_id"><option value="">None</option>
+                  {% for s in suspects %}<option value="{{ s.id }}" {{ 'selected' if s.id == w.related_suspect_id }}>{{ s.id|scode }} {{ s.name }}</option>{% endfor %}</select></div>
+              <div class="field"><label>Related evidence</label>
+                <select name="related_evidence_id"><option value="">None</option>
+                  {% for e in evidence %}<option value="{{ e.id }}" {{ 'selected' if e.id == w.related_evidence_id }}>{{ e.evidence_code }} {{ e.filename }}</option>{% endfor %}</select></div>
+              <div class="field full"><label>Reason for change (kept in the audit history)</label><input type="text" name="reason"></div>
+            </div>
+            <button class="btn primary" type="submit">Save new version</button>
+          </form>
+        </details>
+      {% endif %}
+    </section>
+  {% else %}
+    <div class="empty">No witness statements recorded.</div>
+  {% endfor %}
+
+  {% if editable %}
+    <details class="drawer">
+      <summary>Record a witness statement</summary>
+      <form method="post" action="{{ url_for('cases.add_witness', case_number=case.case_number) }}">
+        {{ csrf() }}
+        <div class="form-grid">
+          <div class="field"><label>Witness name</label><input type="text" name="name" required></div>
+          <div class="field"><label>Role / contact</label><input type="text" name="contact"></div>
+          <div class="field full"><label>Statement</label><textarea name="statement" rows="4" required></textarea></div>
+          <div class="field"><label>Recorded at</label><input type="datetime-local" name="recorded_at">
+            <span class="hint">Leave empty to use the current time.</span></div>
+          <div class="field"><label>Mentions suspect</label>
+            <select name="related_suspect_id"><option value="">None</option>
+              {% for s in suspects %}<option value="{{ s.id }}">{{ s.id|scode }} {{ s.name }}</option>{% endfor %}</select></div>
+          <div class="field"><label>Related evidence</label>
+            <select name="related_evidence_id"><option value="">None</option>
+              {% for e in evidence %}<option value="{{ e.id }}">{{ e.evidence_code }} {{ e.filename }}</option>{% endfor %}</select></div>
+        </div>
+        <button class="btn primary" type="submit">Record statement</button>
+      </form>
+    </details>
+  {% endif %}
+</div>
