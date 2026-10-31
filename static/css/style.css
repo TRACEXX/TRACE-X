@@ -5,36 +5,44 @@
    ===================================================================== */
 
 :root {
-  --bg: #0c1117;
-  --surface: #131a22;
-  --surface-2: #19222c;
-  --surface-3: #202b37;
-  --line: #263240;
-  --line-strong: #344354;
-  --text: #e7ecf1;
-  --muted: #8d9aa8;
-  --faint: #5f6d7c;
-  --accent: #f2b33d;          /* evidence-tape amber */
-  --accent-ink: #1b1404;
-  --info: #62b6dc;
-  --ok: #3fbf8f;
-  --bad: #ec6553;
-  --warn: #e8a23a;
-  --violet: #a48bea;
-  --radius: 10px;
-  --radius-sm: 6px;
-  --sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --mono: "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
-  --shadow: 0 1px 0 rgba(255,255,255,.03) inset, 0 8px 24px rgba(0,0,0,.25);
+    /* BLACK & DEEP CHARCOAL BASE */
+    --bg: #08080a;
+    --surface: rgba(18, 18, 22, 0.82);   /* Semi-transparent so background image peeks through */
+    --surface-2: rgba(30, 30, 36, 0.85);
+    --surface-3: rgba(42, 42, 50, 0.90);
+
+    /* METALLIC SILVER BORDERS & TEXT */
+    --line: #3f3f46;
+    --line-strong: #71717a;
+    --text: #f4f4f5;
+    --muted: #a1a1aa;
+    --faint: #52525b;
+
+    /* CRIMSON RED ACCENT (Replaces Evidence-Tape Amber Yellow) */
+    --accent: #dc2626;         /* Bright investigation red */
+    --accent-ink: #ffffff;     /* Crisp white text on red accents */
+    
+    --info: #38bdf8;
+    --ok: #34d399;
+    --bad: #f87171;
+    --warn: #fbbf24;
+    --violet: #a78bfa;
+    --radius: 10px;
+    --radius-sm: 6px;
 }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 15px/1.55 var(--sans);
+    margin: 0;
+    background-image: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.75)), 
+                      url('../assets/backgrounds/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text);
+    font: 15px/1.55 var(--sans);
 }
 a { color: var(--info); text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -66,11 +74,13 @@ img { max-width: 100%; }
 
 /* ----------------------------------------------------------- layout */
 .topbar {
-  display: flex; align-items: center; gap: 1rem;
-  padding: .7rem 1.25rem;
-  background: var(--surface);
-  border-bottom: 1px solid var(--line);
-  position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: 1rem;
+    padding: .7rem 1.25rem;
+    background: var(--surface);
+    backdrop-filter: blur(12px);          /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 20;
 }
 .brand { display: flex; align-items: center; gap: .55rem; color: var(--text); font-weight: 800; letter-spacing: .08em; }
 .brand:hover { text-decoration: none; }
@@ -85,9 +95,11 @@ img { max-width: 100%; }
 
 .shell { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: calc(100vh - 54px); }
 .sidebar {
-  background: var(--surface);
-  border-right: 1px solid var(--line);
-  padding: 1rem .75rem;
+    background: var(--surface);
+    backdrop-filter: blur(12px);          /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(12px);
+    border-right: 1px solid var(--line);
+    padding: 1rem .75rem;
 }
 .sidebar .nav-title { color: var(--faint); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; margin: 1rem .6rem .4rem; }
 .sidebar a {
@@ -116,12 +128,14 @@ img { max-width: 100%; }
 
 /* ------------------------------------------------------------ cards */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.15rem 1.25rem;
-  box-shadow: var(--shadow);
-  min-width: 0;
+    background: var(--surface);
+    backdrop-filter: blur(10px);          /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.15rem 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    min-width: 0;
 }
 .card h2, .card h3 { margin-bottom: .75rem; }
 .card-head { display: flex; justify-content: space-between; align-items: center; gap: .8rem; margin-bottom: .8rem; }
@@ -288,7 +302,7 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 
 /* ----------------------------------------------------------- viewer */
 .viewer {
-  background: #06090c; border: 1px solid var(--line); border-radius: var(--radius);
+  background: rgba(10, 10, 12, 0.85); border: 1px solid var(--line); border-radius: var(--radius);
   min-height: 260px; display: grid; place-items: center; overflow: hidden;
 }
 .viewer img { max-height: 70vh; object-fit: contain; }
@@ -311,7 +325,7 @@ pre.text-view {
 .result-banner.MISMATCH, .result-banner.FILE-MISSING { background: rgba(236,101,83,.12); color: var(--bad); border: 1px solid rgba(236,101,83,.55); }
 
 /* ------------------------------------------------------------ graph */
-.graph-wrap { position: relative; background: #0a0f14; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.graph-wrap { position: relative; background: rgba(10, 10, 12, 0.85); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 #graph-svg { width: 100%; height: 560px; display: block; cursor: grab; }
 #graph-svg .edge { stroke: var(--line-strong); stroke-width: 1.5; }
 #graph-svg .edge.hot { stroke: var(--accent); stroke-width: 2.5; }
@@ -345,10 +359,31 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
 .example-btn { display: block; width: 100%; text-align: left; margin-bottom: .4rem; white-space: normal; font-weight: 500; }
 
 /* --------------------------------------------------------- landing */
-.landing-hero { padding: 4.5rem 0 3rem; }
-.landing-hero .wordmark { font: 900 clamp(3rem, 9vw, 6.2rem)/.9 var(--sans); letter-spacing: .04em; margin: 1rem 0 .6rem; }
-.landing-hero .wordmark span { color: var(--accent); }
-.landing-hero .lede { font-size: 1.15rem; color: var(--muted); max-width: 640px; }
+/* ------------------------------------------------------- landing */
+.landing-hero { 
+    padding: 4.5rem 0 3rem; 
+}
+
+.landing-hero .wordmark {
+    font-family: var(--sans);
+    font-size: clamp(3.8rem, 9vw, 6.2rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    margin: 1rem 0 0.6rem;
+    color: var(--text);
+}
+
+.landing-hero .wordmark span { 
+    color: var(--accent); 
+}
+
+.landing-hero .lede { 
+    font-size: 1.15rem; 
+    color: var(--muted); 
+    max-width: 640px; 
+    line-height: 1.6;
+}
 .wrap { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
 .feature-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0 0; }
 .feature-list .card h3 { font-size: .98rem; }
