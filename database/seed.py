@@ -37,10 +37,10 @@ from forensics.custody import record_custody_event
 from forensics.integrity import verify_evidence
 
 DETECTIVES = [
-    ("amna", "Amna Fareed", "DET-101", "Homicide & Crime Scene Analysis"),
-    ("warisha", "Warisha Ahmed", "DET-102", "Missing Persons"),
-    ("hiba", "Hiba Khan", "DET-103", "Cybercrime & Digital Forensics"),
-    ("maryam", "Maryam Farhan", "DET-104", "Property Crime & Fraud"),
+    ("amna", "Amna Fareed", "DET-101"),
+    ("warisha", "Warisha Ahmed", "DET-102"),
+    ("hiba", "Hiba Khan", "DET-103"),
+    ("maryam", "Maryam Farhan", "DET-104"),
 ]
 
 

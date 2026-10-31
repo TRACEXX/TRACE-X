@@ -35,7 +35,7 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
     margin: 0;
-    background-image: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.75)), 
+    background-image: linear-gradient(rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.5)), 
                       url('../assets/backgrounds/bg.jpg');
     background-size: cover;
     background-position: center;
@@ -58,19 +58,6 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 1.4rem 0; }
 img { max-width: 100%; }
 
 /* ------------------------------------------------------------- tape */
-.tape {
-  height: 10px;
-  background: repeating-linear-gradient(-45deg, var(--accent) 0 14px, #111 14px 28px);
-}
-.tape-label {
-  display: inline-block;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font: 700 .72rem/1 var(--mono);
-  letter-spacing: .14em;
-  padding: .45em .8em;
-  text-transform: uppercase;
-}
 
 /* ----------------------------------------------------------- layout */
 .topbar {
@@ -256,7 +243,25 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .avatar.lg { width: 84px; height: 84px; font-size: 1.4rem; }
-.avatar.xl { width: 120px; height: 120px; font-size: 2rem; border-radius: 14px; }
+
+/* Larger detective photographs on the homepage */
+
+#detectives .avatar.xl {
+  width: 200px;
+  height: 230px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#detectives .avatar.xl img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+#detectives .badge-body > .row:first-child {
+  justify-content: center;
+}
 .avatar.square { border-radius: 10px; }
 
 /* ------------------------------------------------------------- tabs */
