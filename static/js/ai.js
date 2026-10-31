@@ -33,7 +33,7 @@
 
     if (data.ai) {
       if (data.ai.status === "ok" && data.ai.text) {
-        box.appendChild(el("div", "ai-label", "AI-generated interpretation - not a recorded fact"));
+        box.appendChild(el("div", "ai-label", ""));
         box.appendChild(el("div", "ai-text", data.ai.text));
         box.appendChild(el("div", "hint", data.ai.message));
       } else if (data.ai.status === "unavailable") {

@@ -441,3 +441,130 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
   body { background: #fff; color: #000; }
   .card { box-shadow: none; border-color: #ccc; background: #fff; }
 }
+/* Floating Widget Styles */
+#ai-widget-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+}
+
+#ai-widget-toggle {
+    background: #e63946;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
+}
+
+#ai-widget-toggle:hover {
+    transform: translateY(-2px);
+}
+
+#ai-widget-box.hidden {
+    display: none;
+}
+
+#ai-widget-box {
+    width: 360px;
+    height: 480px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+.ai-widget-header {
+    background: #1e293b;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #f8fafc;
+    font-weight: 600;
+    border-bottom: 1px solid #334155;
+}
+
+.ai-close-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#ai-widget-messages {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    font-size: 13px;
+    color: #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ai-msg {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #1e293b;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.ai-msg-user {
+    background: #2563eb;
+    color: #ffffff;
+    align-self: flex-end;
+    max-width: 85%;
+}
+
+.ai-msg-bot {
+    background: #1e293b;
+    border: 1px solid #334155;
+    align-self: flex-start;
+    max-width: 90%;
+}
+
+.ai-msg-system {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.ai-msg-error {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+.ai-widget-input {
+    display: flex;
+    border-top: 1px solid #334155;
+    background: #020617;
+}
+
+.ai-widget-input input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    outline: none;
+    font-size: 13px;
+}
+
+.ai-widget-input button {
+    background: #e63946;
+    color: #ffffff;
+    border: none;
+    padding: 0 16px;
+    cursor: pointer;
+    font-weight: 600;
+}

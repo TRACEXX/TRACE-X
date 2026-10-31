@@ -54,10 +54,30 @@
       {% block content %}{% endblock %}
     </main>
   </div>
+
+  <!-- FLOATING TRACE AI CHAT WIDGET -->
+  <div id="ai-widget-container">
+    <button id="ai-widget-toggle">💬 TRACE AI</button>
+    <div id="ai-widget-box" class="hidden">
+      <div class="ai-widget-header">
+        <span>TRACE AI Assistant</span>
+        <button class="ai-close-btn">✕</button>
+      </div>
+      <div id="ai-widget-messages">
+        <div class="ai-msg">Ask TRACE AI a question (e.g., <i>"Summarize Case 001"</i>).</div>
+      </div>
+      <div class="ai-widget-input">
+        <input type="text" id="ai-widget-query" placeholder="Ask TRACE AI...">
+        <button id="ai-widget-send">Ask</button>
+      </div>
+    </div>
+  </div>
 {% else %}
   {% block public %}{% endblock %}
 {% endif %}
+
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
 {% block scripts %}{% endblock %}
 </body>
 </html>

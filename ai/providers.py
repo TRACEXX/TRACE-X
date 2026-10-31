@@ -121,7 +121,7 @@ def _gemini(system_prompt, user_prompt, model):
 def _ollama(system_prompt, user_prompt, model):
     data = _post_json(
         current_app.config["OLLAMA_URL"].rstrip("/") + "/api/chat",
-        {"model": model, "stream": False, "options": {"temperature": 0.2},
+        {"model": model, "stream": False, "options": {"temperature": 0.2,"num_predict": 256},
          "messages": [{"role": "system", "content": system_prompt},
                       {"role": "user", "content": user_prompt}]},
         {},
@@ -130,3 +130,6 @@ def _ollama(system_prompt, user_prompt, model):
         return data["message"]["content"].strip()
     except (KeyError, TypeError):
         raise AIProviderError("Unexpected response format from Ollama.") from None
+
+
+
