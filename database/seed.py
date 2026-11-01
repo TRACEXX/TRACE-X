@@ -36,12 +36,12 @@ from database.db import create_schema, get_db, log_activity, now_str
 from forensics.custody import record_custody_event
 from forensics.integrity import verify_evidence
 
-# Fixed: Added 4th value (specialization) to match the 4-variable loop in seed_database()
+# Fixed: Added profile image path to match static/assets/detectives/ filenames
 DETECTIVES = [
-    ("amna", "Amna Fareed", "DET-101", "Homicide & Forensics"),
-    ("warisha", "Warisha Ahmed", "DET-102", "Cyber & Digital Forensics"),
-    ("hiba", "Hiba Khan", "DET-103", "Financial & Cybercrime"),
-    ("maryam", "Maryam Farhan", "DET-104", "Evidence & Intelligence"),
+    ("amna", "Amna Fareed", "DET-101", "Homicide & Forensics", "detectives/amna.jpeg"),
+    ("warisha", "Warisha Ahmed", "DET-102", "Cyber & Digital Forensics", "detectives/warisha.jpeg"),
+    ("hiba", "Hiba Khan", "DET-103", "Financial & Cybercrime", "detectives/hiba.jpeg"),
+    ("maryam", "Maryam Farhan", "DET-104", "Evidence & Intelligence", "detectives/maryam.jpeg"),
 ]
 
 
@@ -357,19 +357,20 @@ def seed_database():
     config = current_app.config
     stamp = now_str()
 
-    # ---- users: exactly one administrator and four detectives
+    # ---- users: exactly one administrator and four detectives (including profile_image)
     users = {}
     cursor = db.execute(
-        "INSERT INTO users (username, password_hash, full_name, role, badge_id, specialization, created_at) "
-        "VALUES (?, ?, ?, 'admin', 'ADM-001', 'System administration', ?)",
+        "INSERT INTO users (username, password_hash, full_name, role, badge_id, specialization, profile_image, created_at) "
+        "VALUES (?, ?, ?, 'admin', 'ADM-001', 'System administration', 'detectives/admin.jpg', ?)",
         (config["ADMIN_USERNAME"].lower(), generate_password_hash(config["ADMIN_PASSWORD"]),
          "TRACE X Administrator", stamp))
     users["admin"] = {"id": cursor.lastrowid, "role": "admin"}
-    for username, full_name, badge, specialization in DETECTIVES:
+
+    for username, full_name, badge, specialization, profile_image in DETECTIVES:
         cursor = db.execute(
-            "INSERT INTO users (username, password_hash, full_name, role, badge_id, specialization, created_at) "
-            "VALUES (?, ?, ?, 'detective', ?, ?, ?)",
-            (username, generate_password_hash(config["DETECTIVE_PASSWORD"]), full_name, badge, specialization, stamp))
+            "INSERT INTO users (username, password_hash, full_name, role, badge_id, specialization, profile_image, created_at) "
+            "VALUES (?, ?, ?, 'detective', ?, ?, ?, ?)",
+            (username, generate_password_hash(config["DETECTIVE_PASSWORD"]), full_name, badge, specialization, profile_image, stamp))
         users[username] = {"id": cursor.lastrowid, "role": "detective"}
 
     # ---- cases and assignments
@@ -456,6 +457,7 @@ def seed_database():
             (cases[case_number]["id"], name, contact, statement, recorded_at, users[by]["id"],
              suspects.get(suspect_key), evidence.get(evidence_key)))
         witnesses[name.split()[0].lower()] = cursor.lastrowid
+
     # One statement that was corrected later, to show the audit history.
     db.execute("INSERT INTO witness_history (witness_id, previous_statement, edited_by, edited_at, reason) "
                "VALUES (?, ?, ?, ?, ?)",
