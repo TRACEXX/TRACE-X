@@ -36,12 +36,12 @@ from database.db import create_schema, get_db, log_activity, now_str
 from forensics.custody import record_custody_event
 from forensics.integrity import verify_evidence
 
-# Fixed: Added profile image path to match static/assets/detectives/ filenames
+# Updated with correct static paths for avatar macro resolution
 DETECTIVES = [
-    ("amna", "Amna Fareed", "DET-101", "Homicide & Forensics", "detectives/amna.jpeg"),
-    ("warisha", "Warisha Ahmed", "DET-102", "Cyber & Digital Forensics", "detectives/warisha.jpeg"),
-    ("hiba", "Hiba Khan", "DET-103", "Financial & Cybercrime", "detectives/hiba.jpeg"),
-    ("maryam", "Maryam Farhan", "DET-104", "Evidence & Intelligence", "detectives/maryam.jpeg"),
+    ("amna", "Amna Fareed", "DET-101", "Homicide & Forensics", "assets/detectives/amna.jpeg"),
+    ("warisha", "Warisha Ahmed", "DET-102", "Cyber & Digital Forensics", "assets/detectives/warisha.jpeg"),
+    ("hiba", "Hiba Khan", "DET-103", "Financial & Cybercrime", "assets/detectives/hiba.jpeg"),
+    ("maryam", "Maryam Farhan", "DET-104", "Evidence & Intelligence", "assets/detectives/maryam.jpeg"),
 ]
 
 
@@ -357,11 +357,11 @@ def seed_database():
     config = current_app.config
     stamp = now_str()
 
-    # ---- users: exactly one administrator and four detectives (including profile_image)
+    # ---- users: administrator and detectives with relative image paths for static assets
     users = {}
     cursor = db.execute(
         "INSERT INTO users (username, password_hash, full_name, role, badge_id, specialization, profile_image, created_at) "
-        "VALUES (?, ?, ?, 'admin', 'ADM-001', 'System administration', 'detectives/admin.jpg', ?)",
+        "VALUES (?, ?, ?, 'admin', 'ADM-001', 'System administration', 'assets/detectives/admin.jpg', ?)",
         (config["ADMIN_USERNAME"].lower(), generate_password_hash(config["ADMIN_PASSWORD"]),
          "TRACE X Administrator", stamp))
     users["admin"] = {"id": cursor.lastrowid, "role": "admin"}
