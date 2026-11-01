@@ -36,11 +36,12 @@ from database.db import create_schema, get_db, log_activity, now_str
 from forensics.custody import record_custody_event
 from forensics.integrity import verify_evidence
 
+# Fixed: Added 4th value (specialization) to match the 4-variable loop in seed_database()
 DETECTIVES = [
-    ("amna", "Amna Fareed", "DET-101"),
-    ("warisha", "Warisha Ahmed", "DET-102"),
-    ("hiba", "Hiba Khan", "DET-103"),
-    ("maryam", "Maryam Farhan", "DET-104"),
+    ("amna", "Amna Fareed", "DET-101", "Homicide & Forensics"),
+    ("warisha", "Warisha Ahmed", "DET-102", "Cyber & Digital Forensics"),
+    ("hiba", "Hiba Khan", "DET-103", "Financial & Cybercrime"),
+    ("maryam", "Maryam Farhan", "DET-104", "Evidence & Intelligence"),
 ]
 
 
@@ -54,7 +55,7 @@ def make_placeholder_png(width, height, tint):
     cx, cy, radius = width * 0.62, height * 0.45, min(width, height) * 0.09
     rows = []
     for y in range(height):
-        row = bytearray(b"\x00")                      # PNG filter byte: none
+        row = bytearray(b"\x00")                  # PNG filter byte: none
         fade = 0.25 + 0.55 * (1 - y / height)
         for x in range(width):
             r, g, b = int(r0 * fade), int(g0 * fade), int(b0 * fade)
