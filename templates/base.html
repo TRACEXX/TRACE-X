@@ -47,7 +47,6 @@
       <a href="{{ url_for('detectives.case_list') }}" class="{{ 'active' if ep in ('detectives.case_list', 'cases.view_case') }}"><span class="ico">[]</span>{{ 'All cases' if user_is_admin else 'My cases' }}</a>
       <a href="{{ url_for('detectives.search') }}" class="{{ 'active' if ep == 'detectives.search' }}"><span class="ico">?</span>Search</a>
       <a href="{{ url_for('ai.page', case=case.case_number if case is defined and case else None) }}" class="{{ 'active' if ep == 'ai.page' }}"><span class="ico">AI</span>TRACE AI</a>
-      <a href="{{ url_for('inspector.page') }}" class="{{ 'active' if ep == 'inspector.page' }}"><span class="ico">{}</span>DSA Inspector</a>
     </nav>
     <main class="main">
       {% include "_flashes.html" %}
