@@ -58,8 +58,8 @@ def _load_or_create_secret(folder):
 
 
 def _register_blueprints(app):
-    from routes import admin, ai, auth, cases, detectives, evidence, inspector, reports
-    for module in (auth, admin, detectives, cases, evidence, reports, ai, inspector):
+    from routes import admin, ai, auth, cases, detectives, evidence, reports
+    for module in (auth, admin, detectives, cases, evidence, reports, ai):
         app.register_blueprint(module.bp)
 
 
