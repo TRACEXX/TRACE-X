@@ -2,11 +2,12 @@
 {% from "_macros.html" import status_chip, role_chip %}
 {% block title %}{{ case.case_number }} {{ case.title }}{% endblock %}
 {% block content %}
-<div class="breadcrumb">
-  <a href="{{ url_for('detectives.case_list') }}">Cases</a> / {{ case.case_number }}
-</div>
+
 <div class="page-head">
   <div>
+    <div class="breadcrumb">
+      <a href="{{ url_for('detectives.case_list') }}">Cases</a> / {{ case.case_number }}
+    </div>
     <div class="eyebrow">{{ case.case_number }} &middot; {{ case.category }}</div>
     <h1>{{ case.title }}</h1>
     <div class="row" style="margin-top:.5rem">
