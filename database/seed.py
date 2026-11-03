@@ -148,17 +148,64 @@ CASES = [
         "summary": "Server logs tie the logins to one IP range. An internal workstation appears in the logs.",
         "team": [("hiba", "lead"), ("maryam", "viewer")],
     },
-    {
-        "case_number": "CASE-004", "title": "Noor Gallery Painting Theft", "category": "Theft",
-        "status": "Open", "incident_date": "2026-09-21",
-        "location": "Noor Art Gallery (fictional), East Wing", "created_at": "2026-09-22 09:30:00",
-        "description": (
-            "The oil painting 'Evening at the River' (fictional artist S. Rahim, insured value recorded in the "
-            "gallery inventory) was found missing from the East Wing at opening time on 22 September 2026. The "
-            "frame was left behind. The gallery had hosted a private viewing the evening before."),
-        "summary": "",
-        "team": [],          # left unassigned on purpose: the admin assigns it during the demo
-    },
+    
+{
+    "case_number": "CASE-004",
+    "title": "The Indigo Veil",
+    "category": "Narcotics Offence",
+    "status": "Open",
+    "incident_date": "2026-03-13",
+    "location": "West Wharf District, Karachi (fictional)",
+    "created_at": "2026-03-14 08:05:00",
+    "description": (
+        "On 13 March 2026, suspected narcotics activities were reported near "
+        "Warehouse 03 in Karachi's West Wharf District. A hospital incident "
+        "and CCTV footage of a suspicious duffel-bag exchange prompted an "
+        "investigation. Unidentified packages marked with an indigo crescent, "
+        "a handwritten ledger, and a mobile phone were recovered. "
+        "Anmol Pinky and Walter White were identified as persons of interest. "
+        "Their involvement remains unconfirmed."
+    ),
+    "summary": (
+        "An ongoing narcotics investigation involving suspicious warehouse "
+        "activity, conflicting witness statements, and unidentified packages "
+        "bearing an indigo crescent symbol. Two suspects remain under "
+        "investigation, with no confirmed culprit."
+    ),
+    "team": [],  # Admin assigns detectives during the demo
+},
+{
+  "case_number": "CASE-005",
+"title": "Binance Wallet Theft",
+"category": "Cybercrime",
+"status": "Under Investigation",
+"incident_date": "2026-10-29",
+"location": "Binance Cryptocurrency Exchange (Global)",
+"created_at": "2026-10-29 20:25:00",
+"description": (
+    "On October 29, 2026, Binance reportedly suffered a massive "
+    "cryptocurrency theft involving approximately $6.36 billion across "
+    "ten blockchains within just 20 minutes, beginning at 20:05 UTC. "
+    "Attackers allegedly compromised hot wallet signing infrastructure "
+    "through a DevOps engineer's laptop, impersonating authorized "
+    "withdrawal services without obtaining master private keys. "
+    "Ethereum wallets were reportedly exploited using EIP-7702 "
+    "authorizations, while additional funds were transferred across "
+    "Bitcoin, Tron, Solana, XRP, and other networks. "
+    "Security organizations and stablecoin issuers reportedly froze "
+    "approximately $2.7 billion in stolen assets, while Binance "
+    "mobilized corporate reserves to cover remaining losses."
+),
+"summary": (
+    "Attackers reportedly stole $6.36 billion from Binance hot wallets "
+    "across ten blockchains in 20 minutes. "
+    "Approximately $2.7 billion was reportedly frozen as investigators "
+    "traced the compromised signing infrastructure."
+),
+"team": [("maryam", "lead"), ("warisha", "investigator")],
+     
+}
+
 ]
 
 SUSPECTS = {
@@ -358,8 +405,12 @@ def _evidence_specs():
         ("CASE-003", "screenshot", "cloned_login_page_screenshot.png", make_placeholder_png(800, 500, (60, 130, 110)),
          "Screenshot of the cloned login page (generated placeholder - replace with your own).",
          "hiba", "2026-06-19 11:05:00"),
-        ("CASE-004", "inventory", "gallery_inventory_extract.txt", GALLERY_INVENTORY.encode(),
-         "Inventory extract supplied by the gallery manager.", "admin", "2026-09-22 10:00:00"),
+        
+        ("CASE-004", "document", "warehouse_incident_report.txt",
+        "On 13 March 2026, suspicious activity was recorded near Warehouse 03. CCTV footage captured a possible duffel-bag exchange involving Anmol Pinky. Unidentified packages bearing an indigo crescent symbol, a handwritten ledger, and a mobile phone were later recovered. Investigations are ongoing.".encode(),
+        "Initial incident report documenting suspicious warehouse activity and recovered evidence.",
+        "admin", "2026-03-14 10:30:00"),
+
     ]
 
 
