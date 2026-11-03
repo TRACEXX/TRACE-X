@@ -209,15 +209,30 @@ SUSPECTS = {
          "background": "Alias advertising 'bank login kits' on a forum (fictional).",
          "motive": "Unknown.", "alibi": "Not applicable - identity unknown.", "statements": "", "notes": ""},
     ],
-    "CASE-004": [
-        {"key": "salman", "name": "Salman Haider", "relationship": "Contract art installer",
-         "background": "Installed the East Wing exhibition on 19 September.",
-         "motive": "None recorded.", "alibi": "Not yet interviewed.", "statements": "", "notes": ""},
-        {"key": "kiran", "name": "Kiran Aftab", "relationship": "Guest at the private viewing",
-         "background": "Private collector; enquired about buying the painting in August.",
-         "motive": "Offer to buy the painting was refused.", "alibi": "Not yet interviewed.",
-         "statements": "", "notes": ""},
-    ],
+    
+"CASE-004": [
+    {
+        "key": "pinky",
+        "name": "Anmol Pinky",
+        "relationship": "Linked to a suspicious bag exchange near Warehouse 03.",
+        "background": "Nightlife event coordinator at Neon Wharf Lounge.",
+        "motive": "Possible financial gain from narcotics distribution.",
+        "alibi": "Claims she was arranging event equipment at the lounge.",
+        "statements": "Denies involvement; says the bag contained audio equipment.",
+        "notes": "CCTV places her near the warehouse. Bag contents unverified."
+    },
+    {
+        "key": "walter",
+        "name": "Walter White",
+        "relationship": "Seen near a restricted warehouse storage area.",
+        "background": "Former chemistry teacher and industrial consultant.",
+        "motive": "Possible financial gain from illegal operations.",
+        "alibi": "Claims he attended a scheduled technical consultation.",
+        "statements": "Denies involvement; says his case held measuring equipment.",
+        "notes": "Late-night visit and connection to Pinky remain unverified."
+    }
+],
+
 }
 
 ACCESS_LOG_CSV = """timestamp,door,card_id,card_holder,direction
