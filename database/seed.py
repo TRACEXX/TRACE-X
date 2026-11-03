@@ -163,7 +163,7 @@ CASES = [
 
 SUSPECTS = {
     "CASE-001": [
-        {"key": "kamran", "name": "Kamran Sheikh", "relationship": "Head librarian; colleague of the victim",
+        {"key": "kamran", "name": "Kamran Khan", "relationship": "Head librarian; colleague of the victim",
          "background": "Head librarian for 14 years. Responsible for the manuscript loan ledger.",
          "motive": "Staff report a heated argument with the victim about the missing loan ledger on 13 March.",
          "alibi": "States he left the library at about 20:00 and was at home all evening; his wife confirms.",
