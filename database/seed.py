@@ -551,35 +551,12 @@ def _evidence_specs():
             "Restricted historic complaint reference; unverified.", "warisha", "2026-11-01 10:00:00"),
         # ------------------------------------------------ CASE-007: exact supplied media from DUET package
         
-("CASE-007", "c7_video", "EV-001_classroom_video.mp4",
-    (Path("evidence_storage/CASE-007") / "EV-001_classroom_video.mp4").read_bytes(),
+("CASE-007", "c7_video", "case7cctv.mp4",
+    (Path("static/assets/demo-videos") / "case8cctv.mp4").read_bytes(),
     "Original user-supplied classroom video; recording date and clock time unknown.",
     "admin", "2026-11-07 12:05:00"),
 
-("CASE-007", "c7_frame2", "EV-002_entry.png",
-    (Path("evidence_storage/CASE-007") / "EV-002_entry.png").read_bytes(),
-    "Extracted still at video offset 00:02.5: Classroom entry; offset is not a wall-clock time.",
-    "admin", "2026-11-07 12:10:00"),
 
-("CASE-007", "c7_uswa_photo", "EV-009_uswa_portrait.jpeg",
-    (Path("evidence_storage/CASE-007") / "EV-009_uswa_portrait.jpeg").read_bytes(),
-    "User-supplied portrait labeled Uswa; source identification not independently verified.",
-    "admin", "2026-11-07 12:15:00"),
-
-("CASE-007", "c7_fatima_photo", "EV-010_fatima_portrait.jpeg",
-    (Path("evidence_storage/CASE-007") / "EV-010_fatima_portrait.jpeg").read_bytes(),
-    "User-supplied portrait labeled Fatima; source identification not independently verified.",
-    "admin", "2026-11-07 12:16:00"),
-
-("CASE-007", "c7_sim_chat", "SIM-001_chat_transcript.csv",
-    (Path("evidence_storage/CASE-007") / "SIM-001_chat_transcript.csv").read_bytes(),
-    "SIMULATED conversation for fictional storyline; not recovered from a device.",
-    "admin", "2026-11-07 12:20:00"),
-
-("CASE-007", "c7_lost_report", "SIM-002_lost_property_report.txt",
-    (Path("evidence_storage/CASE-007") / "SIM-002_lost_property_report.txt").read_bytes(),
-    "SIMULATED student-property report; ownership and incident date not verified.",
-    "admin", "2026-11-07 12:21:00"),
 
         # ------------------------------------------------ CASE-008: starter fictional exhibits; editable later
         ("CASE-008", "c8_ledger", "black_ledger_intake.txt",
