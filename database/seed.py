@@ -202,7 +202,66 @@ CASES = [
             "traced the compromised signing infrastructure."
         ),
         "team": [("maryam", "lead"), ("warisha", "investigator")],
-    }
+    },
+    # ------------------------------------------------ CASE-006: THE RED SIGNATURE MURDERS
+    {
+        "case_number": "CASE-006", "title": "The Red Signature Murders", "category": "Homicide",
+        "status": "Under Investigation", "incident_date": "2026-01-12",
+        "location": "Multiple fictional crime scenes; Crimson Task Force jurisdiction",
+        "created_at": "2026-04-18 09:00:00",
+        "description": (
+            "A series of suspected connected killings is attributed to an unidentified offender called "
+            "the Red Phantom. Investigators have documented a recurring red spiral symbol and anonymous "
+            "messages apparently directed toward the investigation team. The Administrator's wife and "
+            "daughter are among the victims, creating a conflict requiring operational recusal. "
+            "Incident type: serial homicide, targeted family killings, psychological intimidation "
+            "and possible evidence manipulation. The offender's identity and links among victims remain unknown."
+        ),
+        "summary": (
+            "Open serial-homicide investigation involving nine reported victims, a recurring red spiral "
+            "mark and anonymous communications. The Crimson Task Force is investigating possible insider leaks."
+        ),
+        "team": [("warisha", "lead"), ("amna", "investigator"),
+                 ("hiba", "investigator"), ("maryam", "investigator")],
+    },
+    # ------------------------------------------------ CASE-007: THE DUET CAMPUS THEFT
+    {
+        "case_number": "CASE-007", "title": "The DUET Campus Theft", "category": "Theft",
+        "status": "Pending Review", "incident_date": None,
+        "location": "DUET Gulberg Campus (fictional training scenario)",
+        "created_at": "2026-11-07 12:00:00",
+        "description": (
+            "In a fictional classroom scenario, student belongings including a mobile phone were reportedly "
+            "taken near chairs. Uswa and Fatima are the scripted suspects, and Darishna reports observing "
+            "activity near the corridor. A user-supplied classroom video, seven extracted frames, two "
+            "portraits and simulated messages are available for investigation training. The actual incident "
+            "date is unknown, and the source footage alone does not establish criminal wrongdoing."
+        ),
+        "summary": (
+            "Fictional DUET student-property theft: Uswa and Fatima are responsible in the scripted "
+            "storyline only. Original video and supplied portraits are separate from simulated exhibits."
+        ),
+        "team": [],  # The admin assigns the case during the demo
+    },
+    # ------------------------------------------------ CASE-008: THE BLACK LEDGER
+    {
+        "case_number": "CASE-008", "title": "The Black Ledger", "category": "Criminal Conspiracy",
+        "status": "Open", "incident_date": None,
+        "location": "Fictional Old Port District, Karachi",
+        "created_at": "2026-11-07 12:10:00",
+        "description": (
+            "A sealed ledger bearing a black chess-knight emblem appears after a fictional port firm's "
+            "records disappear. Anonymous claims name two people of interest, Rehman Dakait and Pablo, "
+            "but investigators cannot yet verify their involvement. Abdul Wahid and Ali Ahmed are "
+            "potential witnesses to unusual meetings and records transfers. The suspected conspiracy "
+            "and the source of the ledger remain unresolved. All characters and allegations are fictional."
+        ),
+        "summary": (
+            "Open fictional organized-crime conspiracy involving a missing ledger, conflicting accounts "
+            "and two persons of interest. Evidence is preliminary; no culprit has been identified."
+        ),
+        "team": [],  # Admin assignment later
+    },
 ]
 
 SUSPECTS = {
@@ -275,6 +334,58 @@ SUSPECTS = {
             "statements": "Denies involvement; says his case held measuring equipment.",
             "notes": "Late-night visit and connection to Pinky remain unverified."
         }
+    ],
+    # ------------------------------------------------ CASE-006
+    "CASE-006": [
+        {"key": "c6_daniel", "name": "Daniel Cross", "relationship": "Former homicide investigator; prior links to a victim.",
+         "background": "Former senior investigator with knowledge of police procedures.",
+         "motive": "Unknown; former professional associations under review.",
+         "alibi": "Not verified.", "statements": "Interview pending.",
+         "notes": "Past case access and current whereabouts need verification."},
+        {"key": "c6_victor", "name": "Victor Hale", "relationship": "Business and family associate of the Administrator.",
+         "background": "Businessman with prior disagreements involving the family.",
+         "motive": "Possible personal or financial dispute; unconfirmed.",
+         "alibi": "Claims to have been travelling during one incident.",
+         "statements": "Formal statement pending.", "notes": "Financial and travel records requested."},
+        {"key": "c6_unknown", "name": "Unknown CCTV Individual", "relationship": "Unidentified figure in footage near two locations.",
+         "background": "Identity and occupation unknown.", "motive": "Unknown.",
+         "alibi": "Not established.", "statements": "No interview possible until identification.",
+         "notes": "Do not assume repeated footage proves the same individual."},
+        {"key": "c6_adrian", "name": "Dr. Adrian Moore", "relationship": "Former forensic pathologist with historic case access.",
+         "background": "Previously worked with law enforcement; employment records under review.",
+         "motive": "Unknown; possible link to confidential case records unverified.",
+         "alibi": "Partially verified.", "statements": "Interview pending.",
+         "notes": "Verify prior information access and remaining alibi gaps."},
+    ],
+    # ------------------------------------------------ CASE-007
+    "CASE-007": [
+        {"key": "c7_uswa", "name": "Uswa", "relationship": "Scripted participant in missing-belongings incident.",
+         "background": "Student character; maroon outfit in supplied classroom video.",
+         "motive": "Not established from source footage.",
+         "alibi": "No authenticated alibi supplied.",
+         "statements": "No verified interrogation; fictional storyline assigns joint responsibility.",
+         "notes": "Portrait and video identification supplied by user; not independent proof.",
+         "photo_path": "assets/suspects/case007_uswa.jpeg"},
+        {"key": "c7_fatima", "name": "Fatima", "relationship": "Scripted participant in missing-belongings incident.",
+         "background": "Student character; lighter outfit and green headscarf in video.",
+         "motive": "Not established from source footage.",
+         "alibi": "No authenticated alibi supplied.",
+         "statements": "No verified interrogation; fictional storyline assigns joint responsibility.",
+         "notes": "Portrait and video identification supplied by user; not independent proof.",
+         "photo_path": "assets/suspects/case007_fatima.jpeg"},
+    ],
+    # ------------------------------------------------ CASE-008
+    "CASE-008": [
+        {"key": "c8_rehman", "name": "Rehman Dakait", "relationship": "Fictional character named in an anonymous conspiracy allegation.",
+         "background": "Legendary underworld figure within the fictional scenario.",
+         "motive": "Possible influence over disputed port records; unverified.",
+         "alibi": "Not yet interviewed.", "statements": "No authenticated statement.",
+         "notes": "Treat the role as fictional; verify claims independently."},
+        {"key": "c8_pablo", "name": "Pablo", "relationship": "Fictional contact named alongside Rehman in an anonymous tip.",
+         "background": "Mysterious business intermediary; identity details pending.",
+         "motive": "Unknown possible interest in missing company ledger.",
+         "alibi": "Not yet interviewed.", "statements": "No authenticated statement.",
+         "notes": "No confirmed association with any offence."},
     ],
 }
 
@@ -366,6 +477,20 @@ CCTV footage indicates a duffel-bag exchange involving Anmol Pinky.
 """
 
 
+# CASE-007: original project-provided source media; relative to this repository.
+# Put the included case_assets directory beside database/ before first-time seeding.
+from pathlib import Path
+
+CASE007_ASSET_ROOT = Path(__file__).resolve().parent.parent / "case_assets" / "CASE-007"
+
+
+def case007_asset(relative_path):
+    path = CASE007_ASSET_ROOT / relative_path
+    if not path.is_file():
+        raise FileNotFoundError(f"Missing CASE-007 exhibit: {path}. Extract the supplied case_assets folder.")
+    return path.read_bytes()
+
+
 def _evidence_specs():
     """(case, key, filename, bytes, description, uploader, uploaded_at)."""
     return [
@@ -404,6 +529,66 @@ def _evidence_specs():
         ("CASE-004", "inventory", "warehouse_incident_report.txt", WAREHOUSE_INCIDENT_REPORT.encode(),
          "Initial incident report documenting suspicious warehouse activity and recovered evidence.",
          "admin", "2026-03-14 10:30:00"),
+        # ------------------------------------------------ CASE-006: Red Signature case exhibits
+        ("CASE-006", "c6_spiral", "red_spiral_scene_record.pdf", make_pdf(
+            "Red Spiral Scene Record", ["CASE-006: Fictional recurring red spiral mark documented at multiple scenes.",
+            "Meaning, maker and connection between scenes remain undetermined."]),
+            "Fictional recurring-symbol examination record.", "hiba", "2026-04-20 10:00:00"),
+        ("CASE-006", "c6_note", "handwritten_note_report.txt",
+            b"CASE-006 | Fictional handwritten note found near an earlier scene. Authorship unknown; handwriting review pending.",
+            "Scene note and handwriting comparison request.", "hiba", "2026-04-20 10:05:00"),
+        ("CASE-006", "c6_trace", "physical_trace_register.pdf", make_pdf(
+            "Physical Trace Register", ["CASE-006: Fictional partial fingerprint, fabric and hair exhibits documented.",
+            "Laboratory and DNA comparisons have not been completed."]),
+            "Preliminary forensic exhibit register.", "hiba", "2026-04-20 10:10:00"),
+        ("CASE-006", "c6_cam1", "cctv_first_location.png", make_placeholder_png(800, 500, (120, 35, 48)),
+            "Generated fictional CCTV placeholder for unidentified person; not actual footage.", "hiba", "2026-04-20 10:20:00"),
+        ("CASE-006", "c6_cam2", "cctv_vehicle_location.png", make_placeholder_png(800, 500, (105, 45, 55)),
+            "Generated fictional camera still placeholder; vehicle identification pending.", "hiba", "2026-04-20 10:25:00"),
+        ("CASE-006", "c6_mail", "anonymous_email.txt",
+            b"FICTIONAL ANONYMOUS EMAIL | Recipient: Administrator | Sender unverified. A message references the Administrator's family. Original headers requested.",
+            "Anonymous email report; sender unknown.", "maryam", "2026-04-20 10:30:00"),
+        ("CASE-006", "c6_sms", "investigation_unit_message.txt",
+            b"FICTIONAL TEXT | Recipient: Investigation Unit | Sender unknown. Message claims knowledge of the four detectives. Source attribution pending.",
+            "Anonymous message allegedly sent to investigators.", "maryam", "2026-05-19 11:00:00"),
+        ("CASE-006", "c6_secret", "restricted_complaint_reference.txt",
+            b"CASE-006 | RESTRICTED FICTIONAL LEAD | Old confidential complaint appears connected to an event in the Administrator's professional history. Possible coincidence; no names established.",
+            "Restricted historic complaint reference; unverified.", "warisha", "2026-11-01 10:00:00"),
+        # ------------------------------------------------ CASE-007: exact supplied media from DUET package
+        ("CASE-007", "c7_video", "EV-001_classroom_video.mp4", case007_asset("original/EV-001_classroom_video.mp4"),
+            "Original user-supplied classroom video; recording date and clock time unknown.", "admin", "2026-11-07 12:05:00"),
+        ("CASE-007", "c7_frame2", "EV-002_entry.png", case007_asset("frames/EV-002_entry.png"),
+            "Extracted still at video offset 00:02.5: Classroom entry; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
+        ("CASE-007", "c7_frame3", "EV-003_approach.png", case007_asset("frames/EV-003_approach.png"),
+            "Extracted still at video offset 00:04.5: Approach to chairs; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
+        ("CASE-007", "c7_frame4", "EV-004_item_interaction.png", case007_asset("frames/EV-004_item_interaction.png"),
+            "Extracted still at video offset 00:06.5: Near belongings; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
+        ("CASE-007", "c7_frame5", "EV-005_close_interaction.png", case007_asset("frames/EV-005_close_interaction.png"),
+            "Extracted still at video offset 00:08.5: Continued interaction; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
+        ("CASE-007", "c7_frame6", "EV-006_separation.png", case007_asset("frames/EV-006_separation.png"),
+            "Extracted still at video offset 00:10.5: Individuals separate; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
+        ("CASE-007", "c7_frame7", "EV-007_later_activity.png", case007_asset("frames/EV-007_later_activity.png"),
+            "Extracted still at video offset 00:15.5: Later chair-area activity; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
+        ("CASE-007", "c7_frame8", "EV-008_exit.png", case007_asset("frames/EV-008_exit.png"),
+            "Extracted still at video offset 00:17.0: Movement across classroom; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
+        ("CASE-007", "c7_uswa_photo", "EV-009_uswa_portrait.jpeg", case007_asset("original/EV-009_uswa_portrait.jpeg"),
+            "User-supplied portrait labeled Uswa; source identification not independently verified.", "admin", "2026-11-07 12:15:00"),
+        ("CASE-007", "c7_fatima_photo", "EV-010_fatima_portrait.jpeg", case007_asset("original/EV-010_fatima_portrait.jpeg"),
+            "User-supplied portrait labeled Fatima; source identification not independently verified.", "admin", "2026-11-07 12:16:00"),
+        ("CASE-007", "c7_sim_chat", "SIM-001_chat_transcript.csv", case007_asset("simulated/chat_transcript.csv"),
+            "SIMULATED conversation for fictional storyline; not recovered from a device.", "admin", "2026-11-07 12:20:00"),
+        ("CASE-007", "c7_lost_report", "SIM-002_lost_property_report.txt",
+            case007_asset("simulated/lost_property_report.md"),
+            "SIMULATED student-property report; ownership and incident date not verified.", "admin", "2026-11-07 12:21:00"),
+        # ------------------------------------------------ CASE-008: starter fictional exhibits; editable later
+        ("CASE-008", "c8_ledger", "black_ledger_intake.txt",
+            b"CASE-008 | FICTIONAL CASE FILE | Sealed black ledger reported missing from a port company. An anonymous copy contains a black chess-knight emblem. Provenance under review.",
+            "Preliminary ledger intake note; authenticity not established.", "admin", "2026-11-07 12:20:00"),
+        ("CASE-008", "c8_tip", "anonymous_port_tip.txt",
+            b"CASE-008 | FICTIONAL ANONYMOUS TIP | Caller mentions Rehman Dakait and Pablo but provides no corroborated information. Do not treat allegations as verified.",
+            "Anonymous allegation; identity and claims unverified.", "admin", "2026-11-07 12:25:00"),
+        ("CASE-008", "c8_cam", "port_corridor_placeholder.png", make_placeholder_png(800, 500, (50, 70, 100)),
+            "Generated fictional port-corridor still; replace with original staged evidence.", "admin", "2026-11-07 12:30:00"),
     ]
 
 
@@ -508,6 +693,36 @@ def seed_database():
         ("CASE-004", "Zainab Ali", "Gallery receptionist",
          "Locked the East Wing at 22:20 after the private viewing. The painting was on the wall at that time.",
          "2026-09-22 10:30:00", "admin", None, None),
+        # ------------------------------------------------ CASE-006
+        ("CASE-006", "Sarah Mitchell", "Neighbour of first victim",
+         "Reported unfamiliar activity near the victim's home; person not identified.",
+         "2026-04-20 13:00:00", "amna", None, "c6_cam1"),
+        ("CASE-006", "James Carter", "Security guard",
+         "Observed an unidentified visitor near a crime-scene approach; identification pending.",
+         "2026-04-20 13:20:00", "amna", "c6_unknown", "c6_cam1"),
+        ("CASE-006", "Emily Brooks", "Friend of Administrator's wife",
+         "Reports that the victim mentioned unsettling phone calls; call source unverified.",
+         "2026-04-20 13:40:00", "amna", None, "c6_mail"),
+        ("CASE-006", "Michael Reed", "Former colleague of one victim",
+         "May know about earlier workplace disagreements; recollection needs corroboration.",
+         "2026-04-20 14:00:00", "maryam", None, None),
+        ("CASE-006", "David Wilson", "CCTV operator",
+         "Can explain camera placement and export limitations across relevant locations.",
+         "2026-04-20 14:20:00", "hiba", None, "c6_cam2"),
+        ("CASE-006", "Anonymous Caller", "Unidentified caller",
+         "Claims knowledge of the offender. Identity and reliability unknown.",
+         "2026-04-20 14:40:00", "maryam", None, "c6_sms"),
+        # ------------------------------------------------ CASE-007
+        ("CASE-007", "Darishna", "Fictional eyewitness; campus corridor",
+         "In the scripted scenario, reports seeing Uswa and Fatima near belongings. No signed interview or verified clock time supplied.",
+         "2026-11-07 12:30:00", "admin", "c7_uswa", "c7_video"),
+        # ------------------------------------------------ CASE-008
+        ("CASE-008", "Abdul Wahid", "Fictional witness; port-records clerk",
+         "Reports a ledger transfer and an unfamiliar visitor; has not identified either suspect.",
+         "2026-11-07 12:35:00", "admin", None, "c8_ledger"),
+        ("CASE-008", "Ali Ahmed", "Fictional witness; nearby café employee",
+         "Reports an unusual meeting near the port office; participants remain unidentified.",
+         "2026-11-07 12:40:00", "admin", None, "c8_cam"),
     ]
     witnesses = {}
     for case_number, name, contact, statement, recorded_at, by, suspect_key, evidence_key in witness_rows:
@@ -541,20 +756,72 @@ def seed_database():
          "Witness W-001 statement", "transcript"),
         ("CASE-001", "2026-03-14 07:25:00", "Police notified", "Emergency call logged by the library.",
          "Control room log reference CR-5521", None),
+        
         ("CASE-002", "2026-05-02 18:45:00", "Last seen at studio", "Zoya leaves the Canal View Plaza studio.",
          "Lobby still (EV) and Nadia Butt's statement", "lobby"),
         ("CASE-002", "2026-05-02 20:10:00", "Possible sighting", "Woman matching description boards the 20:10 coach.",
          "Witness W-005 statement", None),
         ("CASE-002", "2026-05-03 09:15:00", "Reported missing", "Ayesha Malik files the missing person report.",
          "Missing person report", "report"),
+        
         ("CASE-003", "2026-06-18 22:58:00", "Phishing email received", "Customers receive the fake security alert.",
          "Phishing email sample", "phish"),
         ("CASE-003", "2026-06-19 02:40:00", "Sessions revoked", "Security analyst revokes 37 sessions.",
          "Witness W-006 statement", None),
+        
         ("CASE-004", "2026-09-21 22:20:00", "East Wing locked", "Receptionist locks the East Wing after the viewing.",
          "Witness W-008 statement", None),
         ("CASE-004", "2026-09-22 08:55:00", "Theft discovered", "Painting found missing; frame on the floor.",
          "Gallery inventory extract", "inventory"),
+        # ------------------------------------------------ CASE-006
+        ("CASE-006", "2026-01-12 12:00:00", "First incident reported",
+         "First known victim identified; red spiral scene marking documented.", "Initial incident report; date only", "c6_spiral"),
+        ("CASE-006", "2026-02-03 12:00:00", "Second incident reported",
+         "Investigators compare similarities between two scenes.", "Case chronology; time placeholder", "c6_trace"),
+        ("CASE-006", "2026-03-18 12:00:00", "Third incident reported",
+         "Another scene prompts comparison of a recovered handwritten note.", "Case chronology; time placeholder", "c6_note"),
+        ("CASE-006", "2026-04-02 12:00:00", "Anonymous communication",
+         "Administrator receives an anonymous message referencing family.", "Case chronology; time placeholder", "c6_mail"),
+        ("CASE-006", "2026-04-17 12:00:00", "Family incident reported",
+         "Administrator's wife and daughter identified among victims; independent command needed.", "Case chronology; time placeholder", None),
+        ("CASE-006", "2026-04-18 12:00:00", "Crimson Task Force formed",
+         "Warisha leads the investigation; Administrator recused from operational decisions.", "Case chronology; time placeholder", None),
+        ("CASE-006", "2026-04-20 12:00:00", "Evidence review",
+         "CCTV, physical exhibits and witness statements registered for review.", "Forensic exhibit register; time placeholder", "c6_trace"),
+        ("CASE-006", "2026-05-05 12:00:00", "Suspect leads identified",
+         "Four persons of interest entered for independent background and alibi checks.", "Investigator notes; time placeholder", None),
+        ("CASE-006", "2026-05-19 12:00:00", "Investigation-unit message",
+         "Anonymous communication claims knowledge of the detective team.", "Communications report; time placeholder", "c6_sms"),
+        ("CASE-006", "2026-11-01 12:00:00", "Investigation remains open",
+         "Offender's identity and possible information leak remain unresolved.", "Case status review; time placeholder", "c6_secret"),
+        # ------------------------------------------------ CASE-007 (video offsets only; clock times unknown)
+        ("CASE-007", "2026-11-07 12:00:00", "Classroom video registered",
+         "User-supplied original video registered; incident date and recording time remain unknown.", "Evidence intake date, NOT incident date", "c7_video"),
+        ("CASE-007", "2026-11-07 12:12:00", "Video frame 02 review",
+         "Video offset 00:02.5: Classroom entry. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame2"),
+        ("CASE-007", "2026-11-07 12:13:00", "Video frame 03 review",
+         "Video offset 00:04.5: Approach to chairs. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame3"),
+        ("CASE-007", "2026-11-07 12:14:00", "Video frame 04 review",
+         "Video offset 00:06.5: Near belongings. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame4"),
+        ("CASE-007", "2026-11-07 12:15:00", "Video frame 05 review",
+         "Video offset 00:08.5: Continued interaction. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame5"),
+        ("CASE-007", "2026-11-07 12:16:00", "Video frame 06 review",
+         "Video offset 00:10.5: Individuals separate. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame6"),
+        ("CASE-007", "2026-11-07 12:17:00", "Video frame 07 review",
+         "Video offset 00:15.5: Later chair-area activity. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame7"),
+        ("CASE-007", "2026-11-07 12:18:00", "Video frame 08 review",
+         "Video offset 00:17.0: Movement across classroom. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame8"),
+        ("CASE-007", "2026-11-07 12:30:00", "Fictional witness account",
+         "Darishna's scenario report recorded separately from camera observations.", "Scenario witness summary, not authenticated interview", "c7_video"),
+        ("CASE-007", "2026-11-07 12:35:00", "Narrative outcome noted",
+         "Storyline assigns joint responsibility to Uswa and Fatima; media alone does not prove wrongdoing.", "Fictional scenario conclusion", "c7_lost_report"),
+        # ------------------------------------------------ CASE-008
+        ("CASE-008", "2026-11-07 12:20:00", "Ledger reference logged",
+         "Anonymous account of missing port ledger registered; original provenance unverified.", "Fictional intake entry; not an incident timestamp", "c8_ledger"),
+        ("CASE-008", "2026-11-07 12:25:00", "Anonymous tip received",
+         "Rehman Dakait and Pablo named by unverified caller.", "Fictional tip entry; not an incident timestamp", "c8_tip"),
+        ("CASE-008", "2026-11-07 12:40:00", "Witness review opened",
+         "Abdul Wahid and Ali Ahmed nominated for scenario-based interviews.", "Fictional investigator note", "c8_cam"),
     ]
     events = {}
     for case_number, when, kind, text, source, evidence_key in timeline_rows:
@@ -613,6 +880,31 @@ def seed_database():
          "The email's link opens the page shown in the screenshot.", "hiba"),
         ("CASE-004", node("evidence", "inventory"), node("location", "East Wing"), "describes",
          "Inventory location for item NG-0147.", "admin"),
+        # ------------------------------------------------ CASE-006
+        ("CASE-006", node("evidence", "c6_spiral"), node("location", "Multiple scenes"), "reported at",
+         "A similar symbol is reported at several fictional scenes; origin unverified.", "hiba"),
+        ("CASE-006", node("witness", "david"), node("evidence", "c6_cam2"), "can clarify provenance of",
+         "CCTV operator can explain camera export and coverage limits.", "hiba"),
+        ("CASE-006", node("suspect", "c6_unknown"), node("evidence", "c6_cam1"), "resembles person in",
+         "An unidentified figure appears in the fictional CCTV reference.", "maryam"),
+        # ------------------------------------------------ CASE-007
+        ("CASE-007", node("witness", "darishna"), node("location", "DUET Gulberg classroom corridor"), "reports activity near",
+         "Fictional witness account; no authenticated corridor video provided.", "admin"),
+        ("CASE-007", node("evidence", "c7_frame2"), node("evidence", "c7_video"), "frame derived from",
+         "Extracted image from user-supplied original classroom video at 00:02.5.", "admin"),
+        ("CASE-007", node("suspect", "c7_uswa"), node("evidence", "c7_uswa_photo"), "portrait label associated with",
+         "Identity label provided with the media; no independent verification.", "admin"),
+        ("CASE-007", node("suspect", "c7_fatima"), node("evidence", "c7_fatima_photo"), "portrait label associated with",
+         "Identity label provided with the media; no independent verification.", "admin"),
+        # ------------------------------------------------ CASE-008
+        ("CASE-008", node("witness", "abdul"), node("evidence", "c8_ledger"), "reports observation related to",
+         "Fictional ledger-transfer account; no authenticated original yet.", "admin"),
+        ("CASE-008", node("witness", "ali"), node("location", "Old Port District"), "reports meeting near",
+         "Scenario-based account; participants unidentified.", "admin"),
+        ("CASE-008", node("suspect", "c8_rehman"), node("evidence", "c8_tip"), "named in unverified allegation",
+         "Anonymous tip alone does not establish involvement.", "admin"),
+        ("CASE-008", node("suspect", "c8_pablo"), node("evidence", "c8_tip"), "named in unverified allegation",
+         "Anonymous tip alone does not establish involvement.", "admin"),
     ]
     for case_number, source, target, kind, text, by in rel_rows:
         db.execute("INSERT INTO evidence_relationships (case_id, source_node, target_node, relationship_type, "
@@ -643,6 +935,31 @@ def seed_database():
         (cases["CASE-003"]["id"], users["hiba"]["id"], "Service account",
          "svc.upgrade should have been disabled when the contract ended on 31 May. Request the IAM change ticket.",
          "2026-06-20 10:00:00", "2026-06-20 10:00:00"))
+
+    # ---- additional per-case notes (CASE-006 / CASE-007 / CASE-008)
+    additional_notes = [
+        ("CASE-006", "Confidentiality risk", "Anonymous messages suggest possible knowledge of the team; audit access lawfully.", "maryam"),
+        ("CASE-006", "Administrator recusal", "Administrator is personally connected to the victims and must not direct investigative operations.", "warisha"),
+        ("CASE-006", "Signature pattern", "A repeated red spiral marking may be significant or intentionally misleading.", "hiba"),
+        ("CASE-006", "Victim link review", "Compare documented contacts, disputes and records without presuming a common offender.", "amna"),
+        ("CASE-006", "Independent verification", "Review authenticity of CCTV, anonymous mail, prior complaints and witness claims.", "hiba"),
+        ("CASE-007", "Fictional storyline", "Uswa and Fatima are responsible in the scripted scenario only; this is not a claim about real students.", "admin"),
+        ("CASE-007", "Unknown incident time", "The supplied video provides playback offsets, not a confirmed filming date or clock time.", "admin"),
+        ("CASE-007", "Source versus simulation", "Keep original video and portraits separate from created messages and missing-property report.", "admin"),
+        ("CASE-007", "Witness scope", "Darishna's fictional corridor statement is not corroborated by separate corridor footage.", "admin"),
+        ("CASE-007", "Identity caution", "Named portrait associations are supplied labels, not independent biometric identification.", "admin"),
+        ("CASE-007", "Integrity and privacy", "Preserve original file hashes and confirm permission before making portraits/videos public.", "admin"),
+        ("CASE-008", "Unverified association", "Anonymous tip names Rehman Dakait and Pablo; do not treat this as established involvement.", "admin"),
+        ("CASE-008", "Witness follow-up", "Interview fictional witnesses Abdul Wahid and Ali Ahmed; compare accounts with independently sourced records.", "admin"),
+        ("CASE-008", "Ledger authenticity", "Confirm provenance and meaning of black chess-knight symbol before drawing conclusions.", "admin"),
+        ("CASE-008", "Open case", "All entries are fictional placeholders and remain editable; no culprit or real allegation is established.", "admin"),
+    ]
+    for case_number, title, content, by in additional_notes:
+        db.execute(
+            "INSERT INTO investigation_notes (case_id, user_id, title, content, created_at, updated_at) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (cases[case_number]["id"], users[by]["id"], title, content, stamp, stamp)
+        )
 
     # ---- one pending analysis task so the Queue has something to process
     db.execute("INSERT INTO analysis_tasks (case_id, evidence_id, task_type, requested_by, created_at) "
