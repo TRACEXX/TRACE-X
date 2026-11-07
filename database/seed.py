@@ -28,6 +28,7 @@ import struct
 import sys
 import zlib
 from functools import lru_cache
+from pathlib import Path
 
 from flask import current_app
 from werkzeug.security import generate_password_hash
@@ -477,12 +478,6 @@ CCTV footage indicates a duffel-bag exchange involving Anmol Pinky.
 """
 
 
-# CASE-007: original project-provided source media; relative to this repository.
-# Put the included case_assets directory beside database/ before first-time seeding.
-from pathlib import Path
-
-
-
 def _evidence_specs():
     """(case, key, filename, bytes, description, uploader, uploaded_at)."""
     return [
@@ -550,14 +545,10 @@ def _evidence_specs():
             b"CASE-006 | RESTRICTED FICTIONAL LEAD | Old confidential complaint appears connected to an event in the Administrator's professional history. Possible coincidence; no names established.",
             "Restricted historic complaint reference; unverified.", "warisha", "2026-11-01 10:00:00"),
         # ------------------------------------------------ CASE-007: exact supplied media from DUET package
-        
-("CASE-007", "c7_video", "case7cctv.mp4",
-    (Path("static/assets/demo-videos") / "case8cctv.mp4").read_bytes(),
-    "Original user-supplied classroom video; recording date and clock time unknown.",
-    "admin", "2026-11-07 12:05:00"),
-
-
-
+        ("CASE-007", "c7_video", "case7cctv.mp4",
+            (Path("static/assets/demo-videos") / "case7cctv.mp4").read_bytes(),
+            "Original user-supplied classroom video; recording date and clock time unknown.",
+            "admin", "2026-11-07 12:05:00"),
         # ------------------------------------------------ CASE-008: starter fictional exhibits; editable later
         ("CASE-008", "c8_ledger", "black_ledger_intake.txt",
             b"CASE-008 | FICTIONAL CASE FILE | Sealed black ledger reported missing from a port company. An anonymous copy contains a black chess-knight emblem. Provenance under review.",
@@ -772,27 +763,11 @@ def seed_database():
          "Anonymous communication claims knowledge of the detective team.", "Communications report; time placeholder", "c6_sms"),
         ("CASE-006", "2026-11-01 12:00:00", "Investigation remains open",
          "Offender's identity and possible information leak remain unresolved.", "Case status review; time placeholder", "c6_secret"),
-        # ------------------------------------------------ CASE-007 (video offsets only; clock times unknown)
+        # ------------------------------------------------ CASE-007
         ("CASE-007", "2026-11-07 12:00:00", "Classroom video registered",
          "User-supplied original video registered; incident date and recording time remain unknown.", "Evidence intake date, NOT incident date", "c7_video"),
-        ("CASE-007", "2026-11-07 12:12:00", "Video frame 02 review",
-         "Video offset 00:02.5: Classroom entry. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame2"),
-        ("CASE-007", "2026-11-07 12:13:00", "Video frame 03 review",
-         "Video offset 00:04.5: Approach to chairs. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame3"),
-        ("CASE-007", "2026-11-07 12:14:00", "Video frame 04 review",
-         "Video offset 00:06.5: Near belongings. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame4"),
-        ("CASE-007", "2026-11-07 12:15:00", "Video frame 05 review",
-         "Video offset 00:08.5: Continued interaction. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame5"),
-        ("CASE-007", "2026-11-07 12:16:00", "Video frame 06 review",
-         "Video offset 00:10.5: Individuals separate. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame6"),
-        ("CASE-007", "2026-11-07 12:17:00", "Video frame 07 review",
-         "Video offset 00:15.5: Later chair-area activity. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame7"),
-        ("CASE-007", "2026-11-07 12:18:00", "Video frame 08 review",
-         "Video offset 00:17.0: Movement across classroom. Not a real-world timestamp.", "Playback offset from EV-001; review logged on import date", "c7_frame8"),
         ("CASE-007", "2026-11-07 12:30:00", "Fictional witness account",
          "Darishna's scenario report recorded separately from camera observations.", "Scenario witness summary, not authenticated interview", "c7_video"),
-        ("CASE-007", "2026-11-07 12:35:00", "Narrative outcome noted",
-         "Storyline assigns joint responsibility to Uswa and Fatima; media alone does not prove wrongdoing.", "Fictional scenario conclusion", "c7_lost_report"),
         # ------------------------------------------------ CASE-008
         ("CASE-008", "2026-11-07 12:20:00", "Ledger reference logged",
          "Anonymous account of missing port ledger registered; original provenance unverified.", "Fictional intake entry; not an incident timestamp", "c8_ledger"),
@@ -868,12 +843,6 @@ def seed_database():
         # ------------------------------------------------ CASE-007
         ("CASE-007", node("witness", "darishna"), node("location", "DUET Gulberg classroom corridor"), "reports activity near",
          "Fictional witness account; no authenticated corridor video provided.", "admin"),
-        ("CASE-007", node("evidence", "c7_frame2"), node("evidence", "c7_video"), "frame derived from",
-         "Extracted image from user-supplied original classroom video at 00:02.5.", "admin"),
-        ("CASE-007", node("suspect", "c7_uswa"), node("evidence", "c7_uswa_photo"), "portrait label associated with",
-         "Identity label provided with the media; no independent verification.", "admin"),
-        ("CASE-007", node("suspect", "c7_fatima"), node("evidence", "c7_fatima_photo"), "portrait label associated with",
-         "Identity label provided with the media; no independent verification.", "admin"),
         # ------------------------------------------------ CASE-008
         ("CASE-008", node("witness", "abdul"), node("evidence", "c8_ledger"), "reports observation related to",
          "Fictional ledger-transfer account; no authenticated original yet.", "admin"),
