@@ -365,14 +365,14 @@ SUSPECTS = {
          "alibi": "No authenticated alibi supplied.",
          "statements": "No verified interrogation; fictional storyline assigns joint responsibility.",
          "notes": "Portrait and video identification supplied by user; not independent proof.",
-         "photo_path": "assets/suspects/case007_uswa.jpeg"},
+         "photo_path": "assets/suspects/uswa.jpeg"},
         {"key": "c7_fatima", "name": "Fatima", "relationship": "Scripted participant in missing-belongings incident.",
          "background": "Student character; lighter outfit and green headscarf in video.",
          "motive": "Not established from source footage.",
          "alibi": "No authenticated alibi supplied.",
          "statements": "No verified interrogation; fictional storyline assigns joint responsibility.",
          "notes": "Portrait and video identification supplied by user; not independent proof.",
-         "photo_path": "assets/suspects/case007_fatima.jpeg"},
+         "photo_path": "assets/suspects/fatima.jpeg"},
     ],
     # ------------------------------------------------ CASE-008
     "CASE-008": [
@@ -481,14 +481,6 @@ CCTV footage indicates a duffel-bag exchange involving Anmol Pinky.
 # Put the included case_assets directory beside database/ before first-time seeding.
 from pathlib import Path
 
-CASE007_ASSET_ROOT = Path(__file__).resolve().parent.parent / "case_assets" / "CASE-007"
-
-
-def case007_asset(relative_path):
-    path = CASE007_ASSET_ROOT / relative_path
-    if not path.is_file():
-        raise FileNotFoundError(f"Missing CASE-007 exhibit: {path}. Extract the supplied case_assets folder.")
-    return path.read_bytes()
 
 
 def _evidence_specs():
@@ -512,6 +504,7 @@ def _evidence_specs():
          "Transcript of the interview with night guard Bilal Akhtar.", "amna", "2026-03-14 10:30:00"),
         ("CASE-001", "email", "dealer_email_printout.txt", DEALER_EMAIL.encode(),
          "Email printout recovered from the victim's office computer.", "hiba", "2026-03-16 11:10:00"),
+        
         ("CASE-002", "lobby", "office_lobby_still.png", make_placeholder_png(800, 500, (120, 95, 140)),
          "Still frame from the Canal View Plaza lobby camera (generated placeholder - replace with your own).",
          "warisha", "2026-05-03 15:00:00"),
@@ -519,6 +512,7 @@ def _evidence_specs():
          "Call detail records for Zoya Malik's phone, 2 May 2026 (fictional).", "warisha", "2026-05-04 13:20:00"),
         ("CASE-002", "report", "missing_person_report.txt", MISSING_REPORT.encode(),
          "Original missing person report.", "warisha", "2026-05-03 10:25:00"),
+        
         ("CASE-003", "authlog", "server_auth_log_2026-06-18.csv", AUTH_LOG_CSV.encode(),
          "Authentication log export from the online banking server.", "hiba", "2026-06-19 10:15:00"),
         ("CASE-003", "phish", "phishing_email_sample.txt", PHISHING_EMAIL.encode(),
@@ -526,6 +520,7 @@ def _evidence_specs():
         ("CASE-003", "screenshot", "cloned_login_page_screenshot.png", make_placeholder_png(800, 500, (60, 130, 110)),
          "Screenshot of the cloned login page (generated placeholder - replace with your own).",
          "hiba", "2026-06-19 11:05:00"),
+        
         ("CASE-004", "inventory", "warehouse_incident_report.txt", WAREHOUSE_INCIDENT_REPORT.encode(),
          "Initial incident report documenting suspicious warehouse activity and recovered evidence.",
          "admin", "2026-03-14 10:30:00"),
@@ -555,31 +550,37 @@ def _evidence_specs():
             b"CASE-006 | RESTRICTED FICTIONAL LEAD | Old confidential complaint appears connected to an event in the Administrator's professional history. Possible coincidence; no names established.",
             "Restricted historic complaint reference; unverified.", "warisha", "2026-11-01 10:00:00"),
         # ------------------------------------------------ CASE-007: exact supplied media from DUET package
-        ("CASE-007", "c7_video", "EV-001_classroom_video.mp4", case007_asset("original/EV-001_classroom_video.mp4"),
-            "Original user-supplied classroom video; recording date and clock time unknown.", "admin", "2026-11-07 12:05:00"),
-        ("CASE-007", "c7_frame2", "EV-002_entry.png", case007_asset("frames/EV-002_entry.png"),
-            "Extracted still at video offset 00:02.5: Classroom entry; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
-        ("CASE-007", "c7_frame3", "EV-003_approach.png", case007_asset("frames/EV-003_approach.png"),
-            "Extracted still at video offset 00:04.5: Approach to chairs; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
-        ("CASE-007", "c7_frame4", "EV-004_item_interaction.png", case007_asset("frames/EV-004_item_interaction.png"),
-            "Extracted still at video offset 00:06.5: Near belongings; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
-        ("CASE-007", "c7_frame5", "EV-005_close_interaction.png", case007_asset("frames/EV-005_close_interaction.png"),
-            "Extracted still at video offset 00:08.5: Continued interaction; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
-        ("CASE-007", "c7_frame6", "EV-006_separation.png", case007_asset("frames/EV-006_separation.png"),
-            "Extracted still at video offset 00:10.5: Individuals separate; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
-        ("CASE-007", "c7_frame7", "EV-007_later_activity.png", case007_asset("frames/EV-007_later_activity.png"),
-            "Extracted still at video offset 00:15.5: Later chair-area activity; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
-        ("CASE-007", "c7_frame8", "EV-008_exit.png", case007_asset("frames/EV-008_exit.png"),
-            "Extracted still at video offset 00:17.0: Movement across classroom; offset is not a wall-clock time.", "admin", "2026-11-07 12:10:00"),
-        ("CASE-007", "c7_uswa_photo", "EV-009_uswa_portrait.jpeg", case007_asset("original/EV-009_uswa_portrait.jpeg"),
-            "User-supplied portrait labeled Uswa; source identification not independently verified.", "admin", "2026-11-07 12:15:00"),
-        ("CASE-007", "c7_fatima_photo", "EV-010_fatima_portrait.jpeg", case007_asset("original/EV-010_fatima_portrait.jpeg"),
-            "User-supplied portrait labeled Fatima; source identification not independently verified.", "admin", "2026-11-07 12:16:00"),
-        ("CASE-007", "c7_sim_chat", "SIM-001_chat_transcript.csv", case007_asset("simulated/chat_transcript.csv"),
-            "SIMULATED conversation for fictional storyline; not recovered from a device.", "admin", "2026-11-07 12:20:00"),
-        ("CASE-007", "c7_lost_report", "SIM-002_lost_property_report.txt",
-            case007_asset("simulated/lost_property_report.md"),
-            "SIMULATED student-property report; ownership and incident date not verified.", "admin", "2026-11-07 12:21:00"),
+        
+("CASE-007", "c7_video", "EV-001_classroom_video.mp4",
+    (Path("evidence_storage/CASE-007") / "EV-001_classroom_video.mp4").read_bytes(),
+    "Original user-supplied classroom video; recording date and clock time unknown.",
+    "admin", "2026-11-07 12:05:00"),
+
+("CASE-007", "c7_frame2", "EV-002_entry.png",
+    (Path("evidence_storage/CASE-007") / "EV-002_entry.png").read_bytes(),
+    "Extracted still at video offset 00:02.5: Classroom entry; offset is not a wall-clock time.",
+    "admin", "2026-11-07 12:10:00"),
+
+("CASE-007", "c7_uswa_photo", "EV-009_uswa_portrait.jpeg",
+    (Path("evidence_storage/CASE-007") / "EV-009_uswa_portrait.jpeg").read_bytes(),
+    "User-supplied portrait labeled Uswa; source identification not independently verified.",
+    "admin", "2026-11-07 12:15:00"),
+
+("CASE-007", "c7_fatima_photo", "EV-010_fatima_portrait.jpeg",
+    (Path("evidence_storage/CASE-007") / "EV-010_fatima_portrait.jpeg").read_bytes(),
+    "User-supplied portrait labeled Fatima; source identification not independently verified.",
+    "admin", "2026-11-07 12:16:00"),
+
+("CASE-007", "c7_sim_chat", "SIM-001_chat_transcript.csv",
+    (Path("evidence_storage/CASE-007") / "SIM-001_chat_transcript.csv").read_bytes(),
+    "SIMULATED conversation for fictional storyline; not recovered from a device.",
+    "admin", "2026-11-07 12:20:00"),
+
+("CASE-007", "c7_lost_report", "SIM-002_lost_property_report.txt",
+    (Path("evidence_storage/CASE-007") / "SIM-002_lost_property_report.txt").read_bytes(),
+    "SIMULATED student-property report; ownership and incident date not verified.",
+    "admin", "2026-11-07 12:21:00"),
+
         # ------------------------------------------------ CASE-008: starter fictional exhibits; editable later
         ("CASE-008", "c8_ledger", "black_ledger_intake.txt",
             b"CASE-008 | FICTIONAL CASE FILE | Sealed black ledger reported missing from a port company. An anonymous copy contains a black chess-knight emblem. Provenance under review.",
