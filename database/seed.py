@@ -148,64 +148,61 @@ CASES = [
         "summary": "Server logs tie the logins to one IP range. An internal workstation appears in the logs.",
         "team": [("hiba", "lead"), ("maryam", "viewer")],
     },
-    
-{
-    "case_number": "CASE-004",
-    "title": "The Indigo Veil",
-    "category": "Narcotics Offence",
-    "status": "Open",
-    "incident_date": "2026-03-13",
-    "location": "West Wharf District, Karachi (fictional)",
-    "created_at": "2026-03-14 08:05:00",
-    "description": (
-        "On 13 March 2026, suspected narcotics activities were reported near "
-        "Warehouse 03 in Karachi's West Wharf District. A hospital incident "
-        "and CCTV footage of a suspicious duffel-bag exchange prompted an "
-        "investigation. Unidentified packages marked with an indigo crescent, "
-        "a handwritten ledger, and a mobile phone were recovered. "
-        "Anmol Pinky and Walter White were identified as persons of interest. "
-        "Their involvement remains unconfirmed."
-    ),
-    "summary": (
-        "An ongoing narcotics investigation involving suspicious warehouse "
-        "activity, conflicting witness statements, and unidentified packages "
-        "bearing an indigo crescent symbol. Two suspects remain under "
-        "investigation, with no confirmed culprit."
-    ),
-    "team": [],  # Admin assigns detectives during the demo
-},
-{
-  "case_number": "CASE-005",
-"title": "Binance Wallet Theft",
-"category": "Cybercrime",
-"status": "Under Investigation",
-"incident_date": "2026-10-29",
-"location": "Binance Cryptocurrency Exchange (Global)",
-"created_at": "2026-10-29 20:25:00",
-"description": (
-    "On October 29, 2026, Binance reportedly suffered a massive "
-    "cryptocurrency theft involving approximately $6.36 billion across "
-    "ten blockchains within just 20 minutes, beginning at 20:05 UTC. "
-    "Attackers allegedly compromised hot wallet signing infrastructure "
-    "through a DevOps engineer's laptop, impersonating authorized "
-    "withdrawal services without obtaining master private keys. "
-    "Ethereum wallets were reportedly exploited using EIP-7702 "
-    "authorizations, while additional funds were transferred across "
-    "Bitcoin, Tron, Solana, XRP, and other networks. "
-    "Security organizations and stablecoin issuers reportedly froze "
-    "approximately $2.7 billion in stolen assets, while Binance "
-    "mobilized corporate reserves to cover remaining losses."
-),
-"summary": (
-    "Attackers reportedly stole $6.36 billion from Binance hot wallets "
-    "across ten blockchains in 20 minutes. "
-    "Approximately $2.7 billion was reportedly frozen as investigators "
-    "traced the compromised signing infrastructure."
-),
-"team": [("maryam", "lead"), ("warisha", "investigator")],
-     
-}
-
+    {
+        "case_number": "CASE-004",
+        "title": "The Indigo Veil",
+        "category": "Narcotics Offence",
+        "status": "Open",
+        "incident_date": "2026-03-13",
+        "location": "West Wharf District, Karachi (fictional)",
+        "created_at": "2026-03-14 08:05:00",
+        "description": (
+            "On 13 March 2026, suspected narcotics activities were reported near "
+            "Warehouse 03 in Karachi's West Wharf District. A hospital incident "
+            "and CCTV footage of a suspicious duffel-bag exchange prompted an "
+            "investigation. Unidentified packages marked with an indigo crescent, "
+            "a handwritten ledger, and a mobile phone were recovered. "
+            "Anmol Pinky and Walter White were identified as persons of interest. "
+            "Their involvement remains unconfirmed."
+        ),
+        "summary": (
+            "An ongoing narcotics investigation involving suspicious warehouse "
+            "activity, conflicting witness statements, and unidentified packages "
+            "bearing an indigo crescent symbol. Two suspects remain under "
+            "investigation, with no confirmed culprit."
+        ),
+        "team": [],  # Admin assigns detectives during the demo
+    },
+    {
+        "case_number": "CASE-005",
+        "title": "Binance Wallet Theft",
+        "category": "Cybercrime",
+        "status": "Under Investigation",
+        "incident_date": "2026-10-29",
+        "location": "Binance Cryptocurrency Exchange (Global)",
+        "created_at": "2026-10-29 20:25:00",
+        "description": (
+            "On October 29, 2026, Binance reportedly suffered a massive "
+            "cryptocurrency theft involving approximately $6.36 billion across "
+            "ten blockchains within just 20 minutes, beginning at 20:05 UTC. "
+            "Attackers allegedly compromised hot wallet signing infrastructure "
+            "through a DevOps engineer's laptop, impersonating authorized "
+            "withdrawal services without obtaining master private keys. "
+            "Ethereum wallets were reportedly exploited using EIP-7702 "
+            "authorizations, while additional funds were transferred across "
+            "Bitcoin, Tron, Solana, XRP, and other networks. "
+            "Security organizations and stablecoin issuers reportedly froze "
+            "approximately $2.7 billion in stolen assets, while Binance "
+            "mobilized corporate reserves to cover remaining losses."
+        ),
+        "summary": (
+            "Attackers reportedly stole $6.36 billion from Binance hot wallets "
+            "across ten blockchains in 20 minutes. "
+            "Approximately $2.7 billion was reportedly frozen as investigators "
+            "traced the compromised signing infrastructure."
+        ),
+        "team": [("maryam", "lead"), ("warisha", "investigator")],
+    }
 ]
 
 SUSPECTS = {
@@ -256,30 +253,29 @@ SUSPECTS = {
          "background": "Alias advertising 'bank login kits' on a forum (fictional).",
          "motive": "Unknown.", "alibi": "Not applicable - identity unknown.", "statements": "", "notes": ""},
     ],
-    
-"CASE-004": [
-    {
-        "key": "pinky",
-        "name": "Anmol Pinky",
-        "relationship": "Linked to a suspicious bag exchange near Warehouse 03.",
-        "background": "Nightlife event coordinator at Neon Wharf Lounge.",
-        "motive": "Possible financial gain from narcotics distribution.",
-        "alibi": "Claims she was arranging event equipment at the lounge.",
-        "statements": "Denies involvement; says the bag contained audio equipment.",
-        "notes": "CCTV places her near the warehouse. Bag contents unverified."
-    },
-    {
-        "key": "walter",
-        "name": "Walter White",
-        "relationship": "Seen near a restricted warehouse storage area.",
-        "background": "Former chemistry teacher and industrial consultant.",
-        "motive": "Possible financial gain from illegal operations.",
-        "alibi": "Claims he attended a scheduled technical consultation.",
-        "statements": "Denies involvement; says his case held measuring equipment.",
-        "notes": "Late-night visit and connection to Pinky remain unverified."
-    }
-],
-
+    "CASE-004": [
+        {
+            "key": "pinky",
+            "name": "Anmol Pinky",
+            "relationship": "Linked to a suspicious bag exchange near Warehouse 03.",
+            "background": "Nightlife event coordinator at Neon Wharf Lounge.",
+            "motive": "Possible financial gain from narcotics distribution.",
+            "alibi": "Claims she was arranging event equipment at the lounge.",
+            "statements": "Denies involvement; says the bag contained audio equipment.",
+            "notes": "CCTV places her near the warehouse. Bag contents unverified.",
+            "photo_path": "assets/suspects/pinky.jpg"
+        },
+        {
+            "key": "walter",
+            "name": "Walter White",
+            "relationship": "Seen near a restricted warehouse storage area.",
+            "background": "Former chemistry teacher and industrial consultant.",
+            "motive": "Possible financial gain from illegal operations.",
+            "alibi": "Claims he attended a scheduled technical consultation.",
+            "statements": "Denies involvement; says his case held measuring equipment.",
+            "notes": "Late-night visit and connection to Pinky remain unverified."
+        }
+    ],
 }
 
 ACCESS_LOG_CSV = """timestamp,door,card_id,card_holder,direction
@@ -362,11 +358,11 @@ Crescent Bank Security Team
 [Analyst note at registration: the sender domain is not a Crescent Bank domain.]
 """
 
-GALLERY_INVENTORY = """NOOR ART GALLERY - INVENTORY EXTRACT (FICTIONAL)
-Item NG-0147  'Evening at the River'  oil on canvas, 60 x 90 cm, artist S. Rahim
-Location: East Wing, wall 3      Last condition check: 19 Sep 2026 (installer S. Haider present)
-Status on 22 Sep 2026 08:55: painting missing, frame on floor below hanging point
-Private viewing 21 Sep 2026, 19:00-22:00, 41 guests on list
+WAREHOUSE_INCIDENT_REPORT = """WAREHOUSE INCIDENT REPORT (FICTIONAL)
+Case reference: CASE-004. Date: 14 March 2026.
+Location: West Wharf District, Warehouse 03.
+Findings: Unidentified packages marked with an indigo crescent symbol recovered.
+CCTV footage indicates a duffel-bag exchange involving Anmol Pinky.
 """
 
 
@@ -405,12 +401,9 @@ def _evidence_specs():
         ("CASE-003", "screenshot", "cloned_login_page_screenshot.png", make_placeholder_png(800, 500, (60, 130, 110)),
          "Screenshot of the cloned login page (generated placeholder - replace with your own).",
          "hiba", "2026-06-19 11:05:00"),
-        
-        ("CASE-004", "document", "warehouse_incident_report.txt",
-        "On 13 March 2026, suspicious activity was recorded near Warehouse 03. CCTV footage captured a possible duffel-bag exchange involving Anmol Pinky. Unidentified packages bearing an indigo crescent symbol, a handwritten ledger, and a mobile phone were later recovered. Investigations are ongoing.".encode(),
-        "Initial incident report documenting suspicious warehouse activity and recovered evidence.",
-        "admin", "2026-03-14 10:30:00"),
-
+        ("CASE-004", "inventory", "warehouse_incident_report.txt", WAREHOUSE_INCIDENT_REPORT.encode(),
+         "Initial incident report documenting suspicious warehouse activity and recovered evidence.",
+         "admin", "2026-03-14 10:30:00"),
     ]
 
 
@@ -457,10 +450,11 @@ def seed_database():
     suspects = {}
     for case_number, rows in SUSPECTS.items():
         for s in rows:
+            photo_path = s.get("photo_path")
             cursor = db.execute(
-                "INSERT INTO suspects (case_id, name, background, relationship, motive, alibi, statements, notes, "
-                "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                (cases[case_number]["id"], s["name"], s["background"], s["relationship"], s["motive"], s["alibi"],
+                "INSERT INTO suspects (case_id, name, photo_path, background, relationship, motive, alibi, statements, notes, "
+                "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (cases[case_number]["id"], s["name"], photo_path, s["background"], s["relationship"], s["motive"], s["alibi"],
                  s["statements"], s["notes"], stamp, stamp))
             suspects[s["key"]] = cursor.lastrowid
     db.commit()
