@@ -2,9 +2,7 @@
 {% block title %}TRACE AI{% endblock %}
 {% block content %}
 <div class="page-head">
-  <div><div class="eyebrow">Investigation assistant</div><h1>TRACE AI</h1>
-    <p class="muted" style="margin:.3rem 0 0;max-width:760px">Answers come from TRACE X records you are authorised to see. Stored facts are shown first;
-      any AI-generated interpretation is labelled separately. TRACE AI never changes records and never names a culprit.</p></div>
+  <div><div class="eyebrow">Investigation assistant</div><h1>TRACE AI</h1></div>
 </div>
 
 <div class="ai-shell">
@@ -32,8 +30,6 @@
       <h3>AI provider</h3>
       <p style="margin:0 0 .4rem"><span class="chip {{ 'int-match' if provider.configured else 'int-unverified' }}">{{ provider.name }}</span>
         {% if provider.model %}<span class="mono faint" style="font-size:.8rem">{{ provider.model }}</span>{% endif %}</p>
-      <p class="muted" style="font-size:.86rem;margin:0">{{ provider.message }}</p>
-      <p class="hint" style="margin:.6rem 0 0">Configure with AI_PROVIDER and AI_API_KEY in .env (see README). Basic search works without any provider.</p>
     </section>
   </aside>
 </div>
