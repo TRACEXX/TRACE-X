@@ -4,8 +4,7 @@
 {% block content %}
 <div class="page-head">
   <div><div class="eyebrow">Administrator</div><h1>User accounts</h1>
-    <p class="muted" style="margin:.3rem 0 0">TRACE X has exactly five accounts: one administrator and four detectives.
-      Passwords are stored only as Werkzeug hashes and are never shown.</p></div>
+    <p class="muted" style="margin:.3rem 0 0"></p></div>
 </div>
 <div class="stack">
   {% for u in users %}
@@ -22,10 +21,10 @@
       <div class="form-grid">
         <div class="field"><label>Full name</label><input type="text" name="full_name" value="{{ u.full_name }}"></div>
         <div class="field"><label>Specialization</label><input type="text" name="specialization" value="{{ u.specialization or '' }}"></div>
-        <div class="field"><label>Profile photo (path inside static/)</label>
+        <div class="field"><label>Profile photo</label>
           <input type="text" name="profile_image" value="{{ u.profile_image or '' }}" placeholder="assets/detectives/{{ u.username }}.jpg">
-          <span class="hint">Copy the photo into static/assets/detectives/ first. Leave empty for initials.</span></div>
-        <div class="field"><label>New password (optional, 8+ characters)</label>
+          <span class="hint"></span></div>
+        <div class="field"><label>New password (8+ characters)</label>
           <input type="password" name="new_password" autocomplete="new-password"></div>
       </div>
       <div class="row between">
