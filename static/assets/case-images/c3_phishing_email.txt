@@ -1,0 +1,11 @@
+From: "Crescent Bank Security" <alerts@crescentbank-verify.example>
+Subject: Action required: unusual sign-in detected
+Date: 18 Jun 2026 22:58
+
+Dear Customer,
+We detected an unusual sign-in to your Crescent Bank account. To avoid suspension, verify your
+identity within 12 hours:  https://crescentbank-verify.example/login
+Crescent Bank Security Team
+
+[Analyst note at registration: the sender domain is not a Crescent Bank domain.
+ Forwarded by customer Rabia Siddiqui on 19 Jun 2026.]

@@ -1,0 +1,47 @@
+PUBLIC STATEMENTS RECORD - Binance hot-wallet theft, 29 October 2026
+Prepared for TRACE X training. Quotes are copied from the cited news reports. Times are UTC.
+These are public statements, not police interviews.
+
+[1] Binance (official statement to TechCrunch)
+    Reported: TechCrunch, 29 Oct 2026, 15:27 PDT (22:27 UTC)
+    "aware of reports of a potential security issue and are actively investigating"
+    "user funds are completely safe"
+
+[2] Ross O'Leary, Binance spokesperson
+    Reported: TechCrunch, 29 Oct 2026, 15:27 PDT (22:27 UTC)
+    Binance "temporarily suspended withdrawals on multiple networks following a security incident as a
+    precautionary measure."
+
+[3] Changpeng Zhao (CZ), Binance founder and largest shareholder (no longer runs the company)
+    Reported: TechCrunch, 29 Oct 2026 (post on X made hours before the article; exact time not published)
+    Posted that the company had likely been hacked and that he expects users' funds to be "fully covered".
+
+[4] Richard Teng, Binance chief executive
+    Reported: Wikipedia summary of coverage, 30 Oct 2026 (exact time not published)
+    Said the attackers used EIP-7702 against Binance's hot wallet; Binance will cover all losses and has
+    set aside USD 6 billion for this. Binance's co-CEO also said about USD 200 million in RLUSD was stopped.
+
+[5] Ari Redbord, Global Head of Policy, TRM Labs
+    Reported: CNBC, 30 Oct 2026, 14:08 EDT (18:08 UTC)
+    "Ultimately, they're [hackers] trying to off-ramp it [crypto] to fiat."  Described it as a race against time.
+
+[6] Jonathan Levin, CEO, Chainalysis
+    Reported: CNBC, 30 Oct 2026, 14:08 EDT (18:08 UTC)
+    "We've got teams working around the clock to continue to follow that."
+    "As you get further and further away, the amount of seizure opportunities go down."
+
+[7] Chief scientist, Elliptic (blockchain analytics)
+    Reported: Wikipedia summary of coverage (exact time not published)
+    Called the theft "almost certainly the single largest known theft of any kind".
+
+[8] Joe Hancock, Partner and Head of Cyber Risk, Mishcon de Reya
+    Reported: CNBC, 30 Oct 2026, 14:08 EDT (18:08 UTC)
+    On the attackers quickly swapping freezable stablecoins: "The attackers knew that route would be closed
+    to them and so got out ahead of that."
+
+ATTRIBUTION STATEMENTS (from analytics firms, not law enforcement)
+- TRM Labs: attributes the theft to North Korea's TraderTraitor group, "high" confidence.
+- Chainalysis: "high confidence" that North Korea was responsible.
+- The FBI named the same group for the February 2025 Bybit hack (USD 1.5 billion). As of 30 Oct 2026 no
+  law-enforcement attribution for this incident had been reported; the US Secret Service said it is working
+  to track, freeze and recover the funds.

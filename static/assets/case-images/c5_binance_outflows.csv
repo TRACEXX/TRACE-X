@@ -1,0 +1,21 @@
+timestamp,chain,from_wallet,to_wallet,asset,amount,usd_value_estimate,note
+not published,Ethereum,Tornado Cash,ATTACKER-OPERATOR-WALLET,ETH,small (3 withdrawals),not published,"Operator wallet funded with three small Tornado Cash withdrawals on the morning of 28 Oct 2026 (exact times not published)"
+not published,Ethereum,ATTACKER-OPERATOR-WALLET,TEST-WALLET-1 / TEST-WALLET-2,attack code,n/a,n/a,"Early 29 Oct: first attack code deployed and tested on two wallets (exact time not published)"
+not published,Ethereum,ATTACKER-OPERATOR-WALLET,TEST-WALLET-3,attack code,n/a,n/a,"Later 29 Oct: final version rehearsed on a third wallet; test funds routed back to operator (exact time not published)"
+2026-10-29 20:05:00,XRP Ledger,BINANCE-XRPL-WALLETS (5),ATTACKER-XRPL-ADDRESS,XRP,233460000,296000000,"20:05-20:09 UTC: five Binance XRP Ledger wallets each emptied down to their minimum reserve"
+2026-10-29 20:10:00,Solana,BINANCE-SOL-WALLET,ATTACKER-SOL-ADDRESS,SOL,970500,96000000,"Reported as 'after 20:10 UTC'; 20:10 is the earliest possible time"
+2026-10-29 20:10:00,Optimism,BINANCE-OP-WALLET,ATTACKER-OP-ADDRESS,mixed,not published,part of 39000000,"Reported as 'after 20:10 UTC'; Arbitrum + Optimism + Base total about USD 39M"
+2026-10-29 20:20:00,Bitcoin,BINANCE-BTC-HOT-WALLET,ATTACKER-BTC-ADDRESS,BTC,18270,1470000000,"Split into 1000 BTC and 100 BTC pieces (peel chain) to make tracing harder"
+2026-10-29 20:20:00,Tron,BINANCE-TRON-HOT-WALLET,ATTACKER-TRON-ADDRESS,USDT + TRX,612700000 USDT + 46400000 TRX,628000000,"Sent within two minutes of 20:20 UTC"
+2026-10-29 20:20:00,Ethereum,ATTACKER-OPERATOR-WALLET,BINANCE-ETH-HOT-WALLET-1,EIP-7702 authorizations,50,n/a,"One transaction carrying 50 pre-signed EIP-7702 authorizations delegating the hot wallet to the attacker's sweeper contract"
+2026-10-29 20:23:24,Ethereum,BINANCE-ETH-HOT-WALLET-1,ATTACKER-MAIN-RECEIVING-WALLET,ETH + 63 tokens,167464 ETH (+ 1.615B USDT and 62 other tokens),part of 3790000000,"Entire balance of the hot wallet swept 3 min 24 s after the authorization transaction"
+2026-10-29 20:41:00,Ethereum,BINANCE-ETH-HOT-WALLET-1,ATTACKER-MAIN-RECEIVING-WALLET,new deposits,not published,not published,"Repeat sweep: the delegation stayed active so new funds arriving in the hot wallet were taken"
+2026-10-29 20:59:00,Ethereum,BINANCE-ETH-HOT-WALLET-1,ATTACKER-MAIN-RECEIVING-WALLET,new deposits,not published,not published,Repeat sweep
+2026-10-29 21:04:00,Ethereum,BINANCE-ETH-HOT-WALLET-1,ATTACKER-MAIN-RECEIVING-WALLET,new deposits,not published,not published,Repeat sweep
+2026-10-29 21:44:00,Ethereum,BINANCE-ETH-HOT-WALLET-1,ATTACKER-MAIN-RECEIVING-WALLET,new deposits,not published,not published,Repeat sweep
+2026-10-29 22:39:00,Ethereum,BINANCE-ETH-HOT-WALLET-1,ATTACKER-MAIN-RECEIVING-WALLET,new deposits,not published,not published,Repeat sweep
+2026-10-29 23:05:00,Avalanche,BINANCE-AVAX-WALLET,ATTACKER-AVAX-ADDRESS,mixed,not published,28000000,Second wave (approx. 23:05 UTC)
+2026-10-29 23:05:00,Polygon,BINANCE-POLYGON-WALLET,ATTACKER-POLYGON-ADDRESS,mixed,not published,10000000,Second wave (approx. 23:05 UTC)
+2026-10-29 23:56:00,Ethereum,BINANCE-ETH-HOT-WALLET-1,ATTACKER-MAIN-RECEIVING-WALLET,new deposits,not published,not published,Last reported repeat sweep
+not published,Ethereum,BINANCE-ETH-HOT-WALLET-2,ATTACKER-ADDRESS,ETH + USDT + RLUSD,28006 ETH + 55.7M USDT + 25.9M RLUSD,not published,"Second Ethereum hot wallet also drained (time not published)"
+not published,Ethereum,BINANCE-SMART-ACCOUNT,ATTACKER-MAIN-RECEIVING-WALLET,USDC,823000000,823000000,"Compromised hot wallet executed a separate Binance smart account to pull USDC (time not published)"

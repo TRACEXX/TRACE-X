@@ -1,0 +1,11 @@
+timestamp,door,card_id,card_holder,direction
+2026-03-13 18:02:11,Main Entrance,C-1001,Abdul Wahid,ENTRY
+2026-03-13 18:15:40,Rare Books Room,C-1001,Abdul Wahid,ENTRY
+2026-03-13 19:58:03,Main Entrance,C-1001,Abdul Wahid,EXIT
+2026-03-13 20:10:27,Main Entrance,C-2044,Tariq Rafiq,ENTRY
+2026-03-13 20:14:52,Rare Books Room,C-2044,Tariq Rafiq,ENTRY
+2026-03-13 20:31:09,Staff Room,G-0007,Ghufran Siddique,ENTRY
+2026-03-13 22:47:19,Side Entrance,C-1001,Abdul Wahid,ENTRY
+2026-03-13 22:51:05,Rare Books Room,C-1001,Abdul Wahid,ENTRY
+2026-03-13 23:20:44,Side Entrance,C-1001,Abdul Wahid,EXIT
+2026-03-14 07:10:02,Rare Books Room,G-0007,Ghufran Siddique,ENTRY

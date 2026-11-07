@@ -1,0 +1,7 @@
+timestamp,booking_id,event,customer_phone,pickup,dropoff,driver
+2026-03-13 22:16:40,BK-58812,booking created,+92 3**-***-4471,"Hasnain Antiques, Saddar","Old Riverside Library - side gate",Aslam Javed
+2026-03-13 22:21:05,BK-58812,passenger picked up,+92 3**-***-4471,"Hasnain Antiques, Saddar","Old Riverside Library - side gate",Aslam Javed
+2026-03-13 22:40:12,BK-58812,trip completed,+92 3**-***-4471,"Hasnain Antiques, Saddar","Old Riverside Library - side gate",Aslam Javed
+2026-03-13 23:24:51,BK-58840,booking created,+92 3**-***-4471,"Library Road (side gate)","Hasnain Antiques, Saddar",Imran Khattak
+2026-03-13 23:29:30,BK-58840,passenger picked up,+92 3**-***-4471,"Library Road (side gate)","Hasnain Antiques, Saddar",Imran Khattak
+2026-03-13 23:52:18,BK-58840,trip completed,+92 3**-***-4471,"Library Road (side gate)","Hasnain Antiques, Saddar",Imran Khattak

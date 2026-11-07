@@ -1,0 +1,13 @@
+timestamp,organisation,action,chain,asset,amount,wallet,note
+2026-10-29 21:01:00,Tether,Froze funds,Ethereum,USDT,971100000,ATTACKER-MAIN-RECEIVING-WALLET,"37 minutes after the main sweep; later sweeps raised this wallet's frozen total to 1.175B"
+2026-10-29 21:04:00,Circle,Froze funds,Ethereum,USDC,823000000,ATTACKER-MAIN-RECEIVING-WALLET,Three minutes after Tether
+2026-10-29 22:01:00,Ripple,Froze funds,Ethereum,RLUSD,40500000,ATTACKER-RLUSD-HOP-WALLET,"48M RLUSD had already been sold on DEXs before this freeze"
+2026-10-29 22:10:00,World Liberty Financial,Froze funds,Ethereum,USD1,27800000,ATTACKER-MAIN-RECEIVING-WALLET,
+2026-10-29 22:26:00,World Liberty Financial,Froze funds,Ethereum,USD1,not published,BINANCE-ETH-HOT-WALLET-1,Frozen inside the compromised hot wallet itself
+2026-10-29 23:35:00,Binance,Reported verified frozen total,multiple,mixed,2540000000,multiple,USD 2.54B verified frozen at this point
+2026-10-30 00:08:00,Arbitrum Security Council,Forced transfer (recovery),Arbitrum,ETH + ARB,8426 ETH + 74600000 ARB,ATTACKER-ARB-ADDRESS,About USD 30M
+2026-10-30 00:10:00,Binance,Removed attacker permissions from hot wallet,Ethereum,n/a,n/a,BINANCE-ETH-HOT-WALLET-1,"Reported as 8:10 pm ET on 29 Oct (= 00:10 UTC 30 Oct)"
+2026-10-30 00:30:00,TRM Labs,On-chain snapshot,multiple,mixed,about 2700000000 frozen,multiple,"About USD 2.7B frozen in total; about USD 2.4B in ETH and BTC still held by the attacker"
+not published,Tether,Froze funds,Tron,USDT,378700000,ATTACKER-TRON-WALLETS (2),
+not published,Tether,Froze funds,Ethereum,USDT,205000000,ATTACKER-ETH-WALLETS (2),
+not published,Aave,Froze affected markets,Ethereum,USDT/ETH,n/a,AAVE-MARKETS,After attacker supplied 60M USDT and borrowed about 19760 ETH

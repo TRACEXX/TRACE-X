@@ -1,0 +1,5 @@
+container,declared_goods,declared_weight_kg,weighbridge_weight_kg,consignee,shipper,arrival,status
+MSKU-48211,Textile machinery parts,18400,18350,Knight Holdings (Pvt) Ltd,Gulf Mercantile FZE,2026-11-02,released
+MSKU-48212,Textile machinery parts,18400,18420,Knight Holdings (Pvt) Ltd,Gulf Mercantile FZE,2026-11-02,released
+MSKU-48213,Textile machinery parts,18400,22600,Knight Holdings (Pvt) Ltd,Gulf Mercantile FZE,2026-11-02,"released 04 Nov 23:10 - override by records office"
+MSKU-48214,Cotton yarn,16200,16190,Indus Weaving Mills,Gulf Mercantile FZE,2026-11-02,released

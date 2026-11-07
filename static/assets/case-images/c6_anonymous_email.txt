@@ -1,0 +1,13 @@
+FICTIONAL ANONYMOUS EMAIL - CASE-006
+Received : 02 Apr 2026, 03:33       To: Administrator (personal address)
+From     : tyger.tyger@mailbox.example   (account created 02 Apr 2026, 03:20; deleted 03:41)
+Subject  : (no subject)
+
+    Tyger Tyger, burning bright,
+    In the forests of the night.
+
+Your family sends their regards. You always did look in the wrong places.
+                                                                            :)
+
+Investigator note: headers route through an anonymising relay; original sending IP not recovered.
+Quotation is from William Blake's poem "The Tyger" (public domain).

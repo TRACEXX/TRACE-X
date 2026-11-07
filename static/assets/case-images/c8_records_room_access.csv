@@ -1,0 +1,6 @@
+timestamp,door,badge,holder,direction
+2026-11-04 21:40:12,Records Room,E-2207,Abdul Wahid (records clerk),ENTRY
+2026-11-04 21:52:40,Records Room,V-117,VISITOR (issued at gate to "P. Rodrigues"),ENTRY
+2026-11-04 22:10:05,Records Room,V-117,VISITOR,EXIT
+2026-11-04 22:31:57,Records Room,E-2207,Abdul Wahid (records clerk),EXIT
+2026-11-04 23:10:44,Customs System,E-2207,Abdul Wahid (records clerk),"release override MSKU-48213"

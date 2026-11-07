@@ -1,0 +1,11 @@
+timestamp,event,account,source_ip,workstation,result
+2026-06-09 14:22:10,DOMAIN REGISTERED (external),-,-,-,crescentbank-verify.example (see WHOIS)
+2026-06-18 17:02:44,LOGOUT,teller.tayyab,10.20.4.18,BR-TELLER-04,OK
+2026-06-18 23:41:10,ADMIN LOGIN,svc.upgrade,203.0.113.45,-,OK
+2026-06-18 23:44:52,CONFIG CHANGE,svc.upgrade,203.0.113.45,-,Redirect rule added: /login -> crescentbank-verify.example
+2026-06-19 00:15:03,CUSTOMER LOGIN,cust-10982,203.0.113.61,-,OK
+2026-06-19 00:15:40,TRANSFER,cust-10982,203.0.113.61,-,PKR 95000 to mule account A
+2026-06-19 01:02:18,WORKSTATION LOGIN (RDP),teller.tayyab,203.0.113.45,BR-TELLER-04,OK - remote desktop session
+2026-06-19 01:09:51,TRANSFER APPROVAL,teller.tayyab,203.0.113.45,BR-TELLER-04,"Override: 12 transfers > PKR 50,000 approved"
+2026-06-19 01:30:55,CUSTOMER LOGIN,cust-11247,203.0.113.62,-,OK
+2026-06-19 02:40:00,SESSIONS REVOKED,security.usman,10.20.1.5,SEC-01,37 sessions

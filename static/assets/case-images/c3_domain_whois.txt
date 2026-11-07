@@ -1,0 +1,11 @@
+WHOIS / REGISTRAR RECORD (FICTIONAL TRAINING RECORD)
+Domain           : crescentbank-verify.example
+Created          : 2026-06-09 14:22 UTC+5
+Registrar        : FastNames Ltd (fictional)
+Registrant name  : REDACTED FOR PRIVACY
+Registrant email : shadow.teller@mailbox.example
+Payment          : debit card ending 8823, amount PKR 2,450, approved 2026-06-09 14:21
+Hosting          : VPS 203.0.113.45 (same IP as the svc.upgrade admin login and the RDP session)
+Login history    : 2026-06-12 21:05 from 198.51.100.36 (residential, no proxy)
+
+Registrar note to investigators (21 Jun 2026): the same email "shadow.teller" is used by forum seller "shadowteller".

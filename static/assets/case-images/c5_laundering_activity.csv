@@ -1,0 +1,7 @@
+timestamp,method,chain,input,output,platform,note
+2026-10-29 21:42:00,DEX sale,Ethereum,48000000 RLUSD,not published,Decentralised exchanges,"Sold between 21:42 and 22:01 UTC, before Ripple froze the remaining 40.5M"
+not published,Swap to ETH via market makers,Ethereum,about 325000000 USDT,about 122300 ETH,UniswapX (intent-based fillers),"Effective price about USD 2650/ETH vs market about 2300-2350: attacker accepted a >10% loss to escape freezable stablecoins; 175M USDT of this batch was frozen"
+not published,Collateral borrow,Ethereum,60000000 USDT supplied,about 19760 ETH borrowed,Aave,"Turns freezable USDT into ETH, which issuers cannot freeze; Aave then froze the markets"
+not published,Collateral supply,Tron,300000000 USDT,not published,JustLend,
+not published,Hop wallets + swap,Ethereum,200000000 USDT,not published,Uniswap,30M of this was frozen
+not published,Peel chain,Bitcoin,18270 BTC,pieces of 1000 BTC and 100 BTC,Bitcoin network,"Still moving at 00:30 UTC 30 Oct; Bitcoin cannot be frozen by an issuer"

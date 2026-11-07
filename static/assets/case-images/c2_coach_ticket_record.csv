@@ -1,0 +1,4 @@
+timestamp,ticket_no,route,departure,seat,passenger_name,payment
+2026-05-02 19:58:14,KHI-HYD-55107,Karachi (Sohrab Goth) -> Hyderabad,20:10,14,A. Shakir,"card ending 3390 (R. Mazhar)"
+2026-05-02 19:58:14,KHI-HYD-55108,Karachi (Sohrab Goth) -> Hyderabad,20:10,15,R. Mazhar,"card ending 3390 (R. Mazhar)"
+2026-05-03 00:40:02,HYD-KHI-30122,Hyderabad -> Karachi (Sohrab Goth),00:55,7,R. Mazhar,cash

@@ -1,0 +1,61 @@
+ANALYST NOTE - HOW THE ETHEREUM HOT WALLET WAS EMPTIED (EIP-7702)
+Case: Binance hot-wallet theft, 29 October 2026
+Prepared for TRACE X training from public reporting (main source: TRM Labs, on-chain data as of 30 Oct 2026 00:30 UTC)
+Status: Binance has NOT published an official root cause. Points marked [ASSESSMENT] are analysts' opinions, not confirmed facts.
+
+1. BACKGROUND: WHAT IS A HOT WALLET?
+   An exchange keeps most coins offline ("cold") and a working balance online ("hot") so that customer
+   withdrawals can be paid quickly. A hot wallet is controlled by a private key held in the exchange's
+   signing system. Anyone who can make that system SIGN a message can move the hot wallet's funds.
+
+2. BACKGROUND: WHAT IS EIP-7702?
+   EIP-7702 arrived with Ethereum's "Pectra" upgrade in May 2025. It lets a normal wallet sign an
+   "authorization" that says: "from now on, run the code of smart contract X when someone calls me".
+   It was designed for useful features (batching, sponsored fees). But if an attacker obtains such an
+   authorization pointing to THEIR contract, the wallet starts obeying the attacker's code.
+
+3. WHAT THE ATTACKER DID (sequence reconstructed by TRM Labs)
+   a) Prepared a "sweeper" smart contract that only the attacker's operator wallet can call.
+      Calling it sends everything in the wallet to the attacker.
+   b) Obtained 50 authorizations signed by the Binance hot wallet, each pointing to the sweeper contract.
+   c) Why 50? Each authorization is only valid for one specific "nonce" (the wallet's transaction counter).
+      The hot wallet's nonce keeps rising as normal customer withdrawals go out, so the attacker could not
+      know the exact number in advance. Fifty signatures covering a range of nonces guaranteed that one
+      would match at the moment of the attack.
+   d) 20:20 UTC: the operator submitted ONE transaction containing all 50 authorizations. The matching one
+      activated the delegation.
+   e) About 20:23:24 UTC (3 min 24 s later): the full balance - 167,464 ETH and 63 tokens including
+      1.615 billion USDT - was swept to the attacker's main receiving wallet.
+   f) The delegation stayed in place, so later deposits into the hot wallet were swept again at
+      20:41, 20:59, 21:04, 21:44, 22:39 and 23:56 UTC.
+   g) The same wallet was used to operate a separate Binance smart account and pull 823 million USDC.
+
+4. OTHER BLOCKCHAINS
+   Bitcoin, Tron, XRP Ledger, Solana, Avalanche, Polygon, Arbitrum, Optimism and Base do not use EIP-7702.
+   Funds there left through ordinary signed transfers. That means the attacker could make Binance's
+   systems sign transactions on many chains.
+   [ASSESSMENT - TRM Labs] This points to a compromise of Binance's hot-wallet SIGNING INFRASTRUCTURE,
+   not phishing alone.
+
+5. HOW DID THE ATTACKER GET SIGNING ACCESS? (NOT CONFIRMED)
+   - Binance's initial investigation (as reported) traced the breach to a software engineer's laptop that
+     gave the attacker a route to submit unauthorised withdrawals.
+   - Later reporting (The New York Times, as cited on Wikipedia) says other issues were found as well.
+   - No official post-mortem has been published. Record this as an OPEN QUESTION, not a finding.
+
+6. PREPARATION (shows planning; at least 36 hours according to reports)
+   - 28 Oct, morning: operator wallet funded with three small withdrawals from Tornado Cash (a mixer that
+     hides where money came from).
+   - Early 29 Oct: first attack code deployed and tested on two wallets.
+   - Later 29 Oct: final version rehearsed on a third wallet; test funds sent back to the operator.
+   - About 4 hours later: the same code was used against the Binance hot wallet.
+
+7. WARNING SIGNS AN EXCHANGE CAN WATCH FOR (TRM Labs recommendations)
+   - Any EIP-7702 delegation appearing on a treasury wallet -> alert immediately.
+   - Requests to sign many authorizations across a range of nonces -> treat as a compromise indicator.
+   - Keep a tested, pre-approved way to sign a revocation.
+   - Separate signing systems and approval paths by chain and by wallet tier.
+
+8. WHAT THIS NOTE DOES NOT SHOW
+   It does not identify any individual, and it does not prove who obtained the signatures. Attribution to a
+   group (see suspect record) comes from blockchain-intelligence firms, not from this note.

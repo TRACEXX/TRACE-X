@@ -1,0 +1,6 @@
+timestamp,type,other_party,duration_sec,cell_tower
+2026-05-02 17:58:20,INCOMING CALL,+92 3**-***-0412 (Mahzaib),94,North Nazimabad Block H
+2026-05-02 18:41:07,OUTGOING SMS,+92 321-***-0777 (not in contacts),0,Five Star Chowrangi
+2026-05-02 19:12:45,INCOMING CALL,+92 321-***-0777 (not in contacts),212,Sohrab Goth
+2026-05-02 19:40:31,OUTGOING CALL,+92 3**-***-0158 (Hira Shakir - sister),18,Central Bus Terminal
+2026-05-02 19:52:09,NETWORK DETACH,-,0,Central Bus Terminal

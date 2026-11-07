@@ -1,0 +1,14 @@
+RESPONSE TO LEGAL DATA REQUEST (FICTIONAL TRAINING RECORD)
+Operator  : Zephyr Mobile (fictional)                Received: 06 May 2026
+Request   : subscriber of +92 321-***-0777, active on 02 May 2026
+
+Subscriber      : Ruba Mazhar
+CNIC            : 42101-*******-8 (biometric verification completed)
+Activated       : 28 April 2026 (prepaid, SECOND SIM - her main number ends -2290)
+Activity 02 May : 18:41 SMS received from Aira Shakir's number
+                  19:12 call to Aira Shakir's number, 212 s, tower: Sohrab Goth
+                  20:31 last activity, tower: M-9 Motorway toll plaza (direction Hyderabad)
+                  03 May 01:58 first activity after a gap, tower: Hyderabad Bypass
+                  03 May 02:31 tower: North Nazimabad
+Note            : Ruba Mazhar told investigators she "left the hostel at 18:30 to go to the market" and had
+                  "no idea" where Aira went.

@@ -1,0 +1,13 @@
+WAREHOUSE INCIDENT REPORT (FICTIONAL TRAINING RECORD)
+Case reference : CASE-004 "The Indigo Veil"          Date of report: 14 March 2026
+Location       : Warehouse 03, West Wharf District, Karachi
+
+At 02:10 on 13 March a patrol responded to a call from the warehouse night watchman (Karim Bux) about "a van and
+two people with bags" at the rear gate. On arrival the van had left. Recovered from the loading bay:
+  1. Eleven sealed packets, each stamped with an indigo crescent (approx. 1.9 kg total) - sent to lab (see CASE-004 lab report)
+  2. A handwritten ledger with dates, initials and quantities (photographed - see ledger page)
+  3. A black prepaid mobile phone, battery 31%, unlocked by forensic tools on 15 March (see chat extract)
+  4. A torn equipment label: "NEON WHARF LOUNGE - AUDIO - CASE 4 OF 6"
+CCTV: rear-gate camera CAM-3 shows an exchange of two duffel bags at 01:14 (see still).
+Hospital link: at 03:40 Civil Hospital admitted a 22-year-old man with an overdose; an indigo-crescent packet was found
+in his pocket. He had been at an after-party at Neon Wharf Lounge.

@@ -1,0 +1,6 @@
+timestamp,vehicle,latitude,longitude,location,speed_kmh,event
+2026-03-13 00:41:22,LDR-4418 (Neon Wharf Lounge van),24.8455,66.9790,Neon Wharf Lounge,0,engine on
+2026-03-13 00:48:10,LDR-4418 (Neon Wharf Lounge van),24.8458,66.9801,Neon Wharf Lounge,12,depart
+2026-03-13 01:09:47,LDR-4418 (Neon Wharf Lounge van),24.8402,66.9688,"Warehouse 03, rear gate",0,stop
+2026-03-13 01:27:15,LDR-4418 (Neon Wharf Lounge van),24.8401,66.9690,"Warehouse 03, rear gate",9,depart
+2026-03-13 01:51:03,LDR-4418 (Neon Wharf Lounge van),24.8455,66.9790,Neon Wharf Lounge,0,engine off
