@@ -4,11 +4,10 @@
     <section class="card">
       <div class="card-head"><h2>Investigation report</h2>
         <a class="btn small" href="{{ url_for('reports.preview', case_number=case.case_number) }}">Preview report</a></div>
-      <p class="muted">The PDF compiles case details, suspects, statements, evidence with SHA-256 results, the timeline,
-        custody summary, notes and findings. Automated summaries are labelled as such.</p>
+
       <form method="post" action="{{ url_for('reports.generate', case_number=case.case_number) }}" class="row">
         {{ csrf() }}
-        <label class="check"><input type="checkbox" name="use_ai" value="1"> Include AI summary (if an AI provider is configured)</label>
+        <label class="check"><input type="checkbox" name="use_ai" value="1"> Include AI summary </label>
         <button class="btn primary" type="submit">Generate &amp; download PDF</button>
       </form>
       {% if reports %}
@@ -39,7 +38,7 @@
   {% if editable %}
     <section class="card">
       <h2>Submit investigation findings</h2>
-      <p class="hint">Your findings are saved to the case record as written. TRACE X does not compare them with any answer.</p>
+      <p class="hint">Your findings are saved to the case record as written.</p>
       <form method="post" action="{{ url_for('cases.submit_findings', case_number=case.case_number) }}">
         {{ csrf() }}
         <div class="field"><label>Suspect referenced (optional)</label>

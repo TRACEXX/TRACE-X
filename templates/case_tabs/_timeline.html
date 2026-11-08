@@ -6,7 +6,7 @@
       <a class="btn small" href="{{ url_for('cases.view_case', case_number=case.case_number, tab='timeline', system='0' if include_system else '1') }}">
         {{ 'Hide' if include_system else 'Show' }} system upload times</a>
     </div>
-    <p class="hint">Sorted with merge sort (dsa/sorting.py). Grey entries are when files were uploaded to TRACE X, which is not when anything happened.</p>
+    
     {% if events %}
       <ul class="timeline">
         {% for e in events %}
@@ -38,7 +38,6 @@
             {% for e in evidence %}<option value="{{ e.id }}">{{ e.evidence_code }} {{ e.filename }}</option>{% endfor %}</select></div>
         <button class="btn primary block" type="submit">Add event</button>
       </form>
-      <p class="hint" style="margin:.8rem 0 0">CSV activity logs can be imported row by row from <a href="{{ url_for('cases.view_case', case_number=case.case_number, tab='forensics') }}">Forensic Tools &rarr; analysis queue</a>.</p>
     </section>
   {% endif %}
 </div>

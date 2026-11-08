@@ -31,8 +31,7 @@
 
   <div class="grid grid-2">
     <section class="card">
-      <div class="card-head"><h2>Evidence analysis queue</h2><span class="chip plain">{{ pending }} pending</span></div>
-      <p class="hint">FIFO queue (dsa/queue.py): the oldest request is processed first.</p>
+      <div class="card-head"><h2>Evidence analysis</h2><span class="chip plain">{{ pending }} pending</span></div>
       {% if editable %}
         <form method="post" action="{{ url_for('cases.enqueue_task', case_number=case.case_number) }}">
           {{ csrf() }}

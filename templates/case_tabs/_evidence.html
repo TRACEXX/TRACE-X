@@ -34,7 +34,7 @@
           {{ csrf() }}
           <div class="field"><label for="file">File</label>
             <input id="file" type="file" name="file" required data-video-toggle="#cctv-fields">
-            <span class="hint">Images, CCTV video, audio, PDF, text, CSV logs, DOCX/XLSX/ZIP. The SHA-256 fingerprint is calculated on arrival.</span></div>
+            
           <div class="field"><label for="description">Description</label><textarea id="description" name="description" rows="2"></textarea></div>
           <div id="cctv-fields" class="form-grid">
             <div class="field"><label>Camera ID (CCTV)</label><input type="text" name="camera_id" placeholder="CAM-03"></div>
@@ -46,7 +46,7 @@
       </section>
     {% endif %}
     <section class="card">
-      <div class="card-head"><h2>Evidence tree</h2><span class="hint">dsa/tree.py &middot; {{ tree_size }} nodes</span></div>
+      <div class="card-head"><h2>Evidence tree</h2></span></div>
       {% if tree %}<ul class="tree">{{ tree_node(tree) }}</ul>{% endif %}
     </section>
   </div>
