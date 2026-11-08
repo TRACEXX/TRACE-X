@@ -44,37 +44,6 @@
         </table>
       </div>
     </section>
-
-    <section class="card {{ 'alert' if alerts }}">
-      <div class="card-head"><h2>Evidence integrity alerts</h2></div>
-      {% if alerts %}
-        <ul class="list">
-          {% for e in alerts %}
-            <li class="item-row">
-              <div class="grow"><a href="{{ url_for('evidence.view', evidence_id=e.id) }}" class="mono">{{ e.evidence_code }}</a> {{ e.filename }}
-                <div class="muted" style="font-size:.82rem">{{ e.case_number }} &middot; last checked {{ e.last_verified_at }}</div></div>
-              {{ integrity_chip(e.integrity_status) }}
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="muted" style="margin:0">No evidence has failed its latest SHA-256 verification.</p>
-      {% endif %}
-    </section>
-
-    <section class="card">
-      <div class="card-head"><h2>Recent evidence uploads</h2></div>
-      <ul class="list">
-        {% for e in recent_uploads %}
-          <li class="item-row">
-            <span class="type-tag">{{ e.file_type }}</span>
-            <div class="grow"><a href="{{ url_for('evidence.view', evidence_id=e.id) }}" class="mono">{{ e.evidence_code }}</a> {{ e.filename }}
-              <div class="muted" style="font-size:.82rem">{{ e.case_number }} &middot; {{ e.uploaded_by_name }} &middot; {{ e.uploaded_at }}</div></div>
-            {{ integrity_chip(e.integrity_status) }}
-          </li>
-        {% endfor %}
-      </ul>
-    </section>
   </div>
 
   <div class="stack">
@@ -99,16 +68,6 @@
           <div class="bar"><i style="width: {{ (100 * n / stats.cases) if stats.cases else 0 }}%"></i></div>
         </div>
       {% endfor %}
-    </section>
-
-    <section class="card">
-      <div class="card-head"><h2>Recent system activity</h2><a class="btn small" href="{{ url_for('admin.logs') }}">All logs</a></div>
-      <ul class="list" style="font-size:.86rem">
-        {% for log in recent_activity %}
-          <li><strong>{{ log.action }}</strong> {% if log.target_id %}<span class="mono">{{ log.target_id }}</span>{% endif %}
-            <div class="muted" style="font-size:.78rem">{{ log.timestamp }} &middot; {{ log.full_name or 'unknown user' }}</div></li>
-        {% endfor %}
-      </ul>
     </section>
   </div>
 </div>
