@@ -9,8 +9,8 @@
   {% if current_user %}
     <a class="btn small primary" href="{{ url_for('admin.dashboard') if user_is_admin else url_for('detectives.portal') }}">Back to my portal</a>
   {% else %}
-    <a class="btn small" href="#detectives">Detectives</a>
-    <a class="btn small ghost" href="{{ url_for('auth.login', portal='admin') }}">Administrator login</a>
+    <a class="btn small" href="#admin">Administrator portal</a>
+    <a class="btn small ghost" href="#detectives">Detectives</a>
   {% endif %}
 </header>
 
@@ -20,8 +20,8 @@
     <h1 class="wordmark">TRACE<span>&nbsp;X</span></h1>
     <p class="lede">People lie. Cameras blink. Evidence doesn't explain itself. Welcome to TRACE X, where every trace tells a story.</p>
     <div class="row" style="margin-top:1.6rem">
-      <a class="btn primary" href="#detectives">Choose a detective portal</a>
-      <a class="btn" href="{{ url_for('auth.login', portal='admin') }}">Administrator login</a>
+      <a class="btn primary" href="#admin">Administrator portal</a>
+      <a class="btn" href="#detectives">Choose a detective portal</a>
     </div>
 
     <div class="feature-list">
@@ -36,7 +36,32 @@
     </div>
   </section>
 
-  <section id="detectives">
+  <!-- Administrator Section with direct image styling matching the detective portrait layout -->
+  <section id="admin" style="scroll-margin-top: 5rem;">
+    <div class="section-title">
+      <div>
+        <div class="eyebrow">System administration</div>
+        <h2 style="margin:0">Administrator portal</h2>
+      </div>
+    </div>
+    <div class="grid grid-4">
+      <article class="card badge-card">
+        <div class="badge-top"></div>
+        <div class="badge-body">
+          <div class="row">
+            <img src="{{ url_for('static', filename='assets/detectives/admin.jpg') }}" alt="TRACE X Administrator" style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px;">
+          </div>
+          <div>
+            <div class="badge-id">ADM-001</div>
+            <h3>TRACE X Administrator</h3>
+          </div>
+          <a class="btn primary block" href="{{ url_for('auth.login', portal='admin') }}">Access Portal</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="detectives" style="scroll-margin-top: 5rem;">
     <div class="section-title">
       <div>
         <div class="eyebrow">Investigation unit</div>
@@ -55,7 +80,6 @@
             <div>
               <div class="badge-id">{{ d.badge_id }}</div>
               <h3>{{ d.full_name }}</h3>
-              
             </div>
             
             <a class="btn primary block" href="{{ url_for('auth.login', portal=d.username) }}">Access Portal</a>
@@ -64,6 +88,5 @@
       {% endfor %}
     </div>
   </section>
-
-
+</div>
 {% endblock %}

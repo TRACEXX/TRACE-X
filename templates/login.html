@@ -23,8 +23,14 @@
           </div>
         </div>
       {% elif portal == 'admin' %}
-        <div class="eyebrow">Restricted</div>
-        <h1 style="font-size:1.4rem">Administrator login</h1>
+        <div class="login-who">
+          {{ avatar("TRACE X Administrator", "assets/detectives/admin.jpg", "lg", square=True) }}
+          <div>
+            <div class="eyebrow" style="margin-bottom:.3rem">ADM-001</div>
+            <h1 style="font-size:1.35rem;margin:0">TRACE X Administrator</h1>
+            <div class="muted" style="font-size:.88rem">System administration</div>
+          </div>
+        </div>
       {% else %}
         <div class="eyebrow">Secure access</div>
         <h1 style="font-size:1.4rem">Log in to TRACE X</h1>
