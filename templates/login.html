@@ -4,7 +4,9 @@
 {% block public %}
 <div class="tape"></div>
 <header class="topbar">
-  <a class="brand" href="{{ url_for('auth.index') }}"><span class="brand-mark">TX</span> TRACE X</a>
+  <a class="brand brand-seamless" href="{{ url_for('auth.index') }}">
+    <img src="{{ url_for('static', filename='assets/tracex-logo.png') }}" alt="TRACE X Investigation System">
+  </a>
   <div class="spacer"></div>
   <a class="btn small ghost" href="{{ url_for('auth.index') }}#detectives">All detectives</a>
 </header>

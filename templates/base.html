@@ -5,15 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{% block title %}TRACE X{% endblock %} | TRACE X</title>
-  <link rel="icon" href="{{ url_for('static', filename='assets/favicon.svg') }}" type="image/svg+xml">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    /* Logo sits directly on the navbar: transparent PNG, no box, no background. */
+    .brand-seamless {
+      display: inline-flex;
+      align-items: center;
+      background: transparent !important;
+      padding: 0;
+      border: 0;
+      box-shadow: none;
+    }
+    .brand-seamless img {
+      display: block;
+      height: 46px;   /* change this number to make the logo bigger or smaller */
+      width: auto;
+      background: none;
+      mix-blend-mode: normal;
+      filter: none;
+    }
+  </style>
 </head>
 <body>
 {% from "_macros.html" import avatar %}
 {% if current_user and not public_page %}
   <header class="topbar">
-    <a class="brand" href="{{ url_for('admin.dashboard') if user_is_admin else url_for('detectives.portal') }}">
-      <span class="brand-mark">TX</span> TRACE X <small>Investigation System</small>
+    <a class="brand brand-seamless" href="{{ url_for('admin.dashboard') if user_is_admin else url_for('detectives.portal') }}">
+      <img src="{{ url_for('static', filename='assets/tracex-logo.png') }}" alt="TRACE X Investigation System">
     </a>
     <div class="spacer"></div>
     <div class="user-chip">

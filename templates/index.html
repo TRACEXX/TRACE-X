@@ -4,7 +4,9 @@
 {% block public %}
 <div class="tape"></div>
 <header class="topbar">
-  <a class="brand" href="{{ url_for('auth.index') }}"><span class="brand-mark">TX</span> TRACE X</a>
+  <a class="brand brand-seamless" href="{{ url_for('auth.index') }}">
+    <img src="{{ url_for('static', filename='assets/tracex-logo.png') }}" alt="TRACE X Investigation System">
+  </a>
   <div class="spacer"></div>
   {% if current_user %}
     <a class="btn small primary" href="{{ url_for('admin.dashboard') if user_is_admin else url_for('detectives.portal') }}">Back to my portal</a>
@@ -16,8 +18,12 @@
 
 <div class="wrap">
   <section class="landing-hero">
-  
-    <h1 class="wordmark">TRACE<span>&nbsp;X</span></h1>
+    
+    <!-- Hero Wordmark Banner with clean drop shadow -->
+    <div style="margin-bottom: 1.5rem;">
+      <img src="{{ url_for('static', filename='assets/tracex-hero.png') }}" alt="TRACE X" style="max-width: 520px; width: 100%; height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.9));">
+    </div>
+
     <p class="lede">People lie. Cameras blink. Evidence doesn't explain itself. Welcome to TRACE X, where every trace tells a story.</p>
     <div class="row" style="margin-top:1.6rem">
       <a class="btn primary" href="#admin">Administrator portal</a>
