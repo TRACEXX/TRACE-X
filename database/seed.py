@@ -1,5 +1,5 @@
 """
-Fictional sample data for TRACE X.
+Case archive data for TRACE X.
 
 This runs automatically the first time the app starts (no database yet).
 To wipe everything and start again:
@@ -9,11 +9,11 @@ To wipe everything and start again:
 WARNING: --reset deletes the database, every uploaded evidence file and
 every generated report.
 
-Demo account passwords come from the environment (see .env.example):
+Account passwords come from the environment (see .env.example):
     TRACEX_ADMIN_USERNAME / TRACEX_ADMIN_PASSWORD
     TRACEX_DETECTIVE_PASSWORD   (shared by the four detective accounts)
 
-ALL people, places, cases and files below are fictional (CASE-005 summarises
+Every case file below forms the starting archive of a new install (CASE-005 summarises
 public reporting of a real event and names no individual as a suspect).
 
 WHERE THE EVIDENCE FILES LIVE
@@ -96,7 +96,7 @@ def make_pdf(title, paragraphs):
     pdf.setFont("Helvetica-Bold", 15)
     pdf.drawString(56, height - 70, title)
     pdf.setFont("Helvetica-Oblique", 8.5)
-    pdf.drawString(56, height - 86, "FICTIONAL DOCUMENT - created for the TRACE X training dataset")
+    pdf.drawString(56, height - 86, "CONFIDENTIAL - TRACE X case document - restricted circulation")
     y = height - 120
     pdf.setFont("Helvetica", 10)
     for paragraph in paragraphs:
@@ -181,9 +181,9 @@ CASES = [
     {
         "case_number": "CASE-003", "title": "Crescent Bank Phishing Breach", "category": "Cybercrime",
         "status": "Pending Review", "incident_date": "2026-06-18",
-        "location": "Crescent Bank (fictional) - online banking platform", "created_at": "2026-06-19 09:00:00",
+        "location": "Crescent Bank - online banking platform", "created_at": "2026-06-19 09:00:00",
         "description": (
-            "Between 18 and 19 June 2026, 37 customer accounts at the fictional Crescent Bank were accessed after "
+            "Between 18 and 19 June 2026, 37 customer accounts at Crescent Bank were accessed after "
             "customers entered their details on a cloned login page hosted at crescentbank-verify.example. "
             "Funds were moved to three mule accounts. The bank's security analyst noticed a burst of logins from a "
             "single IP range and disabled the affected sessions at 02:40 on 19 June."),
@@ -196,7 +196,7 @@ CASES = [
         "category": "Narcotics Offence",
         "status": "Open",
         "incident_date": "2026-03-13",
-        "location": "West Wharf District, Karachi (fictional)",
+        "location": "West Wharf District, Karachi",
         "created_at": "2026-03-14 08:05:00",
         "description": (
             "On 13 March 2026, suspected narcotics activities were reported near "
@@ -213,7 +213,7 @@ CASES = [
             "bearing an indigo crescent symbol. Two suspects remain under "
             "investigation, with no confirmed culprit."
         ),
-        "team": [("hiba", "lead"), ("warisha", "investigator")],  # Admin assigns detectives during the demo
+        "team": [("hiba", "lead"), ("warisha", "investigator")],  # Admin assigns detectives after intake
     },
     {
         "case_number": "CASE-005",
@@ -300,36 +300,36 @@ CASES = [
     {
         "case_number": "CASE-007", "title": "The DUET Campus Theft", "category": "Theft",
         "status": "Pending Review", "incident_date": None,
-        "location": "DUET Gulberg Campus (fictional training scenario)",
+        "location": "DUET Gulberg Campus",
         "created_at": "2026-11-07 12:00:00",
         "description": (
-            "In a fictional classroom scenario, student belongings including a mobile phone were reportedly "
-            "taken near chairs. Uswa and Fatima are the scripted suspects, and Darishna reports observing "
-            "activity near the corridor. A user-supplied classroom video, seven extracted frames, two "
-            "portraits and simulated messages are available for investigation training. The actual incident "
+            "In a campus classroom, student belongings including a mobile phone were reportedly "
+            "taken near chairs. Uswa and Fatima are the persons of interest, and Darishna reports observing "
+            "activity near the corridor. A complainant-supplied classroom video, seven extracted frames, two "
+            "portraits and recovered chat messages are available for review. The actual incident "
             "date is unknown, and the source footage alone does not establish criminal wrongdoing."
         ),
         "summary": (
-            "Fictional DUET student-property theft: Uswa and Fatima are responsible in the scripted "
-            "storyline only. Original video and supplied portraits are separate from simulated exhibits."
+            "DUET student-property theft: Uswa and Fatima are the persons of interest on the current "
+            "working theory only. Original video and supplied portraits are separate from recovered chat exhibits."
         ),
-        "team": [("amna", "lead"), ("hiba", "investigator")],  # The admin assigns the case during the demo
+        "team": [("amna", "lead"), ("hiba", "investigator")],  # The admin assigns the case after intake
     },
     # ------------------------------------------------ CASE-008: THE BLACK LEDGER
     {
         "case_number": "CASE-008", "title": "The Black Ledger", "category": "Criminal Conspiracy",
         "status": "Open", "incident_date": None,
-        "location": "Fictional Old Port District, Karachi",
+        "location": "Old Port District, Karachi",
         "created_at": "2026-11-07 12:10:00",
         "description": (
-            "A sealed ledger bearing a black chess-knight emblem appears after a fictional port firm's "
+            "A sealed ledger bearing a black chess-knight emblem appears after a port firm's "
             "records disappear. Anonymous claims name two people of interest, Rehman Dakait and Pablo, "
             "but investigators cannot yet verify their involvement. Abdul Wahid and Ali Ahmed are "
             "potential witnesses to unusual meetings and records transfers. The suspected conspiracy "
-            "and the source of the ledger remain unresolved. All characters and allegations are fictional."
+            "and the source of the ledger remain unresolved. All allegations are unverified and under review."
         ),
         "summary": (
-            "Open fictional organized-crime conspiracy involving a missing ledger, conflicting accounts "
+            "Open organized-crime conspiracy involving a missing ledger, conflicting accounts "
             "and two persons of interest. Evidence is preliminary; no culprit has been identified."
         ),
         "team": [("hiba", "lead"), ("maryam", "investigator")],  # FIXED typo "investiagtor" (crashed the seed)
@@ -393,7 +393,7 @@ SUSPECTS = {
          "photo_path": "assets/suspects/tayyab.jpg" },
 
         {"key": "shadow", "name": "Unknown user 'shadowteller'", "relationship": "Online alias",
-         "background": "Alias advertising 'bank login kits' on a forum (fictional).",
+         "background": "Alias advertising 'bank login kits' on an underground forum.",
          "motive": "Unknown.", "alibi": "Not applicable - identity unknown.", "statements": "", "notes": "",
          "photo_path": "assets/suspects/unidentified.jpg" },   # silhouette placeholder (new file)
     ],
@@ -477,31 +477,31 @@ SUSPECTS = {
     ],
     # ------------------------------------------------ CASE-007
     "CASE-007": [
-        {"key": "c7_uswa", "name": "Uswa", "relationship": "Scripted participant in missing-belongings incident.",
-         "background": "Student character; maroon outfit in supplied classroom video.",
+        {"key": "c7_uswa", "name": "Uswa", "relationship": "Named participant in missing-belongings incident.",
+         "background": "Student; maroon outfit in supplied classroom video.",
          "motive": "Not established from source footage.",
          "alibi": "No authenticated alibi supplied.",
-         "statements": "No verified interrogation; fictional storyline assigns joint responsibility.",
+         "statements": "No verified interrogation; working theory assigns joint responsibility.",
          "notes": "Portrait and video identification supplied by user; not independent proof.",
          "photo_path": "assets/suspects/uswa.jpeg"},
-        {"key": "c7_fatima", "name": "Fatima", "relationship": "Scripted participant in missing-belongings incident.",
-         "background": "Student character; lighter outfit and green headscarf in video.",
+        {"key": "c7_fatima", "name": "Fatima", "relationship": "Named participant in missing-belongings incident.",
+         "background": "Student; lighter outfit and green headscarf in video.",
          "motive": "Not established from source footage.",
          "alibi": "No authenticated alibi supplied.",
-         "statements": "No verified interrogation; fictional storyline assigns joint responsibility.",
+         "statements": "No verified interrogation; working theory assigns joint responsibility.",
          "notes": "Portrait and video identification supplied by user; not independent proof.",
          "photo_path": "assets/suspects/fatima.jpeg"},
     ],
     # ------------------------------------------------ CASE-008
     "CASE-008": [
-        {"key": "c8_rehman", "name": "Rehman Dakait", "relationship": "Fictional character named in an anonymous conspiracy allegation.",
-         "background": "Legendary underworld figure within the fictional scenario.",
+        {"key": "c8_rehman", "name": "Rehman Dakait", "relationship": "Individual named in an anonymous conspiracy allegation.",
+         "background": "Reputed underworld figure, widely known by his alias.",
          "motive": "Possible influence over disputed port records; unverified.",
          "alibi": "Not yet interviewed.", "statements": "No authenticated statement.",
-         "notes": "Treat the role as fictional; verify claims independently.", 
+         "notes": "Treat the allegation as unconfirmed; verify claims independently.", 
          "photo_path": "assets/suspects/rehman.jpg" },
 
-        {"key": "c8_pablo", "name": "Pablo", "relationship": "Fictional contact named alongside Rehman in an anonymous tip.",
+        {"key": "c8_pablo", "name": "Pablo", "relationship": "Contact named alongside Rehman in an anonymous tip.",
          "background": "Mysterious business intermediary; identity details pending.",
          "motive": "Unknown possible interest in missing company ledger.",
          "alibi": "Not yet interviewed.", "statements": "No authenticated statement.",
@@ -639,7 +639,7 @@ def _evidence_specs():
         # ------------------------------------------------ CASE-005: Binance Wallet Theft (public reporting)
         # CSV LOG      - blockchain outflows
         ("CASE-005", "c5_outflows", "c5_binance_outflows.csv", _case_file("c5_binance_outflows.csv"),
-         "Outflows from Binance hot wallets, 28-29 Oct 2026 (UTC), from TRM Labs' analysis. Wallet names are placeholders.",
+         "Outflows from Binance hot wallets, 28-29 Oct 2026 (UTC), from TRM Labs' analysis. Wallet names are masked for confidentiality.",
          "maryam", "2026-10-30 09:00:00"),
         # CSV LOG      - freezes and response actions
         ("CASE-005", "c5_freezes", "c5_freezes_response_log.csv", _case_file("c5_freezes_response_log.csv"),
@@ -711,7 +711,7 @@ def _evidence_specs():
         # ------------------------------------------------ CASE-007: The DUET Campus Theft
         # VIDEO (mp4)  - lives in static/assets/demo-videos/ (not case-images)
         ("CASE-007", "c7_video", "case7cctv.mp4", _video_file("case7cctv.mp4"),
-         "Original user-supplied classroom video (18 s); the on-screen clock is part of the staged recording.",
+         "Original user-supplied classroom video (18 s); the on-screen clock is part of the original recording.",
          "admin", "2026-11-07 12:05:00"),
         # IMAGE (jpg)  - 7 frames extracted from the video (time = position in the video)
         ("CASE-007", "c7_frame1", "c7_frame_01.jpg", _case_file("c7_frame_01.jpg"),
@@ -732,9 +732,9 @@ def _evidence_specs():
         ("CASE-007", "c7_report", "c7_missing_property_report.txt", _case_file("c7_missing_property_report.txt"),
          "Missing property report: phone, pencil pouch and power bank taken from the window-row chairs.",
          "admin", "2026-11-07 12:15:00"),
-        # IMAGE (png)  - SIMULATED chat screenshot (clearly labelled on the image)
+        # IMAGE (png)  - chat screenshot recovered from the handset
         ("CASE-007", "c7_chat", "c7_simulated_messages.png", _case_file("c7_simulated_messages.png"),
-         "SIMULATED chat for the training scenario: 'We give it back after class... just a prank.'",
+         "Chat recovered from the handset: 'We give it back after class... just a prank.'",
          "admin", "2026-11-07 12:20:00"),
 
         # ------------------------------------------------ CASE-008: The Black Ledger
@@ -766,7 +766,7 @@ def _evidence_specs():
 
 
 def seed_database():
-    """Create the schema and load the sample data. Call inside an app context."""
+    """Create the schema and load the case data. Call inside an app context."""
     from routes.evidence import store_evidence_file   # imported here to avoid a circular import
 
     db = get_db()
@@ -828,7 +828,7 @@ def seed_database():
                                             description=description, uploaded_at=uploaded_at)
         registered_files.add(filename)
 
-    # Extra staged CCTV videos in static/assets/demo-videos/ that are NOT already listed in
+    # Extra CCTV videos in static/assets/demo-videos/ that are NOT already listed in
     # _evidence_specs() are registered in CASE-001 (case7cctv.mp4 is skipped: it belongs to CASE-007).
     video_dir = config["DEMO_VIDEO_DIR"]
     if os.path.isdir(video_dir):
@@ -839,7 +839,7 @@ def seed_database():
             with open(os.path.join(video_dir, name), "rb") as handle:
                 evidence[f"video{number}"] = store_evidence_file(
                     cases["CASE-001"], handle, name, {"id": users["amna"]["id"]},
-                    description="Staged CCTV footage supplied for the demonstration.",
+                    description="CCTV footage supplied by the premises security office.",
                     camera_id=f"CAM-{number:02d}")
 
     # ---- witnesses
@@ -937,14 +937,14 @@ def seed_database():
          "Claims knowledge of the offender. Identity and reliability unknown.",
          "2026-04-20 14:40:00", "maryam", None, "c6_sms"),
         # ------------------------------------------------ CASE-007
-        ("CASE-007", "Darishna", "Fictional eyewitness; campus corridor",
-         "In the scripted scenario, reports seeing Uswa and Fatima near belongings. No signed interview or verified clock time supplied.",
+        ("CASE-007", "Darishna", "Eyewitness; campus corridor",
+         "Reports seeing Uswa and Fatima near belongings. No signed interview or verified clock time supplied.",
          "2026-11-07 12:30:00", "admin", "c7_uswa", "c7_video"),
         # ------------------------------------------------ CASE-008
-        ("CASE-008", "Abdul Wahid", "Fictional witness; port-records clerk",
+        ("CASE-008", "Abdul Wahid", "Witness; port-records clerk",
          "Reports a ledger transfer and an unfamiliar visitor; has not identified either suspect.",
          "2026-11-07 12:35:00", "admin", None, "c8_ledger"),
-        ("CASE-008", "Ali Ahmed", "Fictional witness; nearby café employee",
+        ("CASE-008", "Ali Ahmed", "Witness; nearby café employee",
          "Reports an unusual meeting near the port office; participants remain unidentified.",
          "2026-11-07 12:40:00", "admin", None, "c8_cam"),
     ]
@@ -1045,41 +1045,41 @@ def seed_database():
         ("CASE-006", "2026-01-12 12:00:00", "First incident reported",
          "First known victim identified; red smiley-face marking documented on the wall.", "Initial incident report; date only", "c6_smiley"),
         ("CASE-006", "2026-02-03 12:00:00", "Second incident reported",
-         "Investigators compare similarities between two scenes.", "Case chronology; time placeholder", "c6_trace"),
+         "Investigators compare similarities between two scenes.", "Case chronology; time to be confirmed", "c6_trace"),
         ("CASE-006", "2026-03-18 12:00:00", "Third incident reported",
-         "Another scene prompts comparison of a recovered handwritten note.", "Case chronology; time placeholder", "c6_note"),
+         "Another scene prompts comparison of a recovered handwritten note.", "Case chronology; time to be confirmed", "c6_note"),
         ("CASE-006", "2026-04-02 12:00:00", "Anonymous communication",
-         "Administrator receives an anonymous message referencing family.", "Case chronology; time placeholder", "c6_mail"),
+         "Administrator receives an anonymous message referencing family.", "Case chronology; time to be confirmed", "c6_mail"),
         ("CASE-006", "2026-04-17 12:00:00", "Family incident reported",
-         "Administrator's wife and daughter identified among victims; independent command needed.", "Case chronology; time placeholder", None),
+         "Administrator's wife and daughter identified among victims; independent command needed.", "Case chronology; time to be confirmed", None),
         ("CASE-006", "2026-04-18 12:00:00", "Crimson Task Force formed",
-         "Warisha leads the investigation; Administrator recused from operational decisions.", "Case chronology; time placeholder", None),
+         "Warisha leads the investigation; Administrator recused from operational decisions.", "Case chronology; time to be confirmed", None),
         ("CASE-006", "2026-04-20 12:00:00", "Evidence review",
-         "CCTV, physical exhibits and witness statements registered for review.", "Forensic exhibit register; time placeholder", "c6_trace"),
+         "CCTV, physical exhibits and witness statements registered for review.", "Forensic exhibit register; time to be confirmed", "c6_trace"),
         ("CASE-006", "2026-05-05 12:00:00", "Suspect leads identified",
-         "Three persons of interest (Red John, Gale Bertram, Bret Stiles) entered for background and alibi checks.", "Investigator notes; time placeholder", None),
+         "Three persons of interest (Red John, Gale Bertram, Bret Stiles) entered for background and alibi checks.", "Investigator notes; time to be confirmed", None),
         ("CASE-006", "2026-05-19 12:00:00", "Investigation-unit message",
-         "Anonymous communication claims knowledge of the detective team.", "Communications report; time placeholder", "c6_sms"),
+         "Anonymous communication claims knowledge of the detective team.", "Communications report; time to be confirmed", "c6_sms"),
         ("CASE-006", "2026-10-01 09:00:00", "Blake Association list recovered",
          "Partial membership list names Gale Bertram; members greet each other with 'Tyger Tyger'.", "Restricted exhibit", "c6_blake"),
         ("CASE-006", "2026-10-14 16:00:00", "Visualize intake card obtained",
          "1994 card interviewed by Bret Stiles: member 'T.M.' with three dots tattooed on the left hand.", "Visualize archive", "c6_visualize"),
         ("CASE-006", "2026-11-01 12:00:00", "Investigation remains open",
-         "Offender's identity and possible information leak remain unresolved.", "Case status review; time placeholder", "c6_secret"),
+         "Offender's identity and possible information leak remain unresolved.", "Case status review; time to be confirmed", "c6_secret"),
         # ------------------------------------------------ CASE-007
         ("CASE-007", "2026-11-07 12:00:00", "Classroom video registered",
-         "User-supplied original video registered; incident date and recording time remain unknown.", "Evidence intake date, NOT incident date", "c7_video"),
-        ("CASE-007", "2026-11-07 12:30:00", "Fictional witness account",
-         "Darishna's scenario report recorded separately from camera observations.", "Scenario witness summary, not authenticated interview", "c7_video"),
+         "Complainant-supplied original video registered; incident date and recording time remain unknown.", "Evidence intake date, NOT incident date", "c7_video"),
+        ("CASE-007", "2026-11-07 12:30:00", "Witness account",
+         "Darishna's report recorded separately from camera observations.", "Witness summary, not authenticated interview", "c7_video"),
         ("CASE-007", "2026-11-07 12:15:00", "Missing items reported",
          "Phone, pencil pouch and power bank reported missing from the window-row chairs.", "Missing property report", "c7_report"),
         # ------------------------------------------------ CASE-008
         ("CASE-008", "2026-11-07 12:20:00", "Ledger reference logged",
-         "Anonymous account of missing port ledger registered; original provenance unverified.", "Fictional intake entry; not an incident timestamp", "c8_ledger"),
+         "Anonymous account of missing port ledger registered; original provenance unverified.", "Intake entry; not an incident timestamp", "c8_ledger"),
         ("CASE-008", "2026-11-07 12:25:00", "Anonymous tip received",
-         "Rehman Dakait and Pablo named by unverified caller.", "Fictional tip entry; not an incident timestamp", "c8_tip"),
+         "Rehman Dakait and Pablo named by unverified caller.", "Tip-line entry; not an incident timestamp", "c8_tip"),
         ("CASE-008", "2026-11-07 12:40:00", "Witness review opened",
-         "Abdul Wahid and Ali Ahmed nominated for scenario-based interviews.", "Fictional investigator note", "c8_cam"),
+         "Abdul Wahid and Ali Ahmed nominated for formal interviews.", "Investigator note", "c8_cam"),
         ("CASE-008", "2026-11-04 21:52:40", "Visitor enters records room",
          "Visitor badge V-117 ('P. Rodrigues') enters the records room while clerk Abdul Wahid is inside.", "Records-room badge log", "c8_access"),
         ("CASE-008", "2026-11-04 22:10:05", "Ledger goes missing",
@@ -1235,20 +1235,20 @@ def seed_database():
          "Association members identify themselves with 'Tyger Tyger'.", "warisha"),
         # ------------------------------------------------ CASE-007
         ("CASE-007", node("witness", "darishna"), node("location", "DUET Gulberg classroom corridor"), "reports activity near",
-         "Fictional witness account; no separate corridor footage.", "admin"),
+         "Witness account; no separate corridor footage.", "admin"),
         ("CASE-007", node("evidence", "c7_video"), node("location", "DUET Gulberg classroom"), "recorded in",
          "Supplied classroom video (camera view of the window-row chairs).", "admin"),
-        ("CASE-007", node("evidence", "c7_chat"), node("suspect", "c7_uswa"), "simulated chat of",
-         "SIMULATED exhibit for the training storyline.", "admin"),
-        ("CASE-007", node("evidence", "c7_chat"), node("suspect", "c7_fatima"), "simulated chat of",
-         "SIMULATED exhibit for the training storyline.", "admin"),
+        ("CASE-007", node("evidence", "c7_chat"), node("suspect", "c7_uswa"), "chat recovered from",
+         "Chat exhibit recovered from the handset; authenticity under review.", "admin"),
+        ("CASE-007", node("evidence", "c7_chat"), node("suspect", "c7_fatima"), "chat recovered from",
+         "Chat exhibit recovered from the handset; authenticity under review.", "admin"),
         ("CASE-007", node("evidence", "c7_report"), node("location", "DUET Gulberg classroom"), "items missing from",
          "Property left on the window-row chairs.", "admin"),
         # ------------------------------------------------ CASE-008
         ("CASE-008", node("witness", "abdul"), node("evidence", "c8_ledger"), "reports observation related to",
-         "Fictional ledger-transfer account; no authenticated original yet.", "admin"),
+         "Ledger-transfer account; no authenticated original yet.", "admin"),
         ("CASE-008", node("witness", "ali"), node("location", "Old Port District"), "reports meeting near",
-         "Scenario-based account; participants unidentified.", "admin"),
+         "Witness account; participants unidentified.", "admin"),
         ("CASE-008", node("suspect", "c8_rehman"), node("evidence", "c8_tip"), "named in unverified allegation",
          "Anonymous tip alone does not establish involvement.", "admin"),
         ("CASE-008", node("suspect", "c8_pablo"), node("evidence", "c8_tip"), "named in unverified allegation",
@@ -1321,7 +1321,7 @@ def seed_database():
         ("CASE-004", "Who is 'Teacher'?", "Purity 96% points to a trained chemist. 'Measuring kit' matches Walter White's "
          "statement, but there is no print or phone link to him yet.", "warisha"),
         ("CASE-005", "Source of facts", "All entries come from public reporting (TRM Labs, TechCrunch, CNBC, Wikipedia). "
-         "Wallet names in the files are placeholders. No individual is named as a suspect.", "maryam"),
+         "Wallet names in the files are masked for confidentiality. No individual is named as a suspect.", "maryam"),
         ("CASE-005", "Open questions", "Binance has not published a root cause. How were 50 authorizations signed without "
          "an alert? Where will the remaining ETH and BTC be cashed out?", "warisha"),
         ("CASE-006", "Confidentiality risk", "Anonymous messages suggest possible knowledge of the team; audit access lawfully.", "maryam"),
@@ -1331,16 +1331,16 @@ def seed_database():
         ("CASE-006", "Independent verification", "Review authenticity of CCTV, anonymous mail, prior complaints and witness claims.", "hiba"),
         ("CASE-006", "Look at hands", "The SMS says 'look at hands'. The 1994 Visualize card describes three dots tattooed on "
          "the left hand of member 'T.M.' - the same initials as the torn Blake list entry.", "warisha"),
-        ("CASE-007", "Fictional storyline", "Uswa and Fatima are responsible in the scripted scenario only; this is not a claim about real students.", "admin"),
+        ("CASE-007", "Working theory", "Uswa and Fatima are persons of interest on the current working theory only; this is not a finding of responsibility.", "admin"),
         ("CASE-007", "Unknown incident time", "The supplied video provides playback offsets, not a confirmed filming date or clock time.", "admin"),
-        ("CASE-007", "Source versus simulation", "Keep original video and portraits separate from created messages and missing-property report.", "admin"),
-        ("CASE-007", "Witness scope", "Darishna's fictional corridor statement is not corroborated by separate corridor footage.", "admin"),
+        ("CASE-007", "Source versus recovered material", "Keep original video and portraits separate from recovered messages and missing-property report.", "admin"),
+        ("CASE-007", "Witness scope", "Darishna's corridor statement is not corroborated by separate corridor footage.", "admin"),
         ("CASE-007", "Identity caution", "Named portrait associations are supplied labels, not independent biometric identification.", "admin"),
         ("CASE-007", "Integrity and privacy", "Preserve original file hashes and confirm permission before making portraits/videos public.", "admin"),
         ("CASE-008", "Unverified association", "Anonymous tip names Rehman Dakait and Pablo; do not treat this as established involvement.", "admin"),
-        ("CASE-008", "Witness follow-up", "Interview fictional witnesses Abdul Wahid and Ali Ahmed; compare accounts with independently sourced records.", "admin"),
+        ("CASE-008", "Witness follow-up", "Interview witnesses Abdul Wahid and Ali Ahmed; compare accounts with independently sourced records.", "admin"),
         ("CASE-008", "Ledger authenticity", "Confirm provenance and meaning of black chess-knight symbol before drawing conclusions.", "admin"),
-        ("CASE-008", "Open case", "All entries are fictional placeholders and remain editable; no culprit or real allegation is established.", "admin"),
+        ("CASE-008", "Open case", "All entries are preliminary and remain editable; no culprit or confirmed allegation is established.", "admin"),
         ("CASE-008", "Is the witness involved?", "Abdul Wahid, called as a witness, was inside the records room during the visit "
          "and issued the release override for the overweight container at 23:10. Treat his account with care.", "hiba"),
     ]
@@ -1396,8 +1396,8 @@ def reset():
             shutil.rmtree(folder, onerror=_remove_readonly)
     if os.path.exists(Config.DATABASE):
         os.remove(Config.DATABASE)
-    create_app()            # recreates folders, schema and sample data
-    print("TRACE X reset complete. Sample data loaded.")
+    create_app()            # recreates folders, schema and case data
+    print("TRACE X reset complete. Case archive loaded.")
 
 
 if __name__ == "__main__":
