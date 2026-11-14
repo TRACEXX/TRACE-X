@@ -778,7 +778,7 @@ def seed_database():
     users = {}
     cursor = db.execute(
         "INSERT INTO users (username, password_hash, full_name, role, badge_id, specialization, profile_image, created_at) "
-        "VALUES (?, ?, ?, 'admin', 'ADM-001', 'System administration', 'assets/detectives/admin.jpg', ?)",
+        "VALUES (?, ?, ?, 'admin', 'ADM-001', 'System administration', 'assets/detectives/admin.png', ?)",
         (config["ADMIN_USERNAME"].lower(), generate_password_hash(config["ADMIN_PASSWORD"]),
          "TRACE X Administrator", stamp))
     users["admin"] = {"id": cursor.lastrowid, "role": "admin"}
