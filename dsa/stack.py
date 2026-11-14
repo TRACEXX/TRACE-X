@@ -1,18 +1,3 @@
-"""
-Stack (Last In, First Out), built from linked nodes.
-
-Used for UNDO on investigation notes. Before a note is changed, its previous
-version is saved. When the detective presses "Undo", the saved versions are
-pushed onto a stack in the order they were saved, and the most recent one
-is popped and restored.
-
-    push(v1), push(v2), push(v3)  ->  top is v3
-    pop() returns v3, then v2, then v1
-
-Complexity: push O(1), pop O(1), peek O(1)
-"""
-
-
 class _StackNode:
     def __init__(self, data, below):
         self.data = data

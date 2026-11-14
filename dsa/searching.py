@@ -1,12 +1,3 @@
-"""
-Searching algorithms.
-
-linear_search   - checks every item; works on unsorted data. O(n)
-binary_search   - repeatedly halves a SORTED list. O(log n)
-keyword_search  - linear scan that scores how well each record matches a
-                  free-text query (used by the search page and TRACE AI).
-"""
-
 import re
 
 
@@ -34,9 +25,9 @@ def binary_search(sorted_items, target, key=lambda item: item, steps=None):
         if mid_value == target:
             return mid
         if mid_value < target:
-            low = mid + 1           # target is in the right half
+            low = mid + 1          
         else:
-            high = mid - 1          # target is in the left half
+            high = mid - 1         
     return -1
 
 

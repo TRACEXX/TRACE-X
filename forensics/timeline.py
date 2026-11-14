@@ -1,23 +1,3 @@
-"""
-Investigation timeline.
-
-build_case_timeline() collects events from several places and sorts them with
-our own merge sort (dsa/sorting.py):
-
-  * timeline_events rows    - incident events entered by investigators or
-                              imported from CSV activity logs
-  * witness statements      - the time each statement was recorded
-  * CCTV recordings         - only when the recording time is known
-  * evidence registrations  - the time a file was UPLOADED to TRACE X.
-                              These are clearly labelled "system time"
-                              because an upload time is not the time the
-                              crime happened.
-
-Every event keeps its original timestamp and a `source` describing where it
-came from. Nothing is invented: if a time is not recorded, the event is not
-placed on the timeline.
-"""
-
 import csv
 import io
 from datetime import datetime
@@ -123,7 +103,7 @@ def import_csv_activity_log(evidence, file_path, user_id):
         return 0, 0, "No timestamp column found (expected one of: " + ", ".join(TIMESTAMP_COLUMNS) + ")."
 
     imported = skipped = 0
-    for row_number, row in enumerate(reader, start=2):     # row 1 is the header
+    for row_number, row in enumerate(reader, start=2):    
         stamp = normalize_timestamp(row.get(time_column))
         if stamp is None:
             skipped += 1

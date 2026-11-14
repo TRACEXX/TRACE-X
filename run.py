@@ -1,12 +1,3 @@
-"""
-Start TRACE X locally:
-
-    python run.py
-
-then open http://127.0.0.1:5000 in your browser.
-The database and sample data are created automatically on the first run.
-"""
-
 import os
 
 from app import create_app

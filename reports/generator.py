@@ -1,13 +1,3 @@
-"""
-PDF investigation report (ReportLab).
-
-The report separates three kinds of content:
-  * RECORDED INFORMATION  - copied from the database
-  * AUTOMATED SUMMARY     - either rule-based (no AI) or AI-generated,
-                            always labelled with its source
-  * NOTICE                - the report does not determine guilt
-"""
-
 import os
 from datetime import datetime
 from xml.sax.saxutils import escape

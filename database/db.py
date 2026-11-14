@@ -1,10 +1,3 @@
-"""
-Database helpers for TRACE X.
-
-Every request gets one SQLite connection (stored on Flask's `g` object) that
-is closed automatically when the request ends.
-"""
-
 import os
 import sqlite3
 from datetime import datetime

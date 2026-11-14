@@ -1,8 +1,3 @@
-/* TRACE AI chat panel.
-   Sends the question to Flask (/ai/ask) and renders the structured answer.
-   All text is inserted with textContent, never innerHTML, so record content
-   can never run as code in the page. */
-
 (function () {
   "use strict";
 

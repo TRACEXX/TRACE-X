@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <style>
-    /* Logo sits directly on the navbar: transparent PNG, no box, no background. */
+    
     .brand-seamless {
       display: inline-flex;
       align-items: center;
@@ -19,7 +19,7 @@
     }
     .brand-seamless img {
       display: block;
-      height: 46px;   /* change this number to make the logo bigger or smaller */
+      height: 46px;   
       width: auto;
       background: none;
       mix-blend-mode: normal;
@@ -75,7 +75,9 @@
 
   <!-- FLOATING TRACE AI CHAT WIDGET -->
   <div id="ai-widget-container">
-    <button id="ai-widget-toggle">💬 TRACE AI</button>
+    <button id="ai-widget-toggle" style="background: none; border: none; padding: 0; cursor: pointer;">
+      <img src="{{ url_for('static', filename='assets/trace-ai-badge.png') }}" alt="TRACE AI" style="height: 52px; width: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));">
+    </button>
     <div id="ai-widget-box" class="hidden">
       <div class="ai-widget-header">
         <span>TRACE AI Assistant</span>

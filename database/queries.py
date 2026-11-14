@@ -1,10 +1,3 @@
-"""
-Reusable read queries.
-
-The case page, TRACE AI and the PDF report all need the same information, so
-the SQL lives here once instead of being copied into every route.
-"""
-
 from database.db import get_db, placeholders, query_all, query_one
 from dsa.graph import Graph
 from dsa.hash_table import HashTable

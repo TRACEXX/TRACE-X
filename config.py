@@ -1,11 +1,3 @@
-"""
-TRACE X configuration.
-
-All settings are read from environment variables (or from a local .env file)
-so that secrets such as API keys and demo passwords are never written into
-source code or frontend files.
-"""
-
 import os
 from datetime import timedelta
 
@@ -40,9 +32,6 @@ def env_bool(name, default):
         return default
     return value.strip().lower() in ("1", "true", "yes", "on")
 
-
-# File extensions accepted by the evidence vault, grouped by evidence type.
-# The group decides which viewer opens the file.
 EVIDENCE_TYPES = {
     "image": {"jpg", "jpeg", "png", "gif", "webp", "bmp"},
     "video": {"mp4", "webm", "ogv", "mov", "m4v"},
@@ -55,15 +44,12 @@ EVIDENCE_TYPES = {
 
 
 class Config:
-    # Flask signs the session cookie with this key. If it is not provided,
-    # app.py creates a random key and stores it in instance/secret_key.txt.
+   
     SECRET_KEY = os.environ.get("TRACEX_SECRET_KEY")
 
     INSTANCE_DIR = os.path.join(BASE_DIR, "instance")
     DATABASE = os.environ.get("TRACEX_DATABASE") or os.path.join(INSTANCE_DIR, "tracex.db")
 
-    # Private evidence storage. This folder is outside /static, so files can
-    # only be reached through the authorised Flask routes in routes/evidence.py.
     EVIDENCE_DIR = os.path.join(BASE_DIR, "evidence_storage")
     REPORTS_DIR = os.path.join(INSTANCE_DIR, "reports")
     TEMP_DIR = os.path.join(INSTANCE_DIR, "tmp")
@@ -77,14 +63,10 @@ class Config:
     PERMANENT_SESSION_LIFETIME = timedelta(hours=8)
     CSRF_ENABLED = True
 
-    # Demo account passwords used ONLY by database/seed.py on first setup.
     ADMIN_USERNAME = os.environ.get("TRACEX_ADMIN_USERNAME", "admin")
     ADMIN_PASSWORD = os.environ.get("TRACEX_ADMIN_PASSWORD", "TraceX-Admin-2026")
     DETECTIVE_PASSWORD = os.environ.get("TRACEX_DETECTIVE_PASSWORD", "TraceX-Detective-2026")
 
-    # The integrity demo only touches a temporary copy, never the original.
-    # The spec calls it admin-only, but demo step 16 happens while a detective
-    # is logged in, so detectives may run it on cases they can access.
     INTEGRITY_DEMO_FOR_DETECTIVES = env_bool("TRACEX_DEMO_FOR_DETECTIVES", True)
 
     # TRACE AI provider: none | groq | openrouter | openai | gemini | ollama

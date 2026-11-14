@@ -1,21 +1,3 @@
-"""
-Chain of custody.
-
-Custody events are saved in SQLite (so they survive restarts) and loaded into
-the custom LinkedList from dsa/linked_list.py for traversal and display.
-
-HASH-LINKED AUDIT RECORDS
-Each custody row stores:
-    prev_hash   = record_hash of the previous event for the same evidence
-    record_hash = SHA-256 of (this event's fields + prev_hash)
-If anyone edits or deletes an old row directly in the database, recomputing
-the hashes no longer lines up and verify_custody_chain() reports where the
-chain breaks.
-
-This protects the HISTORY records. It is separate from the file SHA-256
-check in forensics/integrity.py, which protects the evidence FILE itself.
-"""
-
 from database.db import get_db, now_str
 from dsa.linked_list import LinkedList
 from forensics.hashing import sha256_text

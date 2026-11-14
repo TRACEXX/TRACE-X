@@ -1,16 +1,3 @@
-"""
-Evidence integrity verification with SHA-256.
-
-verify_evidence()  - recompute a stored file's hash and compare it with the
-                     reference hash saved at upload time.
-run_tamper_demo()  - safe classroom demonstration of a mismatch using a
-                     TEMPORARY COPY. The registered original is never touched.
-
-Important: a MISMATCH only tells us that the stored file no longer matches
-its registered fingerprint. It does not prove hacking and does not identify
-who changed the file.
-"""
-
 import hmac
 import os
 import shutil
@@ -24,10 +11,6 @@ from forensics.hashing import sha256_file
 
 
 def evidence_abspath(storage_path):
-    """Turn the stored relative path into an absolute path inside EVIDENCE_DIR.
-
-    Refuses any path that would point outside the evidence folder.
-    """
     base = os.path.realpath(current_app.config["EVIDENCE_DIR"])
     full = os.path.realpath(os.path.join(base, storage_path))
     if os.path.commonpath([base, full]) != base:
@@ -36,7 +19,6 @@ def evidence_abspath(storage_path):
 
 
 def verify_evidence(evidence, user_id):
-    """Check one evidence record. `evidence` is a row from the evidence table."""
     path = evidence_abspath(evidence["storage_path"])
     original = evidence["original_sha256"]
     checked_at = now_str()
@@ -45,7 +27,6 @@ def verify_evidence(evidence, user_id):
         result, current = "FILE MISSING", None
     else:
         current = sha256_file(path)
-        # compare_digest compares in constant time (good security habit)
         result = "MATCH" if hmac.compare_digest(current, original) else "MISMATCH"
 
     db = get_db()

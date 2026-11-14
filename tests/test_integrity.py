@@ -1,6 +1,3 @@
-"""SHA-256 registration, verification (MATCH / MISMATCH / FILE MISSING), the safe
-tamper demo, upload validation and the hash-linked custody chain."""
-
 import hashlib
 import io
 import os
@@ -36,12 +33,11 @@ def test_upload_records_real_sha256_in_private_storage(app, client, login):
     path = _path(app, evidence)
     assert os.path.exists(path)
     assert "static" not in os.path.relpath(path, app.root_path).split(os.sep)
-    assert os.path.basename(path) != "test_note.txt"           # generated storage name
-    assert not os.stat(path).st_mode & stat.S_IWRITE            # stored read-only
+    assert os.path.basename(path) != "test_note.txt"           
+    assert not os.stat(path).st_mode & stat.S_IWRITE           
     with app.app_context():
         assert query_one("SELECT * FROM custody_events WHERE evidence_id = ? AND action = 'Evidence registered'",
                          (evidence["id"],))
-    # The file is served back only through the authorised route.
     assert client.get(f"/evidence/{evidence['id']}/file").data == CONTENT
 
 
@@ -52,7 +48,6 @@ def test_verify_match_then_mismatch_then_missing(app, client, login):
     client.post(f"/evidence/{evidence['id']}/verify")
     assert _latest_evidence(app)["integrity_status"] == "MATCH"
 
-    # Simulate the stored file changing on disk.
     path = _path(app, evidence)
     os.chmod(path, stat.S_IWRITE | stat.S_IREAD)
     with open(path, "ab") as handle:
@@ -60,7 +55,7 @@ def test_verify_match_then_mismatch_then_missing(app, client, login):
     client.post(f"/evidence/{evidence['id']}/verify")
     after = _latest_evidence(app)
     assert after["integrity_status"] == "MISMATCH"
-    assert after["original_sha256"] == evidence["original_sha256"]      # reference never replaced
+    assert after["original_sha256"] == evidence["original_sha256"]      
 
     os.remove(path)
     client.post(f"/evidence/{evidence['id']}/verify")
@@ -80,7 +75,7 @@ def test_tamper_demo_never_changes_original(app, client, login):
     assert "MISMATCH" in page
     with open(_path(app, evidence), "rb") as handle:
         assert handle.read() == CONTENT
-    assert os.listdir(app.config["TEMP_DIR"]) == []                   # temporary copy deleted
+    assert os.listdir(app.config["TEMP_DIR"]) == []                  
     client.post(f"/evidence/{evidence['id']}/verify")
     assert _latest_evidence(app)["integrity_status"] == "MATCH"
 
@@ -106,7 +101,7 @@ def test_custody_chain_detects_edited_history(app, client, login):
     login("amna")
     _upload(client)
     evidence = _latest_evidence(app)
-    client.get(f"/evidence/{evidence['id']}")                          # adds "Evidence viewed"
+    client.get(f"/evidence/{evidence['id']}")                         
     with app.app_context():
         assert verify_custody_chain(evidence["id"])["valid"]
         first = query_one("SELECT id FROM custody_events WHERE evidence_id = ? ORDER BY id LIMIT 1", (evidence["id"],))

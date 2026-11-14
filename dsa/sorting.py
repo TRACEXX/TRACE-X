@@ -1,24 +1,7 @@
-"""
-Merge sort (recursive, stable).
-
-Used to put TIMELINE EVENTS in chronological order and to rank search
-results.
-
-Idea (divide and conquer):
-  1. Split the list in half.
-  2. Recursively sort each half.
-  3. Merge the two sorted halves by repeatedly taking the smaller front item.
-
-Complexity: O(n log n) in every case. Stable: items with equal keys keep
-their original order, so two events with the same timestamp stay in the
-order they were recorded.
-"""
-
-
 def merge_sort(items, key=lambda item: item, reverse=False, steps=None):
     """Return a new sorted list. The input list is not changed."""
     items = list(items)
-    if len(items) <= 1:                       # base case of the recursion
+    if len(items) <= 1:                      
         return items
     middle = len(items) // 2
     left = merge_sort(items[:middle], key, reverse, steps)
@@ -44,7 +27,7 @@ def _merge(left, right, key, reverse):
         else:
             result.append(right[j])
             j += 1
-    result.extend(left[i:])                    # whatever is left over is already sorted
+    result.extend(left[i:])                    
     result.extend(right[j:])
     return result
 

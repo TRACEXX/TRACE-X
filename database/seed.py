@@ -1,32 +1,3 @@
-"""
-Case archive data for TRACE X.
-
-This runs automatically the first time the app starts (no database yet).
-To wipe everything and start again:
-
-    python -m database.seed --reset
-
-WARNING: --reset deletes the database, every uploaded evidence file and
-every generated report.
-
-Account passwords come from the environment (see .env.example):
-    TRACEX_ADMIN_USERNAME / TRACEX_ADMIN_PASSWORD
-    TRACEX_DETECTIVE_PASSWORD   (shared by the four detective accounts)
-
-Every case file below forms the starting archive of a new install (CASE-005 summarises
-public reporting of a real event and names no individual as a suspect).
-
-WHERE THE EVIDENCE FILES LIVE
-    static/assets/case-images/   every evidence file (photos, CCTV stills, chat
-                                 screenshots, PDFs, CSV logs, text reports)
-    static/assets/demo-videos/   videos (case7cctv.mp4 belongs to CASE-007)
-    static/assets/suspects/      suspect photos
-    static/assets/detectives/    detective photos
-The seed copies each evidence file into evidence_storage/<CASE-NNN>/, hashes it
-(SHA-256) and registers it. If a file is missing, that one item is skipped with
-a warning instead of crashing the deploy.
-"""
-
 import io
 import os
 import shutil

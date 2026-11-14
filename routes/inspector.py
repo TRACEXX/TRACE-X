@@ -1,15 +1,3 @@
-"""
-DSA Inspector.
-
-Runs one of the hand-written data structures or algorithms on REAL records
-from the database and shows: the input, the operation, the result, and the
-processing order. Nothing here is pre-recorded; every run executes the
-Python code in dsa/.
-
-The inspector only reads data. Operations that would normally change state
-(stack pop, queue dequeue) are performed on in-memory copies.
-"""
-
 from flask import Blueprint, render_template, request
 
 from database.db import placeholders, query_all

@@ -1,5 +1,3 @@
-"""Unit tests for the hand-written data structures and algorithms in dsa/."""
-
 import random
 
 import pytest
@@ -70,7 +68,7 @@ def test_hash_table_put_get_collisions_and_resize():
 
 def test_hash_table_handles_forced_collisions():
     table = HashTable(capacity=1000)
-    table.capacity = 1                      # every key in one bucket: pure chaining
+    table.capacity = 1                     
     table.buckets = [[]]
     for key in ("a", "b", "c"):
         table.buckets[0].append([key, key.upper()])
@@ -86,7 +84,6 @@ def test_tree_recursion():
         {"id": 13, "case_id": 2, "evidence_code": "EV-0013", "filename": "d.txt", "file_type": "text"},
     ]
     root = build_evidence_tree(cases, evidence)
-    # root + 2 cases + 3 folders + 4 files
     assert root.count() == 10
     assert root.height() == 3
     found = root.find(lambda n: n.kind == "evidence" and n.ref == 13)
@@ -98,9 +95,6 @@ def test_tree_recursion():
 
 
 def _sample_graph():
-    #   S1 - E1 - L1 - W1
-    #    \
-    #     E2 - D1          X (isolated)
     graph = Graph()
     for a, b in [("S1", "E1"), ("E1", "L1"), ("L1", "W1"), ("S1", "E2"), ("E2", "D1")]:
         graph.add_edge(a, b, {"id": a + b, "type": "link", "description": f"{a}-{b}"})
@@ -143,7 +137,7 @@ def test_binary_search():
     numbers = [f"CASE-{i:03d}" for i in range(1, 51)]
     steps = []
     assert binary_search(numbers, "CASE-037", steps=steps) == 36
-    assert len(steps) <= 6                    # log2(50) is about 5.6
+    assert len(steps) <= 6                    
     assert binary_search(numbers, "CASE-099") == -1
     assert binary_search([], "x") == -1
 

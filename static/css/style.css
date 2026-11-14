@@ -1,13 +1,7 @@
-/* =====================================================================
-   TRACE X stylesheet
-   One dark "evidence room" theme. Colours are defined once as variables
-   below; change them here to restyle the whole application.
-   ===================================================================== */
-
 :root {
     /* BLACK & DEEP CHARCOAL BASE */
     --bg: #08080a;
-    --surface: rgba(12, 12, 16, 0.88);   /* Dark frosted panel for high text contrast */
+    --surface: rgba(12, 12, 16, 0.88);   
     --surface-2: rgba(24, 24, 30, 0.92);
     --surface-3: rgba(36, 36, 44, 0.95);
 
@@ -15,12 +9,12 @@
     --line: #3f3f46;
     --line-strong: #71717a;
     --text: #f4f4f5;
-    --muted: #cbd5e1;                    /* Lightened silver-grey for high legibility */
+    --muted: #cbd5e1;                    
     --faint: #71717a;
 
     /* HIGH-CONTRAST CRIMSON RED ACCENT */
-    --accent: #ff3333;         /* Vibrant investigation red */
-    --accent-ink: #ffffff;     /* Crisp white text on red accents */
+    --accent: #ff3333;        
+    --accent-ink: #ffffff;     
     
     --info: #38bdf8;
     --ok: #34d399;
@@ -35,7 +29,6 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
     margin: 0;
-    /* Lightened gradient overlay (0.45 / 0.55) so the background image is bright and clearly visible */
     background-image: linear-gradient(rgba(8, 8, 10, 0.45), rgba(8, 8, 10, 0.55)), 
                       url('../assets/backgrounds/bg.jpg');
     background-size: cover;
@@ -52,7 +45,7 @@ h1, h2, h3, h4 {
     margin: 0 0 .5em; 
     font-weight: 650; 
     letter-spacing: -.01em; 
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95); /* Deep shadows separate text from bright background */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95); 
 }
 h1 { font-size: 1.7rem; }
 h2 { font-size: 1.25rem; }
@@ -69,7 +62,7 @@ img { max-width: 100%; }
     display: flex; align-items: center; gap: 1rem;
     padding: .7rem 1.25rem;
     background: var(--surface);
-    backdrop-filter: blur(12px);          /* Frosted glass effect */
+    backdrop-filter: blur(12px);          
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
     position: sticky; top: 0; z-index: 20;
@@ -88,7 +81,7 @@ img { max-width: 100%; }
 .shell { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: calc(100vh - 54px); }
 .sidebar {
     background: var(--surface);
-    backdrop-filter: blur(12px);          /* Frosted glass effect */
+    backdrop-filter: blur(12px);         
     -webkit-backdrop-filter: blur(12px);
     border-right: 1px solid var(--line);
     padding: 1rem .75rem;
@@ -104,7 +97,6 @@ img { max-width: 100%; }
 .sidebar .ico { width: 18px; text-align: center; color: var(--muted); font-family: var(--mono); font-size: .8rem; }
 .main { padding: 1.6rem 2rem 3rem; min-width: 0; }
 
-/* Enclosed frosted panel for page header and breadcrumbs */
 .page-head { 
     display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; justify-content: space-between; 
     margin-bottom: 1.4rem;
@@ -138,10 +130,9 @@ img { max-width: 100%; }
 .row { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
 .row.between { justify-content: space-between; }
 
-/* ------------------------------------------------------------ cards */
 .card {
     background: var(--surface);
-    backdrop-filter: blur(12px);          /* Frosted glass effect */
+    backdrop-filter: blur(12px);          
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -161,7 +152,6 @@ img { max-width: 100%; }
 .stat.warn .value { color: var(--bad); }
 .stat.good .value { color: var(--ok); }
 
-/* ----------------------------------------------------------- chips */
 .chip {
   display: inline-flex; align-items: center; gap: .35em;
   padding: .18em .6em; border-radius: 999px;
@@ -187,7 +177,6 @@ img { max-width: 100%; }
   padding: .3em .5em; border-radius: 4px; background: var(--surface-3); color: var(--muted);
 }
 
-/* ---------------------------------------------------------- buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .45em;
   padding: .55rem 1rem; border-radius: var(--radius-sm);
@@ -205,7 +194,6 @@ img { max-width: 100%; }
 .btn[disabled] { opacity: .5; cursor: not-allowed; }
 form.inline { display: inline; }
 
-/* ------------------------------------------------------------ forms */
 .field { display: flex; flex-direction: column; gap: .35rem; margin-bottom: .9rem; }
 .field label, .label { font-size: .82rem; color: var(--muted); font-weight: 600; }
 input[type=text], input[type=password], input[type=search], input[type=datetime-local], input[type=date],
@@ -231,7 +219,6 @@ details.drawer > summary::before { content: "+ "; font-family: var(--mono); }
 details.drawer[open] > summary::before { content: "- "; }
 details.drawer[open] > summary { margin-bottom: .9rem; }
 
-/* ------------------------------------------------------------ tables */
 .table-wrap { overflow-x: auto; }
 table.table { width: 100%; border-collapse: collapse; font-size: .9rem; }
 .table th, .table td { text-align: left; padding: .6rem .7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -251,7 +238,6 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 .hash.ok { border-color: rgba(63,191,143,.5); }
 .hash.bad { border-color: rgba(236,101,83,.6); }
 
-/* ------------------------------------------------------------ flash */
 .flashes { display: grid; gap: .5rem; margin-bottom: 1.2rem; }
 .flash { padding: .7rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); background: var(--surface-2); overflow-wrap: anywhere; }
 .flash.success { border-color: rgba(63,191,143,.5); }
@@ -260,7 +246,6 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 .flash.info { border-color: rgba(98,182,220,.5); }
 .notice { border-left: 3px solid var(--accent); padding: .6rem .9rem; background: var(--surface-2); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: .9rem; }
 
-/* ----------------------------------------------------------- avatar */
 .avatar {
   width: 40px; height: 40px; border-radius: 50%; flex: none;
   display: grid; place-items: center; overflow: hidden;
@@ -288,7 +273,6 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 }
 .avatar.square { border-radius: 10px; }
 
-/* ------------------------------------------------------------- tabs */
 .tabs { 
     display: flex; gap: .35rem; 
     border: 1px solid var(--line); 
@@ -314,7 +298,6 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 .tabs a:hover { color: #ffffff; text-decoration: none; background: var(--surface-2); }
 .tabs a.active { color: #ffffff; background: var(--surface-3); border-bottom-color: var(--accent); }
 
-/* ------------------------------------------------------------ lists */
 .list { list-style: none; margin: 0; padding: 0; }
 .list > li { padding: .65rem 0; border-bottom: 1px solid var(--line); }
 .list > li:last-child { border-bottom: 0; }
@@ -326,7 +309,6 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 .case-card .case-id { font: 700 .8rem/1 var(--mono); color: var(--accent); letter-spacing: .06em; }
 .case-card h3 { margin: .45rem 0 .35rem; }
 
-/* --------------------------------------------------------- timeline */
 .timeline { list-style: none; margin: 0; padding: 0 0 0 1.1rem; border-left: 2px solid var(--line-strong); }
 .timeline li { position: relative; padding: 0 0 1.1rem .9rem; }
 .timeline li::before {
@@ -341,7 +323,6 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 .timeline .what { font-weight: 600; }
 .timeline .src { font-size: .8rem; color: var(--muted); }
 
-/* ------------------------------------------------------------- tree */
 .tree, .tree ul { list-style: none; margin: 0; padding-left: 1.1rem; }
 .tree { padding-left: 0; font-size: .9rem; }
 .tree li { position: relative; padding: .18rem 0; }
@@ -349,7 +330,6 @@ dl.kv dd { margin: 0; overflow-wrap: anywhere; }
 .tree ul { border-left: 1px solid var(--line-strong); margin-left: .35rem; }
 .tree .node-kind { font: 600 .66rem/1 var(--mono); color: var(--muted); text-transform: uppercase; margin-right: .4rem; }
 
-/* ----------------------------------------------------------- viewer */
 .viewer {
   background: rgba(10, 10, 12, 0.85); border: 1px solid var(--line); border-radius: var(--radius);
   min-height: 260px; display: grid; place-items: center; overflow: hidden;
@@ -373,7 +353,6 @@ pre.text-view {
 .result-banner.MATCH { background: rgba(63,191,143,.12); color: var(--ok); border: 1px solid rgba(63,191,143,.5); }
 .result-banner.MISMATCH, .result-banner.FILE-MISSING { background: rgba(236,101,83,.12); color: var(--bad); border: 1px solid rgba(236,101,83,.55); }
 
-/* ------------------------------------------------------------ graph */
 .graph-wrap { position: relative; background: rgba(10, 10, 12, 0.85); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 #graph-svg { width: 100%; height: 560px; display: block; cursor: grab; }
 #graph-svg .edge { stroke: var(--line-strong); stroke-width: 1.5; }
@@ -407,7 +386,6 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
 .chat-form input { flex: 1; }
 .example-btn { display: block; width: 100%; text-align: left; margin-bottom: .4rem; white-space: normal; font-weight: 500; }
 
-/* ------------------------------------------------------- landing */
 .landing-hero { 
     padding: 4.5rem 0 3rem; 
 }
@@ -440,7 +418,6 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
 .feature-list .card p { color: var(--muted); font-size: .9rem; margin: 0; }
 .feature-list .k { font: 700 .72rem/1 var(--mono); color: var(--accent); margin-bottom: .7rem; display: block; }
 
-/* Enclosed panel for section titles on landing & portal pages */
 .section-title { 
     display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 1rem; 
     margin: 3.5rem 0 1.2rem; 
@@ -473,7 +450,6 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
 .bar { height: 6px; border-radius: 3px; background: var(--surface-3); overflow: hidden; }
 .bar > i { display: block; height: 100%; background: var(--accent); }
 
-/* ------------------------------------------------------- responsive */
 @media (max-width: 1100px) {
   .feature-list, .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .split, .ai-shell { grid-template-columns: minmax(0, 1fr); }
@@ -633,14 +609,13 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
    ===================================================================== */
 .tx-intro { display: none; }
 html.tx-intro-active .tx-intro {
-    --tx-fade: .67s;                      /* final fade length (keep equal to FADE_MS in intro.js) */
+    --tx-fade: .67s;                      
     display: block; position: fixed; inset: 0; z-index: 10000;
     width: 100%; height: 100vh; height: 100dvh;
     background: #000; color: var(--text); overflow: hidden;
     touch-action: none; overscroll-behavior: none;
     font-family: var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif);
 }
-/* red glow rising from below, silver light from above, dark vignette */
 .tx-intro::before {
     content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
     background:
@@ -648,7 +623,6 @@ html.tx-intro-active .tx-intro {
         radial-gradient(ellipse 60% 40% at 50% -10%, rgba(203, 213, 225, .10), transparent 70%),
         radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, .85) 100%);
 }
-/* slow surveillance-style scan band */
 .tx-intro::after {
     content: ""; position: absolute; left: 0; right: 0; top: -30vh; height: 28vh; pointer-events: none; z-index: 0;
     background: linear-gradient(to bottom, transparent, rgba(203, 213, 225, .05), rgba(255, 51, 51, .07), transparent);

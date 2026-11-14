@@ -16,9 +16,6 @@
   var height = svg.clientHeight || 560;
   svg.setAttribute("viewBox", "0 0 " + width + " " + height);
 
-  // ---------------------------------------------------------- layout
-  // Simple force-directed layout: nodes repel, edges pull. Deterministic start
-  // positions (a circle) so the drawing is the same every time.
   var nodes = data.nodes.map(function (n, i) {
     var angle = 2 * Math.PI * i / Math.max(data.nodes.length, 1);
     return { id: n.id, label: n.label, type: n.type,
@@ -35,7 +32,6 @@
       for (var j = i + 1; j < nodes.length; j++) {
         var a = nodes[i], b = nodes[j];
         var dx = a.x - b.x, dy = a.y - b.y;
-        // Horizontal distance counts for less, because labels are wide: nodes spread sideways more.
         var dist2 = Math.max(dx * dx * 0.35 + dy * dy, 400);
         var force = 9000 / dist2;
         var d = Math.sqrt(dist2);
@@ -51,7 +47,7 @@
       t.vx -= dx / d * pull; t.vy -= dy / d * pull;
     });
     nodes.forEach(function (n) {
-      n.vx += (width / 2 - n.x) * 0.002; n.vy += (height / 2 - n.y) * 0.002;   // gentle centring
+      n.vx += (width / 2 - n.x) * 0.002; n.vy += (height / 2 - n.y) * 0.002;   
       n.x += Math.max(-12, Math.min(12, n.vx)) * cooling;
       n.y += Math.max(-12, Math.min(12, n.vy)) * cooling;
       n.vx *= 0.55; n.vy *= 0.55;
@@ -60,7 +56,6 @@
     });
   }
 
-  // ---------------------------------------------------------- drawing
   function make(tag, attrs, parent) {
     var node = document.createElementNS(NS, tag);
     Object.keys(attrs).forEach(function (k) { node.setAttribute(k, attrs[k]); });
@@ -79,7 +74,6 @@
     n.group = make("g", { "class": "node" }, nodeLayer);
     n.circle = make("circle", { r: 11, fill: COLORS[n.type] || "#8d9aa8" }, n.group);
     n.orderText = make("text", { "class": "order", "text-anchor": "middle", dy: "3.5" }, n.group);
-    // Label centred under the dot keeps neighbouring labels from running into each other.
     n.text = make("text", { y: 25, "text-anchor": "middle" }, n.group);
     n.text.textContent = n.label.length > 24 ? n.label.slice(0, 23) + "…" : n.label;
     var title = make("title", {}, n.group);
@@ -96,7 +90,6 @@
   }
   render();
 
-  // Dragging nodes.
   var dragging = null;
   function svgPoint(event) {
     var rect = svg.getBoundingClientRect();
@@ -119,7 +112,6 @@
     });
   });
 
-  // ---------------------------------------------------------- controls
   var form = document.getElementById("traverse-form");
   var startSelect = document.getElementById("start");
   var targetSelect = document.getElementById("target");
