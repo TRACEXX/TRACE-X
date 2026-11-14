@@ -702,3 +702,30 @@ html.tx-intro-active .tx-intro {
 @media (prefers-reduced-motion: reduce) {
     .tx-intro::after, .tx-intro-enter, .tx-intro-stage > * { animation: none; }
 }
+/* Centers the System Administration header title */
+.admin-section-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Centers the single administrator card wrapper */
+.admin-card-center {
+  display: flex;
+  justify-content: center;
+}
+
+/* Restricts the admin card width so it stays neat when centered */
+.admin-single-card {
+  width: 100%;
+  max-width: 320px;
+}
+/* Centers a single grid item while retaining its original dimensions */
+.admin-card-centered {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100%;
+  max-width: 280px; /* Matches your detective card width */
+}
