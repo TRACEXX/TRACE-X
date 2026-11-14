@@ -67,7 +67,7 @@ What if your DSA algorithms could help investigate a case instead of just sortin
 | **Hash Table** | Finds evidence quickly by ID. |
 | **Tree** | Organizes evidence into folders and cases. |
 | **Graph + BFS / DFS** | Connects clues and explores relationships. |
-| **Merge Sort** | Puts investigation events in time order. |
+| **Merge Sort** | Puts the investigation events in time order. |
 | **Binary / Keyword Search** | Helps locate cases and useful records. |
 
 **Bonus:** The **DSA Inspector** shows how these algorithms work using investigation data.
