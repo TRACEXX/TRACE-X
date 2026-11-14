@@ -14,7 +14,7 @@
 
     /* HIGH-CONTRAST CRIMSON RED ACCENT */
     --accent: #ff3333;        
-    --accent-ink: #ffffff;     
+    --accent-ink: #ffffff;    
     
     --info: #38bdf8;
     --ok: #34d399;
@@ -484,19 +484,33 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
 }
 
 #ai-widget-toggle {
-    background: #e63946;
+    background: linear-gradient(135deg, rgba(24, 24, 30, 0.98), rgba(12, 12, 16, 0.98));
     color: #ffffff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 24px;
-    font-weight: 600;
+    border: 2px solid var(--line-strong);
+    width: 68px;
+    height: 68px;
+    padding: 0;
+    border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    transition: transform 0.2s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 #ai-widget-toggle:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px rgba(255, 51, 51, 0.3);
+}
+
+/* Style for the badge icon inside the circular button */
+#ai-widget-toggle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 #ai-widget-box.hidden {
@@ -609,7 +623,7 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
    ===================================================================== */
 .tx-intro { display: none; }
 html.tx-intro-active .tx-intro {
-    --tx-fade: .67s;                      
+    --tx-fade: .67s;                    
     display: block; position: fixed; inset: 0; z-index: 10000;
     width: 100%; height: 100vh; height: 100dvh;
     background: #000; color: var(--text); overflow: hidden;
