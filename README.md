@@ -16,8 +16,7 @@
 
 **[▶ Launch TRACE X — Live Demo](https://trace-x-ztm7.onrender.com/)**
 
-No installation needed. Open the website and sign in with a demo account below. The first visit may take a little longer if the Render service is asleep.
-
+No installation needed. Open the website and sign in with a demo account below. The first visit may take a little longer while the Render service wakes up. 
 ### 💻 Option 2 — Run it on your computer
 
 Clone or download the GitHub repository, open its folder in a terminal, and run:
