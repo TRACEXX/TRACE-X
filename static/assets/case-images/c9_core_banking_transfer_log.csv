@@ -1,0 +1,9 @@
+timestamp,batch,channel,source_account,destination,accounts_credited,amount_pkr,status
+2026-11-10 14:31:02,B-0001,API svc.payroll-sync,ZCB settlement suspense 1101,retail accounts (other banks via IBFT),1200,960000,SUCCESS
+2026-11-10 14:38:19,B-0017,API svc.payroll-sync,ZCB settlement suspense 1101,retail accounts (other banks via IBFT),9800,7840000,SUCCESS
+2026-11-10 14:46:44,B-0035,API svc.payroll-sync,ZCB settlement suspense 1101,retail accounts (other banks via IBFT),18400,14720000,SUCCESS
+2026-11-10 14:52:10,B-0048,API svc.payroll-sync,ZCB settlement suspense 1101,"SWIFT MT103 -> offshore corporate account (Pacific jurisdiction), ref 'CONSULTING Q4'",1,10000000,SUCCESS
+2026-11-10 14:58:31,B-0061,API svc.payroll-sync,ZCB settlement suspense 1101,retail accounts (other banks via IBFT),27300,21840000,SUCCESS
+2026-11-10 15:06:57,B-0079,API svc.payroll-sync,ZCB settlement suspense 1101,retail accounts (other banks via IBFT),24900,19920000,SUCCESS
+2026-11-10 15:14:20,B-0093,API svc.payroll-sync,ZCB settlement suspense 1101,retail accounts (other banks via IBFT),18400,14720000,SUCCESS - last batch
+2026-11-10 15:18:05,-,SOC,-,-,0,0,API credentials revoked; service svc.payroll-sync disabled

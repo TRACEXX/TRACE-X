@@ -305,6 +305,26 @@ CASES = [
         ),
         "team": [("hiba", "lead"), ("maryam", "investigator")],  # FIXED typo "investiagtor" (crashed the seed)
     },
+    # ------------------------------------------------ CASE-009: CYBERLOCK - PAN SHOP PLAN
+    {
+        "case_number": "CASE-009", "title": "CyberLock - Pan Shop Plan", "category": "Cyber Crime",
+        "status": "Under Investigation", "incident_date": "2026-11-10",
+        "location": "Zarghoon Commercial Bank, Shahrah-e-Faisal / Hasnain Pan Shop, Gulshan-e-Iqbal, Karachi",
+        "created_at": "2026-11-10 16:30:00",
+        "description": (
+            "On 10 November 2026, malware called 'CyberLock' was installed from a USB drive on a core-banking server at "
+            "Zarghoon Commercial Bank. In 43 minutes it moved Rs 90 million out of the bank: Rs 80 million in small "
+            "Rs 800 credits to about 100,000 ordinary accounts at other banks, and Rs 10 million by SWIFT to an offshore "
+            "account. The plan was made at Hasnain Pan Shop, which the crew called 'HQ'. Abdul Wahid had been fired from "
+            "the bank three weeks earlier after he asked for a Rs 5 lakh loan. Five men flew from Karachi to Bangkok on "
+            "fake passports the same evening. An anonymous post said 'Yeh latakrey 90 million'."
+        ),
+        "summary": (
+            "Rs 90M bank heist planned at a pan shop: a fired employee's revenge, malware on a USB, an inside man in the "
+            "server room, Rs 80M to the poor and Rs 10M offshore. Five suspects left for Thailand; whereabouts unknown."
+        ),
+        "team": [("amna", "lead"), ("warisha", "investigator")],
+    },
 ]
 
 SUSPECTS = {
@@ -479,6 +499,59 @@ SUSPECTS = {
          "notes": "No confirmed association with any offence.", 
          "photo_path": "assets/suspects/pablo.jpg" },
 
+    ],
+    # ------------------------------------------------ CASE-009
+    "CASE-009": [
+        {"key": "c9_hasnain", "name": "Syed Hasnain", "relationship": "Leader; owner of Hasnain Pan Shop ('HQ')",
+         "background": "Runs Hasnain Pan Shop in Block 13, Gulshan-e-Iqbal, next to a mobile repair shop and a general store. "
+                       "Usually seen in sunglasses and a maroon striped shirt. Created the WhatsApp group 'TABAHI LONDAY'.",
+         "motive": "Money, and the chance to 'give to the poor'. Recruited Abdul Wahid by leaving a card at his door: "
+                   "'Agar badla lena hai to aa jao'.",
+         "alibi": "None. Shop shut from 10 Nov; it has not reopened.",
+         "statements": "Not interviewed - left the country. Chai stall owner quotes him: \"badla lena hai apni bezti ka?\"",
+         "notes": "Arrived at Tayyab's flat minutes before the crew left on 10 Nov, carrying passports and tickets. "
+                  "Face match 94% at airport immigration (passport in the name 'Saeed Hamid'). Owes Bashir Chai Rs 500.",
+         "photo_path": "assets/suspects/hasnian.jpg"},
+
+        {"key": "c9_wahid", "name": "Abdul Wahid", "relationship": "Former Senior Operations Officer, Zarghoon Commercial Bank",
+         "background": "Worked at the bank for 10 years with no recorded absence. Fired on 20 Oct 2026 after an argument "
+                       "with the Branch Manager over a refused Rs 5 lakh personal loan.",
+         "motive": "Revenge for being fired and humiliated. He knew how the bank's settlement and payroll systems work.",
+         "alibi": "None for 10 Nov. Neighbours say his flat has been empty since that morning.",
+         "statements": "Termination letter: \"refused to sign\". Last message in the group: \"Main ready hoon\" (9 Nov, 23:31).",
+         "notes": "His own bank access was disabled on 20 Oct and never used again, so the insider work was done by someone "
+                  "else. The pan shop card was found in his flat. Face match 91% at immigration ('Wasim Ahmad').",
+         "photo_path": "assets/suspects/wahid.jpg"},
+
+        {"key": "c9_tayyab", "name": "Muhammad Tayyab", "relationship": "Tech specialist ('kaam wala aadmi')",
+         "background": "Self-taught programmer who works from his flat (12-C, Block 7, Gulshan-e-Iqbal). Always in a hoodie "
+                       "with headphones.",
+         "motive": "Share of the money; the challenge of the job.",
+         "alibi": "None. His flat was found empty on 11 Nov with the hard drives removed from both PCs.",
+         "statements": "To Daniyal, about the USB: \"tension na le\". The same phrase is in the malware's code comments.",
+         "notes": "The malware has the build path C:\\Users\\tayyab-pc\\. The bank traced the attacker's connection to his "
+                  "building; his router was reset at 15:27. Face match 96% at immigration ('Tariq Mehmood').",
+         "photo_path": "assets/suspects/tayyab.jpg"},
+
+        {"key": "c9_ali", "name": "Muhammad Ali", "relationship": "Fixer - 'the guy who knows a guy'",
+         "background": "Has contacts everywhere. Drives a white Suzuki Cultus (KHI-AL-2207). Usually in a blue sweatshirt "
+                       "with a yellow logo.",
+         "motive": "Share of the money.",
+         "alibi": "None. His car was left at the airport car park on 10 Nov and has not been collected.",
+         "statements": "Message to the group on 28 Oct: \"banda mil gaya. Daniyal Monday se bank join kar raha hai\".",
+         "notes": "Pushed the recruitment agency to place Daniyal at the bank without a background check. Searched public "
+                  "profiles (OSINT) to pick the 100,000 low-income accounts. Drove the crew to the airport. Face match 93%.",
+         "photo_path": "assets/suspects/ali.jpg"},
+
+        {"key": "c9_daniyal", "name": "Syed Daniyal", "relationship": "Inside man; IT support trainee at the bank (2-10 Nov)",
+         "background": "Talks his way out of any situation. Placed at the bank through TalentLink Staffing on a CV with a "
+                       "software house that cannot be found.",
+         "motive": "Share of the money.",
+         "alibi": "None. Left the bank by the emergency stairs at 15:11 on 10 Nov and never came back.",
+         "statements": "\"ho gaya\" (14:05). \"OYEEEE yahan to hara hori mach gayi hai, main nikal raha\" (15:09).",
+         "notes": "His badge T-0457 was refused at Server Room B at 13:38; he followed the systems administrator inside four "
+                  "minutes later. The malware was installed at 13:46. Face match 92% at immigration ('Danish Yousuf').",
+         "photo_path": "assets/suspects/daniyal.jpg"},
     ],
 }
 
@@ -733,6 +806,88 @@ def _evidence_specs():
         ("CASE-008", "c8_registry", "c8_company_registry_extract.pdf", _case_file("c8_company_registry_extract.pdf"),
          "Company registry: Knight Holdings (chess-knight logo), director 'P. Rodrigues', hidden owner via a Gulf trust.",
          "maryam", "2026-11-07 13:30:00"),
+
+        # ------------------------------------------------ CASE-009: CyberLock - Pan Shop Plan
+        # IMAGE (jpg)  - CCTV still, branch manager's office
+        ("CASE-009", "c9_office_cam", "c9_manager_office_cctv.jpg", _case_file("c9_manager_office_cctv.jpg"),
+         "Bank CAM-02, 20 Oct 10:21: Abdul Wahid in the Branch Manager's office; loan refused, he leaves at 10:24 slamming the door.",
+         "maryam", "2026-11-11 10:00:00"),
+        # PDF          - HR termination letter
+        ("CASE-009", "c9_termination", "c9_termination_letter.pdf", _case_file("c9_termination_letter.pdf"),
+         "Termination letter, 20 Oct 2026: Abdul Wahid fired after 10 years over the refused Rs 5 lakh loan; refused to sign.",
+         "maryam", "2026-11-11 10:10:00"),
+        # IMAGE (png)  - photographed card, front and back
+        ("CASE-009", "c9_card", "c9_pan_shop_card.png", _case_file("c9_pan_shop_card.png"),
+         "Hasnain Pan Shop card found at Wahid's flat. Back, handwritten: 'Agar badla lena hai to aa jao.'",
+         "amna", "2026-11-12 11:30:00"),
+        # IMAGE (jpg)  - CCTV still, street camera
+        ("CASE-009", "c9_shop_arrival", "c9_pan_shop_arrival_cctv.jpg", _case_file("c9_pan_shop_arrival_cctv.jpg"),
+         "Mobile repair shop camera, 21 Oct 18:08: man in a dark suit walks to Hasnain Pan Shop holding a small card.",
+         "amna", "2026-11-12 12:00:00"),
+        # IMAGE (jpg)  - CCTV still, street camera
+        ("CASE-009", "c9_shop_meeting", "c9_pan_shop_meeting_cctv.jpg", _case_file("c9_pan_shop_meeting_cctv.jpg"),
+         "Same camera, 21 Oct 19:41: the crew gathers beside the pan shop; shop owner in sunglasses and a striped shirt.",
+         "amna", "2026-11-12 12:05:00"),
+        # IMAGE (png)  - chat screenshot (recovered group)
+        ("CASE-009", "c9_group_chat", "c9_tabahi_londay_group_chat.png", _case_file("c9_tabahi_londay_group_chat.png"),
+         "Deleted WhatsApp group 'TABAHI LONDAY' recovered from Wahid's old phone: 'ajao', 'HQ. pan shop', 'USB ready'.",
+         "warisha", "2026-11-12 14:00:00"),
+        # IMAGE (png)  - photographed notebook page
+        ("CASE-009", "c9_khata", "c9_chai_udhaar_khata.png", _case_file("c9_chai_udhaar_khata.png"),
+         "Bashir Chai credit book: Hasnain owes Rs 500 for 5 chai on 21 Oct; '5 log - bank ki baatein, 100 million'.",
+         "amna", "2026-11-13 10:00:00"),
+        # PDF          - recruitment agency file
+        ("CASE-009", "c9_recruitment", "c9_recruitment_file_daniyal.pdf", _case_file("c9_recruitment_file_daniyal.pdf"),
+         "TalentLink placement file: Daniyal referred by Muhammad Ali, background check waived, started 2 Nov.",
+         "warisha", "2026-11-12 16:00:00"),
+        # CSV LOG      - server-room door badge log
+        ("CASE-009", "c9_badge", "c9_server_room_badge_log.csv", _case_file("c9_server_room_badge_log.csv"),
+         "Server Room B badge log, 10 Nov: Daniyal's badge refused 13:38, door held open 38 s at 13:42, fire-stair exit 15:11.",
+         "maryam", "2026-11-10 17:00:00"),
+        # TEXT (txt)   - malware analysis
+        ("CASE-009", "c9_malware", "c9_cyberlock_malware_analysis.txt", _case_file("c9_cyberlock_malware_analysis.txt"),
+         "'CyberLock' malware analysis: USB install 13:46, hijacked payments account, build path 'tayyab-pc'.",
+         "warisha", "2026-11-12 18:00:00"),
+        # IMAGE (png)  - chat screenshot
+        ("CASE-009", "c9_ho_gaya", "c9_ho_gaya_message.png", _case_file("c9_ho_gaya_message.png"),
+         "Chat between Daniyal and Ali, 10 Nov: 'ho gaya' at 14:05; 'yahan to hara hori mach gayi hai, main nikal raha' at 15:09.",
+         "warisha", "2026-11-11 15:00:00"),
+        # CSV LOG      - core-banking transfer batches
+        ("CASE-009", "c9_transfers", "c9_core_banking_transfer_log.csv", _case_file("c9_core_banking_transfer_log.csv"),
+         "Core-banking log: 7 batches 14:31-15:14 from suspense account 1101; Rs 10M SWIFT offshore at 14:52.",
+         "maryam", "2026-11-10 17:30:00"),
+        # CSV LOG      - first accounts credited
+        ("CASE-009", "c9_beneficiaries", "c9_first_beneficiary_accounts.csv", _case_file("c9_first_beneficiary_accounts.csv"),
+         "First accounts credited: domestic workers, drivers, teachers - Rs 800 each. Chosen from public profiles.",
+         "amna", "2026-11-11 11:00:00"),
+        # PDF          - bank SOC incident report
+        ("CASE-009", "c9_soc", "c9_soc_incident_report.pdf", _case_file("c9_soc_incident_report.pdf"),
+         "SOC incident report INC-2026-1110: connection traced to Block 7, Gulshan-e-Iqbal; router reset at 15:27.",
+         "maryam", "2026-11-11 12:00:00"),
+        # IMAGE (jpg)  - CCTV still, bank corridor
+        ("CASE-009", "c9_corridor_cam", "c9_bank_corridor_cctv.jpg", _case_file("c9_bank_corridor_cctv.jpg"),
+         "Bank CAM-12, 10 Nov 15:09: trainee badge T-0457 on the phone in the IT corridor, two minutes before leaving.",
+         "maryam", "2026-11-11 12:30:00"),
+        # TEXT (txt)   - search inventory
+        ("CASE-009", "c9_search", "c9_apartment_search_inventory.txt", _case_file("c9_apartment_search_inventory.txt"),
+         "Search of flat 12-C (Tayyab), 11 Nov: drives removed, burnt USB, 'Daniyal ke liye' note, '80 garibon / 10 apna'.",
+         "amna", "2026-11-11 12:00:00"),
+        # CSV LOG      - airport car park log
+        ("CASE-009", "c9_parking", "c9_airport_parking_log.csv", _case_file("c9_airport_parking_log.csv"),
+         "Airport car park: Ali's white Cultus enters 16:42 on 10 Nov; five people walk to departures; never collected.",
+         "warisha", "2026-11-13 10:30:00"),
+        # TEXT (txt)   - immigration departure record
+        ("CASE-009", "c9_immigration", "c9_immigration_departure_record.txt", _case_file("c9_immigration_departure_record.txt"),
+         "Flight SK-881 to Bangkok, 18:52: five passengers on stolen-batch passports; face matches 91-96% to the suspects.",
+         "maryam", "2026-11-12 17:00:00"),
+        # IMAGE (png)  - social media screenshot
+        ("CASE-009", "c9_post", "c9_anonymous_post.png", _case_file("c9_anonymous_post.png"),
+         "Anonymous post 19:05 on 10 Nov from in-flight Wi-Fi: 'Yeh latakrey 90 million'. Same words hidden in the malware.",
+         "warisha", "2026-11-10 19:30:00"),
+        # IMAGE (png)  - fund-flow chart
+        ("CASE-009", "c9_flow", "c9_fund_flow_chart.png", _case_file("c9_fund_flow_chart.png"),
+         "Fund flow: Rs 90M out - Rs 80M to about 100,000 small accounts, Rs 10M to an offshore company account.",
+         "maryam", "2026-11-13 12:00:00"),
     ]
 
 
@@ -918,6 +1073,32 @@ def seed_database():
         ("CASE-008", "Ali Ahmed", "Witness; nearby café employee",
          "Reports an unusual meeting near the port office; participants remain unidentified.",
          "2026-11-07 12:40:00", "admin", None, "c8_cam"),
+        # ------------------------------------------------ CASE-009
+        ("CASE-009", "Kamran Siddiqui", "Branch Manager, Zarghoon Commercial Bank",
+         "Wahid asked for a Rs 5 lakh loan on 20 Oct. When I said no he shouted, so I told him 'You are fired!' He slammed "
+         "the door. Ten years, and he never once argued before that day.",
+         "2026-11-11 10:30:00", "maryam", "c9_wahid", "c9_termination"),
+        ("CASE-009", "Bashir Ahmed", "Owner, Bashir Chai stall next to Hasnain Pan Shop",
+         "On 21 Oct five of them sat outside Hasnain's shop till late, talking about the bank and laughing about '100 million'. "
+         "I brought chai and asked for my 500 rupees - 'bhai woh 500 ka udhaar to waapis krdo'. Hasnain said later. "
+         "Then the shop closed and I never got it.",
+         "2026-11-13 10:00:00", "amna", "c9_hasnain", "c9_khata"),
+        ("CASE-009", "Imtiaz Hussain", "Systems administrator, Zarghoon Commercial Bank",
+         "At about 13:42 the new trainee Daniyal walked in behind me, saying the supervisor had sent him to check cables. He "
+         "was very friendly, so I did not stop him. He was in there about ten minutes.",
+         "2026-11-10 18:00:00", "maryam", "c9_daniyal", "c9_badge"),
+        ("CASE-009", "Saima Khalid", "SOC lead, Zarghoon Commercial Bank",
+         "The alert came at 15:02. We cut the payments account at 15:18 and traced the attacker's connection to a building in "
+         "Gulshan-e-Iqbal. By the time police reached it the router had been reset and the flat was empty.",
+         "2026-11-11 12:00:00", "maryam", "c9_tayyab", "c9_soc"),
+        ("CASE-009", "Farah Naz", "Account manager, TalentLink Staffing",
+         "Muhammad Ali called me three times in one week to place Daniyal at the bank and brought sweets to the office. "
+         "I waived the background check. I have not heard from either of them since 10 Nov.",
+         "2026-11-12 16:30:00", "warisha", "c9_ali", "c9_recruitment"),
+        ("CASE-009", "Gulzar Khan", "Neighbour, flat 12-D, Block 7",
+         "At about 15:40 a man in sunglasses and a striped shirt ran up the stairs with an envelope. Five minutes later five "
+         "men came down with two bags and drove off in a white car.",
+         "2026-11-11 11:00:00", "amna", "c9_hasnain", "c9_search"),
     ]
     witnesses = {}
     for case_number, name, contact, statement, recorded_at, by, suspect_key, evidence_key in witness_rows:
@@ -1057,6 +1238,39 @@ def seed_database():
          "Visitor V-117 leaves the records room; the ledger is missing from this time.", "Records-room badge log", "c8_access"),
         ("CASE-008", "2026-11-04 23:10:44", "Container released by override",
          "Container MSKU-48213 (4,200 kg overweight) released with the records clerk's override.", "Shipping manifest", "c8_manifest"),
+        # ------------------------------------------------ CASE-009
+        ("CASE-009", "2026-10-20 10:24:00", "Wahid fired",
+         "Abdul Wahid is fired after asking for a Rs 5 lakh loan and arguing with the Branch Manager.", "HR letter + office CCTV", "c9_termination"),
+        ("CASE-009", "2026-10-20 21:00:00", "Card left at Wahid's door",
+         "Hasnain Pan Shop card: 'Agar badla lena hai to aa jao.'", "Card found at Wahid's flat", "c9_card"),
+        ("CASE-009", "2026-10-21 18:14:00", "Group 'TABAHI LONDAY' created",
+         "Hasnain creates the group and sends 'ajao'. Meeting at the pan shop ('HQ') at 19:30.", "Recovered WhatsApp group", "c9_group_chat"),
+        ("CASE-009", "2026-10-21 19:41:00", "Crew meets at the pan shop",
+         "Five men gather beside Hasnain Pan Shop; the chai stall owner hears '100 million'.", "Street CCTV + chai stall book", "c9_shop_meeting"),
+        ("CASE-009", "2026-11-02 09:00:00", "Daniyal joins the bank",
+         "Daniyal starts as an IT support trainee, referred by Muhammad Ali; no background check.", "Recruitment file", "c9_recruitment"),
+        ("CASE-009", "2026-11-10 13:42:03", "Server room entered",
+         "Daniyal follows the systems administrator into Server Room B; door held open 38 seconds.", "Badge log", "c9_badge"),
+        ("CASE-009", "2026-11-10 13:46:00", "CyberLock installed",
+         "Malware installed on server CBS-APP-02 from a USB drive. 'ho gaya' sent at 14:05.", "Malware analysis", "c9_malware"),
+        ("CASE-009", "2026-11-10 14:31:02", "Transfers begin",
+         "First batch of Rs 800 credits to ordinary accounts at other banks.", "Core-banking log", "c9_transfers"),
+        ("CASE-009", "2026-11-10 14:52:10", "Rs 10M sent offshore",
+         "One SWIFT transfer of Rs 10M to an offshore company account, reference 'CONSULTING Q4'.", "Core-banking log", "c9_transfers"),
+        ("CASE-009", "2026-11-10 15:11:48", "Daniyal escapes",
+         "Leaves by the emergency stairs after 'yahan to hara hori mach gayi hai'.", "Badge log + chat", "c9_ho_gaya"),
+        ("CASE-009", "2026-11-10 15:18:05", "Attack contained",
+         "Payments account disabled. Rs 90M gone in 43 minutes.", "SOC incident report", "c9_soc"),
+        ("CASE-009", "2026-11-10 15:27:00", "Router reset at Tayyab's flat",
+         "The traced connection drops; police are still on the way.", "SOC incident report", "c9_soc"),
+        ("CASE-009", "2026-11-10 15:45:00", "Crew leaves the flat",
+         "Hasnain arrives with passports and tickets; five men leave in a white car.", "Neighbour statement", "c9_search"),
+        ("CASE-009", "2026-11-10 16:42:18", "Car enters airport car park",
+         "Ali's white Suzuki Cultus enters car park P2; it is never collected.", "Airport parking log", "c9_parking"),
+        ("CASE-009", "2026-11-10 18:52:00", "Flight to Bangkok departs",
+         "Five passengers on fake passports leave on SK-881.", "Immigration record", "c9_immigration"),
+        ("CASE-009", "2026-11-10 19:05:00", "'Yeh latakrey 90 million'",
+         "Anonymous post sent from in-flight Wi-Fi.", "Archived post", "c9_post"),
     ]
     events = {}
     for case_number, when, kind, text, source, evidence_key in timeline_rows:
@@ -1236,6 +1450,39 @@ def seed_database():
          "Weighbridge 22,600 kg vs declared 18,400 kg.", "hiba"),
         ("CASE-008", node("evidence", "c8_tip"), node("device", "Container MSKU-48213"), "names",
          "Caller: 'MSKU-48213 isn't machinery. Check the weight.'", "admin"),
+        # ------------------------------------------------ CASE-009
+        ("CASE-009", node("suspect", "c9_hasnain"), node("suspect", "c9_wahid"), "recruited",
+         "Card 'Agar badla lena hai to aa jao' left at Wahid's door; Wahid came to the pan shop next day.", "amna"),
+        ("CASE-009", node("suspect", "c9_hasnain"), node("location", "Hasnain Pan Shop ('HQ'), Gulshan-e-Iqbal"), "owns / meeting place",
+         "Group message 'HQ. pan shop. 7:30'; street CCTV shows the crew gathering there.", "amna"),
+        ("CASE-009", node("suspect", "c9_hasnain"), node("device", "WhatsApp group 'TABAHI LONDAY'"), "created",
+         "Recovered group: 'Hasnain created group' 21 Oct 18:14, first message 'ajao'.", "warisha"),
+        ("CASE-009", node("suspect", "c9_wahid"), node("device", "WhatsApp group 'TABAHI LONDAY'"), "member",
+         "Group recovered from his old phone; last message 'Main ready hoon'.", "warisha"),
+        ("CASE-009", node("suspect", "c9_tayyab"), node("device", "USB drive with black padlock sticker"), "built",
+         "Group message 'USB ready'; burnt USB with the same sticker found in his sink.", "warisha"),
+        ("CASE-009", node("suspect", "c9_daniyal"), node("device", "USB drive with black padlock sticker"), "installed",
+         "Inside Server Room B 13:42-13:51; malware file created 13:46.", "maryam"),
+        ("CASE-009", node("device", "USB drive with black padlock sticker"), node("device", "Server CBS-APP-02"), "infected",
+         "Malware analysis: CyberLock installed from USB at 13:46.", "warisha"),
+        ("CASE-009", node("evidence", "c9_malware"), node("suspect", "c9_tayyab"), "build path names",
+         "Build path C:\\Users\\tayyab-pc\\ and the phrase 'tension na le' in the code.", "warisha"),
+        ("CASE-009", node("suspect", "c9_ali"), node("suspect", "c9_daniyal"), "got him hired",
+         "Recruitment file: Ali is the referee and pushed for the placement without a background check.", "warisha"),
+        ("CASE-009", node("witness", "imtiaz"), node("suspect", "c9_daniyal"), "let him into server room",
+         "Daniyal followed him in at 13:42 saying he was sent to check cables.", "maryam"),
+        ("CASE-009", node("evidence", "c9_soc"), node("location", "Flat 12-C, Block 7, Gulshan-e-Iqbal"), "traced connection to",
+         "The attacker's connection came from this building; router reset at 15:27.", "maryam"),
+        ("CASE-009", node("suspect", "c9_tayyab"), node("location", "Flat 12-C, Block 7, Gulshan-e-Iqbal"), "tenant of",
+         "Search inventory: his PCs with the hard drives removed.", "amna"),
+        ("CASE-009", node("evidence", "c9_transfers"), node("device", "Offshore company account (ref 'CONSULTING Q4')"), "Rs 10M sent to",
+         "SWIFT transfer at 14:52; not recovered.", "maryam"),
+        ("CASE-009", node("suspect", "c9_ali"), node("device", "White Suzuki Cultus KHI-AL-2207"), "owner / driver",
+         "Left at the airport car park on 10 Nov and never collected.", "warisha"),
+        ("CASE-009", node("suspect", "c9_hasnain"), node("location", "Bangkok, Thailand"), "fled to",
+         "Immigration record: five passengers on SK-881 on fake passports, face matches 91-96%.", "maryam"),
+        ("CASE-009", node("witness", "bashir"), node("suspect", "c9_hasnain"), "owed Rs 500 by",
+         "Chai stall credit book: 5 chai on 21 Oct, never paid.", "amna"),
     ]
     rel_rows = [row for row in rel_rows if row[1] and row[2]]     # drop links to anything that was not created
     for case_number, source, target, kind, text, by in rel_rows:
@@ -1314,6 +1561,17 @@ def seed_database():
         ("CASE-008", "Open case", "All entries are preliminary and remain editable; no culprit or confirmed allegation is established.", "admin"),
         ("CASE-008", "Is the witness involved?", "Abdul Wahid, called as a witness, was inside the records room during the visit "
          "and issued the release override for the overweight container at 23:10. Treat his account with care.", "hiba"),
+        ("CASE-009", "Who did what", "Hasnain - leader, the pan shop is HQ, arranged passports and tickets. Wahid - the motive, "
+         "fired after 10 years. Tayyab - built CyberLock and ran the transfers. Ali - got Daniyal hired, picked the 100,000 "
+         "accounts, drove to the airport. Daniyal - put the USB into the server.", "maryam"),
+        ("CASE-009", "Where the money went", "Rs 80M in Rs 800 credits to about 100,000 ordinary accounts (domestic workers, "
+         "drivers, teachers). Rs 10M to one offshore company account. Recovering the small credits is a legal question.", "maryam"),
+        ("CASE-009", "Suspects abroad", "All five left for Bangkok on 10 Nov on stolen-batch passports and left the airport by "
+         "taxi. Thai liaison informed. Ask for an Interpol notice for each.", "warisha"),
+        ("CASE-009", "Why it worked", "No background check on an agency trainee; tailgating into the server room; open USB "
+         "ports; no second approval on large batches.", "amna"),
+        ("CASE-009", "Open questions", "Who owns the offshore account? Where did the stolen passports come from? Who is "
+         "'the guy Ali knows' at the agency? Did Hasnain plan this before he met Wahid?", "warisha"),
     ]
     for case_number, title, content, by in additional_notes:
         db.execute(
@@ -1325,7 +1583,8 @@ def seed_database():
     # ---- pending analysis tasks so the Queue has something to process (CSV logs -> timeline)
     for case_number, key, requested_by, when in (("CASE-001", "access", "hiba", "2026-03-14 12:35:00"),
                                                  ("CASE-004", "c4_gps", "hiba", "2026-03-17 13:15:00"),
-                                                 ("CASE-008", "c8_access", "hiba", "2026-11-07 13:15:00")):
+                                                 ("CASE-008", "c8_access", "hiba", "2026-11-07 13:15:00"),
+                                                 ("CASE-009", "c9_badge", "amna", "2026-11-10 17:10:00")):
         if key in evidence:
             db.execute("INSERT INTO analysis_tasks (case_id, evidence_id, task_type, requested_by, created_at) "
                        "VALUES (?, ?, 'import_csv_timeline', ?, ?)",
@@ -1337,12 +1596,14 @@ def seed_database():
             ("scene", "hiba", "Evidence viewed", "Reviewed scene photograph", "2026-03-14 11:02:00"),
             ("access", "warisha", "Evidence viewed", "Reviewed access log", "2026-03-14 13:05:00"),
             ("c1_chat", "warisha", "Evidence viewed", "Compared recovered chat with the access log", "2026-03-18 16:10:00"),
-            ("c4_chat", "hiba", "Evidence viewed", "Reviewed burner-phone chat", "2026-03-15 20:05:00")):
+            ("c4_chat", "hiba", "Evidence viewed", "Reviewed burner-phone chat", "2026-03-15 20:05:00"),
+            ("c9_transfers", "maryam", "Evidence viewed", "Matched transfer batches with the badge log", "2026-11-11 09:30:00")):
         if key in evidence:
             record_custody_event(evidence[key], users[username]["id"], action, text, timestamp=when)
     for key, username in (("scene", "warisha"), ("autopsy", "warisha"), ("transcript", "warisha"),
                           ("authlog", "amna"), ("phish", "amna"), ("report", "maryam"),
-                          ("c4_lab", "hiba"), ("c6_smiley", "warisha"), ("c7_video", "amna")):
+                          ("c4_lab", "hiba"), ("c6_smiley", "warisha"), ("c7_video", "amna"),
+                          ("c9_badge", "maryam")):
         if key in evidence:
             verify_evidence(get_db().execute("SELECT * FROM evidence WHERE id = ?", (evidence[key],)).fetchone(),
                             users[username]["id"])

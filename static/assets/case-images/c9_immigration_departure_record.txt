@@ -1,0 +1,16 @@
+IMMIGRATION DEPARTURE RECORD - EXTRACT
+Airport   : Jinnah International Airport, Karachi          Requested: 12 Nov 2026
+Flight    : SK-881 Karachi -> Bangkok, scheduled 18:40, departed 18:52 on 10 Nov 2026
+
+Five passengers checked in together at 17:31 at counter 14 and passed immigration at 17:58-18:03:
+
+  SEAT   NAME ON PASSPORT        PASSPORT NO.   FACE-MATCH RESULT (airport camera vs case photos)
+  23A    Saeed Hamid             AX*****41      Syed Hasnain - 94%
+  23B    Wasim Ahmad             AX*****58      Abdul Wahid - 91%
+  23C    Tariq Mehmood           AX*****63      Muhammad Tayyab - 96%
+  24A    Adnan Latif             AX*****77      Muhammad Ali - 93%
+  24B    Danish Yousuf           AX*****82      Syed Daniyal - 92%
+
+All five passport numbers belong to a batch reported stolen from a printing contractor in 2025.
+Tickets bought on 9 Nov 2026 at 23:12 in cash from a travel agent in Saddar.
+Thai liaison officer informed 12 Nov; all five left Bangkok airport by taxi; whereabouts unknown.

@@ -1,0 +1,8 @@
+timestamp,door,badge,holder,result
+2026-11-10 13:36:12,Floor 3 - IT corridor,T-0457,Syed Daniyal (IT support trainee),GRANTED
+2026-11-10 13:38:40,Server Room B,T-0457,Syed Daniyal (IT support trainee),DENIED - no server-room clearance
+2026-11-10 13:41:55,Server Room B,E-1102,Imtiaz Hussain (systems administrator),GRANTED
+2026-11-10 13:42:03,Server Room B,-,-,DOOR HELD OPEN 38 s (tailgating alarm - auto-cleared)
+2026-11-10 13:51:27,Server Room B,-,-,EXIT BUTTON PRESSED (no badge)
+2026-11-10 14:05:10,Floor 3 - IT corridor,T-0457,Syed Daniyal (IT support trainee),GRANTED
+2026-11-10 15:11:48,Floor 3 - fire stairs,T-0457,Syed Daniyal (IT support trainee),EXIT - emergency stair door

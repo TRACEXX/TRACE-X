@@ -1,0 +1,17 @@
+SEARCH INVENTORY - FLAT 12-C, BLOCK 7, GULSHAN-E-IQBAL (tenant: Muhammad Tayyab)
+Date/time : 2026-11-11, 09:10 - 11:40          Authority: search warrant SW-CCU-1271
+Status    : premises EMPTY on arrival; front door unlocked; occupants gone
+
+ITEM   DESCRIPTION                                                        FOUND
+TY-1   Two desktop PCs - hard drives removed, cases left open            desk, main room
+TY-2   Router - factory reset at 15:27 on 10 Nov (router event log)       shelf
+TY-3   Burnt USB drive with a black padlock sticker (melted)              kitchen sink
+TY-4   Torn printed sheet: "Daniyal ke liye - USB lagao, 5 min wait,      waste bin
+       nikal jao" (CyberLock installation note)
+TY-5   Five empty prepaid SIM packets                                     waste bin
+TY-6   Five paper cups from "Bashir Chai" stall                           table
+TY-7   Printed boarding-pass template / flight timing note "18:40 BKK"   floor, near door
+TY-8   Wall whiteboard, wiped - faint words still visible: "100,000 a/c", "80 garibon / 10 apna", "Thailand"
+
+Neighbour (flat 12-D) states five men left in a hurry at about 15:40 on 10 Nov carrying two bags, and that a
+"man in sunglasses and a striped shirt" arrived just before they left.
