@@ -69,7 +69,7 @@ What if your DSA algorithms could help investigate a case instead of just sortin
 | **Merge Sort** | Puts the investigation events in time order. |
 | **Binary / Keyword Search** | Helps locate cases and useful records. |
 
-**Bonus:** The **DSA Inspector** shows how these algorithms work using investigation data.
+
 
 ## 🧩 Follow the Clues
 
