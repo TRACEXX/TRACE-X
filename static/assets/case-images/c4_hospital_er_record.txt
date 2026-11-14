@@ -1,5 +1,5 @@
-EMERGENCY DEPARTMENT RECORD - EXTRACT (FICTIONAL TRAINING RECORD)
-Hospital   : Civil Hospital Karachi (fictional record)          Date: 13 March 2026, 03:40
+EMERGENCY DEPARTMENT RECORD - EXTRACT 
+Hospital   : Civil Hospital Karachi           Date: 13 March 2026, 03:40
 Patient    : male, 22 (name withheld), brought in by friends from "an after-party at Neon Wharf Lounge"
 Condition  : stimulant overdose; agitation, raised heart rate. Stabilised by 06:15. Discharged 14 March.
 Property   : one small packet stamped with an indigo crescent, partially used, handed to police at 04:05

@@ -1,5 +1,3 @@
-"""TRACE AI page and the JSON endpoint the chat panel calls."""
-
 from flask import Blueprint, jsonify, render_template, request
 
 from ai.assistant import answer_question

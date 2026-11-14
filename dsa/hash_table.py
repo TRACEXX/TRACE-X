@@ -1,21 +1,3 @@
-"""
-Hash table with separate chaining.
-
-Used to INDEX EVIDENCE by evidence ID (e.g. 'EV-0007') so a record can be
-found without scanning every evidence row.
-
-How it works:
-  1. A hash function turns the key into a number.
-  2. number % capacity picks a bucket.
-  3. Each bucket is a list of [key, value] pairs. Two keys that land in the
-     same bucket (a COLLISION) are simply stored side by side in that list.
-  4. When the table gets more than 75% full it doubles in size (resize) so the
-     chains stay short.
-
-Average complexity: put O(1), get O(1). Worst case (all keys collide) O(n).
-"""
-
-
 class HashTable:
     LOAD_FACTOR_LIMIT = 0.75
 
@@ -37,14 +19,13 @@ class HashTable:
         return self._hash(key) % self.capacity
 
     def put(self, key, value):
-        """Insert or update a key. Returns the bucket index used."""
         index = self.bucket_index(key)
         bucket = self.buckets[index]
         for pair in bucket:
-            if pair[0] == key:          # key already present: update it
+            if pair[0] == key:         
                 pair[1] = value
                 return index
-        if bucket:                      # bucket already holds other keys
+        if bucket:                      
             self.collisions += 1
         bucket.append([key, value])
         self.count += 1
@@ -58,8 +39,6 @@ class HashTable:
         return default if value is None else value
 
     def get_with_trace(self, key):
-        """Look up a key and also report which bucket was searched and how
-        many comparisons were needed (shown on the DSA Inspector page)."""
         index = self.bucket_index(key)
         comparisons = 0
         for stored_key, value in self.buckets[index]:
@@ -79,7 +58,6 @@ class HashTable:
         return False
 
     def _resize(self):
-        """Double the capacity and re-insert every pair into the new buckets."""
         old_pairs = self.items()
         self.capacity *= 2
         self.buckets = [[] for _ in range(self.capacity)]

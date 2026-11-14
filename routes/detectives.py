@@ -1,10 +1,3 @@
-"""
-Detective portal, case browser and global search.
-
-There is ONE portal template. It is filled with the logged-in detective's own
-data, so the four detectives share the same code.
-"""
-
 import re
 
 from flask import Blueprint, redirect, render_template, request, url_for

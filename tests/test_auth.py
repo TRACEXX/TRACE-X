@@ -48,7 +48,7 @@ def test_wrong_password_is_rejected_and_logged(app, client):
     assert "Invalid username or password" in response.get_data(as_text=True)
     with app.app_context():
         assert query_one("SELECT * FROM activity_logs WHERE action = 'Failed login attempt'") is not None
-    assert client.get("/portal").status_code == 302      # still not logged in
+    assert client.get("/portal").status_code == 302     
 
 
 def test_protected_routes_redirect_to_login(client):
@@ -70,7 +70,7 @@ def test_disabled_account_cannot_log_in(app, client, login):
         from database.db import execute
         execute("UPDATE users SET is_active = 0 WHERE username = 'warisha'")
     response = login("warisha")
-    assert response.status_code == 200          # login page re-rendered, no redirect
+    assert response.status_code == 200        
 
 
 def test_csrf_token_required_for_posts(tmp_path):
@@ -78,7 +78,7 @@ def test_csrf_token_required_for_posts(tmp_path):
     client = app.test_client()
     response = client.post("/login", data={"username": "admin", "password": ADMIN_PASSWORD})
     assert response.status_code == 400
-    client.get("/login")                          # creates the session token
+    client.get("/login")                          
     with client.session_transaction() as session:
         token = session["csrf_token"]
     response = client.post("/login", data={"username": "admin", "password": ADMIN_PASSWORD, "csrf_token": token})

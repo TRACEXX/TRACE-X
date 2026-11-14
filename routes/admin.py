@@ -1,11 +1,3 @@
-"""
-Administrator dashboard and management functions.
-
-Every route here is protected by @admin_required. Case assignments are rows
-in the case_assignments table, so giving a detective a case is a database
-change, not an edit to any detective page.
-"""
-
 from flask import Blueprint, abort, flash, redirect, render_template, request, url_for
 from werkzeug.security import generate_password_hash
 

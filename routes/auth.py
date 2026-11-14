@@ -1,16 +1,3 @@
-"""
-Landing page, login / logout, and the permission helpers used by every
-other blueprint.
-
-SECURITY RULES
-  * Passwords are checked on the server with Werkzeug's check_password_hash.
-    Only the hash is stored in SQLite; nothing about passwords reaches HTML/JS.
-  * The logged-in user's id lives in the signed Flask session cookie.
-  * @login_required / @admin_required protect routes.
-  * require_case_access() is called by every route that touches case data,
-    so changing a URL by hand cannot open a case the user is not assigned to.
-"""
-
 from functools import wraps
 
 from flask import (Blueprint, abort, flash, g, redirect, render_template, request,

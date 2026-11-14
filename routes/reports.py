@@ -1,5 +1,3 @@
-"""Report preview, PDF generation and authorised download."""
-
 import os
 
 from flask import Blueprint, abort, current_app, redirect, render_template, request, send_file, url_for

@@ -1,22 +1,3 @@
-"""
-LLM provider adapters for TRACE AI.
-
-Choose a provider with the AI_PROVIDER environment variable (see .env.example):
-
-    none        - no LLM. TRACE AI still answers from the database.
-    groq        - Groq cloud API (free tier available), OpenAI-compatible
-    openrouter  - OpenRouter (has free models), OpenAI-compatible
-    openai      - OpenAI API
-    gemini      - Google Gemini API (free tier available)
-    ollama      - a local model through Ollama (no data leaves the computer)
-
-API keys are read from the environment on the server only. They are never
-sent to the browser and never written to logs.
-
-Only Python's standard library (urllib) is used for HTTP, so no extra
-packages are needed.
-"""
-
 import json
 import urllib.error
 import urllib.request

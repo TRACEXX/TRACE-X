@@ -1,20 +1,3 @@
-"""
-Queue (First In, First Out), built from linked nodes.
-
-Used for EVIDENCE-ANALYSIS TASKS (verify a hash, import a CSV log into the
-timeline, extract file metadata). Tasks are processed in the order they were
-requested: the oldest request is always handled first.
-
-    enqueue(A), enqueue(B), enqueue(C)
-    front -> A -> B -> C <- rear
-    dequeue() returns A
-
-The BFS algorithm in dsa/graph.py also uses this queue.
-
-Complexity: enqueue O(1), dequeue O(1)
-"""
-
-
 class _QueueNode:
     def __init__(self, data):
         self.data = data
@@ -44,7 +27,7 @@ class Queue:
             raise IndexError("dequeue from an empty queue")
         item = self._front.data
         self._front = self._front.next
-        if self._front is None:        # queue became empty
+        if self._front is None:        
             self._rear = None
         self._size -= 1
         return item
@@ -56,7 +39,6 @@ class Queue:
         return self._front is None
 
     def to_list(self):
-        """Pending items from front to rear."""
         items = []
         node = self._front
         while node is not None:

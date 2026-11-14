@@ -1,6 +1,5 @@
 -- TRACE X database schema (SQLite)
 -- Foreign keys are switched on for every connection in database/db.py.
--- Timestamps are stored as text in the form 'YYYY-MM-DD HH:MM:SS'.
 
 PRAGMA foreign_keys = ON;
 

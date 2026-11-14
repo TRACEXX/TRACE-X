@@ -1,12 +1,3 @@
-"""
-Turns a detective's question into (1) an intent and (2) a structured context
-containing ONLY records the user is authorised to see.
-
-The LLM never touches the database. Python decides what to look up using
-fixed functions (no SQL is ever generated from the user's message), then
-hands the LLM a JSON snapshot of those records.
-"""
-
 import json
 import re
 

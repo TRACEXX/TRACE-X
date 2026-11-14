@@ -1,23 +1,3 @@
-"""
-TRACE AI - the investigation assistant.
-
-Workflow for every question (see answer_question):
-  1. The route has already checked the session.
-  2. detect_intent() decides what kind of question it is.
-  3. The case / detective / suspect named in the question is identified.
-  4. Records are read from SQLite through fixed functions, limited to the
-     cases this user may access (accessible_case_ids).
-  5. DSA helpers do the work: merge sort for the timeline, the hash table
-     for evidence lookups, linked-list custody chains.
-  6. A deterministic answer is ALWAYS built from those records, so TRACE AI
-     works with no LLM at all.
-  7. If an LLM is configured, it receives only that authorised context and
-     writes an explanation, which the UI labels as AI-generated.
-
-TRACE AI never writes to case records. The only side effect is that
-"generate a report" creates a PDF file, the same as the Reports button.
-"""
-
 from flask import url_for
 
 from ai.context_builder import (SYSTEM_PROMPT, build_llm_prompt, deterministic_summary, detect_intent,

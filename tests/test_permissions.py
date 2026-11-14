@@ -4,10 +4,6 @@ import io
 
 from database.db import query_one
 
-# Seed data: CASE-001 lead Amna + investigator Hiba; CASE-002 lead Warisha;
-# CASE-003 lead Hiba + viewer Maryam; CASE-004 unassigned.
-
-
 def _first_evidence_id(app, case_number):
     with app.app_context():
         return query_one("SELECT e.id FROM evidence e JOIN cases c ON c.id = e.case_id "
@@ -46,7 +42,7 @@ def test_shared_viewer_can_read_but_not_change(app, client, login):
     assert upload.status_code == 403
     assert client.post("/cases/CASE-003/notes", data={"content": "hi"}).status_code == 403
     assert client.post("/cases/CASE-003/suspects", data={"name": "X"}).status_code == 403
-    # Viewers may still verify integrity (it never changes the evidence).
+    
     evidence_id = _first_evidence_id(app, "CASE-003")
     assert client.post(f"/evidence/{evidence_id}/verify").status_code == 302
 

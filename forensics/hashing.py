@@ -1,11 +1,3 @@
-"""
-SHA-256 helpers built on Python's hashlib.
-
-A SHA-256 hash is a 64-character fingerprint of a file's exact bytes.
-Changing even one byte produces a completely different fingerprint, which is
-how TRACE X detects that a stored evidence file has changed.
-"""
-
 import hashlib
 
 CHUNK_SIZE = 64 * 1024   # read files 64 KB at a time so large videos do not fill memory

@@ -1,21 +1,3 @@
-"""
-Singly linked list.
-
-Used for the evidence CHAIN OF CUSTODY: every custody event (registered,
-viewed, verified, downloaded, transferred ...) is one node, and each node
-points to the event that happened after it. Reading the list from head to
-tail gives the handling history in order.
-
-    head -> [Registered] -> [Viewed] -> [Verified] -> None
-                                              ^ tail
-
-Complexity:
-    append   O(1)  (we keep a tail pointer)
-    traverse O(n)
-    search   O(n)  (linear search, the list is not indexed)
-"""
-
-
 class Node:
     def __init__(self, data):
         self.data = data
@@ -31,11 +13,11 @@ class LinkedList:
     def append(self, data):
         """Add a new event at the end of the chain."""
         node = Node(data)
-        if self.head is None:          # empty list: node is both head and tail
+        if self.head is None:         
             self.head = node
             self.tail = node
         else:
-            self.tail.next = node      # link the old last node to the new one
+            self.tail.next = node      
             self.tail = node
         self.size += 1
         return node

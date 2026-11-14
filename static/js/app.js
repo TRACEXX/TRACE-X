@@ -1,12 +1,8 @@
-/* TRACE X - small page behaviours shared by every page.
-   The server does all real work; this file only improves the interface. */
-
 (function () {
   "use strict";
 
   var csrfMeta = document.querySelector('meta[name="csrf-token"]');
 
-  // Shared helper for fetch() calls to Flask. Sends the CSRF token header.
   window.TRACEX = {
     postJSON: function (url, data) {
       return fetch(url, {
@@ -26,14 +22,12 @@
     }
   };
 
-  // Ask before destructive form submissions: <form data-confirm="Are you sure?">
   document.querySelectorAll("form[data-confirm]").forEach(function (form) {
     form.addEventListener("submit", function (event) {
       if (!window.confirm(form.getAttribute("data-confirm"))) { event.preventDefault(); }
     });
   });
 
-  // Click a hash to copy it.
   document.querySelectorAll("[data-copy]").forEach(function (el) {
     el.style.cursor = "copy";
     el.addEventListener("click", function () {
@@ -46,12 +40,9 @@
     });
   });
 
-  // <select data-autosubmit> submits its form when changed.
   document.querySelectorAll("select[data-autosubmit]").forEach(function (select) {
     select.addEventListener("change", function () { select.form.submit(); });
   });
-
-  // Show CCTV fields only when a video file is chosen.
   document.querySelectorAll("input[data-video-toggle]").forEach(function (input) {
     var target = document.querySelector(input.getAttribute("data-video-toggle"));
     if (!target) { return; }
@@ -64,7 +55,6 @@
     update();
   });
 
-  // Relationship form: reveal "new location/device" fields.
   document.querySelectorAll("select[data-new-toggle]").forEach(function (select) {
     var target = document.querySelector(select.getAttribute("data-new-toggle"));
     if (!target) { return; }
@@ -148,7 +138,6 @@
     var question = input.value.trim();
     if (!question) { return; }
 
-    // 1. Display user query
     var userDiv = document.createElement("div");
     userDiv.className = "ai-msg ai-msg-user";
     userDiv.innerHTML = "<b>You:</b> " + question;
@@ -157,7 +146,6 @@
     input.value = "";
     messages.scrollTop = messages.scrollHeight;
 
-    // 2. Display thinking indicator
     var loadingId = "loading-" + Date.now();
     var loadingDiv = document.createElement("div");
     loadingDiv.id = loadingId;
@@ -166,7 +154,6 @@
     messages.appendChild(loadingDiv);
     messages.scrollTop = messages.scrollHeight;
 
-    // 3. Post to /ai/ask using TRACE X built-in helper
     window.TRACEX.postJSON("/ai/ask", { question: question })
       .then(function (data) {
         var loader = document.getElementById(loadingId);
@@ -174,15 +161,13 @@
 
         var answer = "";
         if (data.ai && data.ai.text) {
-          // Clean up unwanted system prompt headers
-          answer = data.ai.text
+                    answer = data.ai.text
             .replace(/\*\*RECORDED FACTS:\*\*/gi, "")
             .replace(/\*\*INTERPRETATION \(AI-generated\):\*\*/gi, "")
             .replace(/\*\*MISSING INFORMATION:\*\*/gi, "")
             .replace(/Not recorded in TRACE X\./gi, "")
             .trim();
         } else if (data.sections && data.sections.length) {
-          // Filter out notice/debug sections like "How this was searched"
           var cleanSections = data.sections.filter(function (s) {
             return s.kind !== "notice" && s.heading !== "How this was searched";
           });

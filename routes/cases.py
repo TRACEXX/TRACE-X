@@ -1,12 +1,3 @@
-"""
-The case file and everything recorded inside a case:
-overview, suspects, witnesses, evidence vault, timeline, notes,
-forensic tools (relationship graph, analysis queue) and findings.
-
-Every route starts with require_case_access(), which returns 403 if the
-logged-in user is not allowed to see (or edit) that case.
-"""
-
 import mimetypes
 import os
 import uuid
@@ -298,7 +289,6 @@ def _note_for_edit(note_id):
     if note is None:
         abort(404)
     case, permission = require_case_access(case_id=note["case_id"], need_edit=True)
-    # Authors, the case lead and the administrator may change a note.
     if note["user_id"] != current_user()["id"] and permission not in ("admin", "lead"):
         abort(403)
     return note, case

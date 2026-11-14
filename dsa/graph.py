@@ -1,22 +1,3 @@
-"""
-Graph stored as an ADJACENCY LIST, with hand-written BFS and DFS.
-
-Nodes are suspects, evidence files, witnesses, devices, locations and
-timeline events. Edges are relationships recorded by investigators
-(table evidence_relationships). Each edge keeps the investigator's stated
-reason, so the application can explain WHY two nodes are connected.
-
-Adjacency list example:
-    'suspect:1'  -> [('evidence:4', edge), ('location:Library', edge)]
-    'evidence:4' -> [('suspect:1', edge)]
-
-The graph is treated as undirected for exploration (a link between a suspect
-and a file can be followed in both directions), but every edge remembers the
-direction in which it was originally recorded.
-
-Complexity of BFS and DFS: O(V + E)
-"""
-
 from dsa.queue import Queue
 
 
@@ -112,11 +93,6 @@ class Graph:
 
     # -------------------------------------------------------- explanations
     def find_path(self, start, goal):
-        """Shortest chain of links between two nodes, found with BFS.
-
-        Returns a list of hops: [(from_node, to_node, edge_info), ...]
-        or None when the nodes are not connected.
-        """
         if start not in self.adjacency or goal not in self.adjacency:
             return None
         if start == goal:
@@ -146,7 +122,6 @@ class Graph:
         return hops
 
     def to_json(self):
-        """Nodes and edges in a format the frontend can draw."""
         nodes = [{"id": n, "label": self.label(n), "type": self.types.get(n, n.split(":")[0])}
                  for n in self.adjacency]
         seen = set()

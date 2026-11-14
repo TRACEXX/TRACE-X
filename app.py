@@ -1,13 +1,3 @@
-"""
-TRACE X application factory.
-
-create_app() builds the Flask app, registers the blueprints in routes/,
-adds security protections, and creates + seeds the SQLite database the
-first time the app runs.
-
-Run it with:   python run.py        (or: flask --app app run)
-"""
-
 import hmac
 import os
 import secrets
@@ -114,7 +104,7 @@ def _register_security(app):
         response.headers["Referrer-Policy"] = "same-origin"
         response.headers["X-Frame-Options"] = "SAMEORIGIN"
         if response.mimetype == "text/html":
-            # Scripts only from our own /static folder: no inline JavaScript.
+           
             response.headers["Content-Security-Policy"] = (
                 "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
                 "img-src 'self' data: blob:; media-src 'self' blob:; frame-src 'self'; object-src 'self'; "

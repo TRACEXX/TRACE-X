@@ -1,22 +1,3 @@
-"""
-Digital evidence vault.
-
-UPLOAD WORKFLOW (upload route below)
-  1. Flask receives the file.
-  2. The user's permission on the case is checked.
-  3. File type (extension + file signature) and size are validated.
-  4. A random storage filename is generated (the user never chooses the path).
-  5. The file is written once into evidence_storage/<case>/ (outside /static)
-     and then marked read-only.
-  6. Python calculates its SHA-256 hash.
-  7-8. The hash and metadata are saved in SQLite.
-  9. A custody event 'Evidence registered' is recorded.
-  10. The evidence appears in the case's Evidence Vault.
-
-Files are only ever sent through file() below, which checks access first.
-There is deliberately no route that replaces or deletes a registered file.
-"""
-
 import csv
 import io
 import mimetypes

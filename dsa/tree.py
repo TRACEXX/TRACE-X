@@ -1,20 +1,3 @@
-"""
-General tree (each node can have any number of children).
-
-Used for the EVIDENCE HIERARCHY:
-
-    TRACE X Evidence Archive
-    ├── CASE-001  The Riverside Library Death
-    │   ├── Images
-    │   │   └── EV-0001  scene_photo.png
-    │   └── CSV Logs
-    │       └── EV-0002  access_log.csv
-    └── CASE-002 ...
-
-All tree operations are RECURSIVE: a function handles one node and then
-calls itself on each child.
-"""
-
 FOLDER_NAMES = {
     "image": "Images",
     "video": "CCTV / Video",

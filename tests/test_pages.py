@@ -1,5 +1,3 @@
-"""End-to-end checks that every page renders and the main workflows run for real."""
-
 import io
 
 from database.db import query_all, query_one
@@ -70,7 +68,7 @@ def test_notes_edit_and_stack_undo(app, client, login):
 
 def test_queue_imports_csv_into_timeline(app, client, login):
     login("amna")
-    client.post("/cases/CASE-001/tasks/process")          # seeded pending CSV import task
+    client.post("/cases/CASE-001/tasks/process")          
     with app.app_context():
         task = query_one("SELECT * FROM analysis_tasks ORDER BY id LIMIT 1")
         assert task["status"] == "done"
@@ -135,7 +133,7 @@ def test_trace_ai_falls_back_when_provider_is_down(tmp_path):
     data = client.post("/ai/ask", json={"question": "Summarize Case 001"}).get_json()
     assert data["ai"]["status"] == "unavailable"
     assert "AI provider unavailable" in data["ai"]["message"]
-    assert "Automated summary" in str(data["sections"])          # stored records still returned
+    assert "Automated summary" in str(data["sections"])          
 
 
 def test_upload_image_and_view(client, login, app):
