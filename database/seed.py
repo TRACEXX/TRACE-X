@@ -881,7 +881,7 @@ def _evidence_specs():
          "Flight SK-881 to Bangkok, 18:52: five passengers on stolen-batch passports; face matches 91-96% to the suspects.",
          "maryam", "2026-11-12 17:00:00"),
         # IMAGE (png)  - social media screenshot
-        ("CASE-009", "c9_post", "c9_anonymous_post.png", _case_file("c9_anonymous_post.png"),
+        ("CASE-009", "c9_post", "c9_anonymous_post.jpg", _case_file("c9_anonymous_post.jpg"),
          "Anonymous post 19:05 on 10 Nov from in-flight Wi-Fi: 'Yeh uraliye 90 million'. Same words hidden in the malware.",
          "warisha", "2026-11-10 19:30:00"),
         # IMAGE (png)  - fund-flow chart
