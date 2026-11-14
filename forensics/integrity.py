@@ -35,7 +35,6 @@ def verify_evidence(evidence, user_id):
         "VALUES (?, ?, ?, ?, ?)",
         (evidence["id"], user_id, checked_at, current, result),
     )
-    # Only the STATUS is updated. original_sha256 is never replaced.
     db.execute(
         "UPDATE evidence SET integrity_status = ?, last_verified_at = ? WHERE id = ?",
         (result, checked_at, evidence["id"]),
