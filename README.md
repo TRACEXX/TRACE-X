@@ -67,34 +67,19 @@ page, the PDF report, and TRACE AI (with and without an AI provider).
 
 ---
 
-## 2. Sample data (all fictional - 8 Active Cases)
+## 2. Sample data ( 8 Active Cases)
+
 
 | Case | Title | Category | Lead Investigator | Team / Notes |
-| --- | --- | --- | --- | --- |
-| **CASE-001** | The Riverside Library Death | Homicide | **Warisha Ahmed**
-
- | Warisha (lead), Hiba |
-| **CASE-002** | Disappearance of Aira Shakir | Missing Person | **Maryam Farhan**
-
- | Maryam (lead), Amna, Warisha |
-| **CASE-003** | Crescent Bank Phishing Breach | Cybercrime | **Amna Fareed**
-
- | Amna (lead), Maryam |
-| **CASE-004** | The Indigo Veil | Narcotics Offence | **Hiba Khan**
-
- | Hiba (lead), Warisha |
-| **CASE-005** | Binance Wallet Theft | Cybercrime | **Maryam Farhan**
-
- | Maryam (lead), Warisha |
-| **CASE-006** | The Mentalist | Homicide | **Warisha Ahmed**
-
- | Warisha (lead), Amna, Hiba, Maryam |
-| **CASE-007** | The DUET Campus Theft | Theft | **Amna Fareed**
-
- | Amna (lead), Hiba |
-| **CASE-008** | The Black Ledger | Criminal Conspiracy | **Hiba Khan**
-
- | Hiba (lead), Maryam |
+|---|---|---|---|---|
+| **CASE-001** | The Riverside Library Death | Homicide | **Warisha Ahmed** | Warisha (lead), Hiba |
+| **CASE-002** | Disappearance of Aira Shakir | Missing Person | **Maryam Farhan** | Maryam (lead), Amna, Warisha |
+| **CASE-003** | Crescent Bank Phishing Breach | Cybercrime | **Amna Fareed** | Amna (lead), Maryam |
+| **CASE-004** | The Indigo Veil | Narcotics Offence | **Hiba Khan** | Hiba (lead), Warisha |
+| **CASE-005** | Binance Wallet Theft | Cybercrime | **Maryam Farhan** | Maryam (lead), Warisha |
+| **CASE-006** | The Mentalist | Homicide | **Warisha Ahmed** | Warisha (lead), Amna, Hiba, Maryam |
+| **CASE-007** | The DUET Campus Theft | Theft | **Amna Fareed** | Amna (lead), Hiba |
+| **CASE-008** | The Black Ledger | Criminal Conspiracy | **Hiba Khan** | Hiba (lead), Maryam |
 
 Every evidence item is a real file that is really hashed and stored read-only. The "photos" are
 generated placeholder images. **No CCTV footage is generated.** Put your staged videos in
