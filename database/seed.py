@@ -317,7 +317,7 @@ CASES = [
             "Rs 800 credits to about 100,000 ordinary accounts at other banks, and Rs 10 million by SWIFT to an offshore "
             "account. The plan was made at Hasnain Pan Shop, which the crew called 'HQ'. Abdul Wahid had been fired from "
             "the bank three weeks earlier after he asked for a Rs 5 lakh loan. Five men flew from Karachi to Bangkok on "
-            "fake passports the same evening. An anonymous post said 'Yeh latakrey 90 million'."
+            "fake passports the same evening. An anonymous post said 'Yeh uraliye 90 million'."
         ),
         "summary": (
             "Rs 90M bank heist planned at a pan shop: a fired employee's revenge, malware on a USB, an inside man in the "
@@ -882,7 +882,7 @@ def _evidence_specs():
          "maryam", "2026-11-12 17:00:00"),
         # IMAGE (png)  - social media screenshot
         ("CASE-009", "c9_post", "c9_anonymous_post.png", _case_file("c9_anonymous_post.png"),
-         "Anonymous post 19:05 on 10 Nov from in-flight Wi-Fi: 'Yeh latakrey 90 million'. Same words hidden in the malware.",
+         "Anonymous post 19:05 on 10 Nov from in-flight Wi-Fi: 'Yeh uraliye 90 million'. Same words hidden in the malware.",
          "warisha", "2026-11-10 19:30:00"),
         # IMAGE (png)  - fund-flow chart
         ("CASE-009", "c9_flow", "c9_fund_flow_chart.png", _case_file("c9_fund_flow_chart.png"),
@@ -1269,7 +1269,7 @@ def seed_database():
          "Ali's white Suzuki Cultus enters car park P2; it is never collected.", "Airport parking log", "c9_parking"),
         ("CASE-009", "2026-11-10 18:52:00", "Flight to Bangkok departs",
          "Five passengers on fake passports leave on SK-881.", "Immigration record", "c9_immigration"),
-        ("CASE-009", "2026-11-10 19:05:00", "'Yeh latakrey 90 million'",
+        ("CASE-009", "2026-11-10 19:05:00", "'Yeh uraliye 90 million'",
          "Anonymous post sent from in-flight Wi-Fi.", "Archived post", "c9_post"),
     ]
     events = {}
