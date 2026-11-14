@@ -123,7 +123,7 @@ def run_queue(args, case, **_):
         queue.enqueue(row)
         steps.append(f"enqueue task #{row['id']} ({row['task_type']} {row['evidence_code']}) -> size {len(queue)}")
     order = []
-    while not queue.is_empty():          # drained in memory only; database is unchanged
+    while not queue.is_empty():          
         task = queue.dequeue()
         order.append(f"#{task['id']} {task['task_type']} {task['evidence_code']}")
         steps.append(f"dequeue #{task['id']}")
