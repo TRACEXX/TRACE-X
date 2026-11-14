@@ -2,7 +2,7 @@
 
 <img src="static/assets/tracex-hero.png" alt="TRACE X" width="760" />
 
-### 🕵️ EVERY CLUE COUNTS. EVERY FILE LEAVES A TRACE.
+### 🕵️ EVERY CLUE COUNTS & EVERY FILE LEAVES A TRACE.
 
 **A detective-style digital investigation system built with Python and Data Structures & Algorithms.**
 
@@ -47,7 +47,7 @@ Open **http://127.0.0.1:5000**. Sample cases and the database are prepared on fi
 
 What if your DSA algorithms could help investigate a case instead of just sorting numbers?
 
-**TRACE X** is a digital detective workspace where investigators explore cases, check evidence, connect clues, and create reports. It **helps organize an investigation — it never decides who is guilty.**
+**TRACE X** is a digital detective workspace where investigators explore cases, check evidence, connect clues and create reports. It **helps organize an investigation — it never decides who is guilty.**
 
 ### 🗂️ What's inside?
 
