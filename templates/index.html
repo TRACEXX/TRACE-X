@@ -3,6 +3,22 @@
 {% block title %}Digital Evidence Integrity & Investigation System{% endblock %}
 {% block public %}
 <div class="tape"></div>
+{# ===== CINEMATIC INTRO (added) - the script must stay first so the overlay is there on first paint ===== #}
+<script src="{{ url_for('static', filename='js/intro.js') }}"></script>
+<div id="tx-intro" class="tx-intro" role="dialog" aria-modal="true" aria-label="TRACE X introduction">
+  <div class="tx-intro-rule top"></div>
+  <div class="tx-intro-rule bottom"></div>
+  <video id="tx-intro-video" class="tx-intro-video" data-src="{{ url_for('static', filename='assets/backgrounds/landing_video.mp4') }}" preload="auto" playsinline webkit-playsinline disablepictureinpicture controlslist="nodownload noremoteplayback" tabindex="-1"></video>
+  <div class="tx-intro-stage">
+    <div class="tx-intro-eyebrow">Digital Evidence Integrity &amp; Investigation System</div>
+    <img class="tx-intro-logo" src="{{ url_for('static', filename='assets/tracex-hero.png') }}" alt="TRACE X">
+    <p class="tx-intro-tag">Every trace tells a story.</p>
+    <button type="button" id="tx-intro-enter" class="tx-intro-enter">ENTER INVESTIGATION</button>
+  </div>
+  <button type="button" id="tx-intro-skip" class="tx-intro-skip">SKIP INTRO</button>
+  <div class="tx-intro-glow"></div>
+</div>
+{# ===== end of cinematic intro ===== #}
 <header class="topbar">
   <a class="brand brand-seamless" href="{{ url_for('auth.index') }}">
     <img src="{{ url_for('static', filename='assets/tracex-logo.png') }}" alt="TRACE X Investigation System">

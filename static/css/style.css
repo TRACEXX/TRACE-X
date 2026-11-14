@@ -626,3 +626,105 @@ pre.steps { font: .8rem/1.55 var(--mono); color: var(--muted); max-height: 320px
     cursor: pointer;
     font-weight: 600;
 }
+
+/* =====================================================================
+   CINEMATIC INTRO (landing page only) - added for the opening video.
+   Everything is hidden unless intro.js adds  html.tx-intro-active.
+   ===================================================================== */
+.tx-intro { display: none; }
+html.tx-intro-active .tx-intro {
+    --tx-fade: .67s;                      /* final fade length (keep equal to FADE_MS in intro.js) */
+    display: block; position: fixed; inset: 0; z-index: 10000;
+    width: 100%; height: 100vh; height: 100dvh;
+    background: #000; color: var(--text); overflow: hidden;
+    touch-action: none; overscroll-behavior: none;
+    font-family: var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif);
+}
+/* red glow rising from below, silver light from above, dark vignette */
+.tx-intro::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background:
+        radial-gradient(ellipse 70% 45% at 50% 108%, rgba(255, 51, 51, .30), transparent 70%),
+        radial-gradient(ellipse 60% 40% at 50% -10%, rgba(203, 213, 225, .10), transparent 70%),
+        radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, .85) 100%);
+}
+/* slow surveillance-style scan band */
+.tx-intro::after {
+    content: ""; position: absolute; left: 0; right: 0; top: -30vh; height: 28vh; pointer-events: none; z-index: 0;
+    background: linear-gradient(to bottom, transparent, rgba(203, 213, 225, .05), rgba(255, 51, 51, .07), transparent);
+    animation: tx-intro-scan 6s linear infinite;
+}
+@keyframes tx-intro-scan { to { transform: translateY(160vh); } }
+
+.tx-intro-rule {
+    position: absolute; left: 8%; right: 8%; height: 1px; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, transparent, var(--line-strong), #cbd5e1 50%, var(--line-strong), transparent);
+    opacity: .7;
+}
+.tx-intro-rule.top { top: max(9vh, env(safe-area-inset-top)); }
+.tx-intro-rule.bottom { bottom: max(9vh, env(safe-area-inset-bottom)); }
+
+/* Stage 1: opening screen */
+.tx-intro-stage {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1.35rem; padding: 2rem 1.25rem; text-align: center;
+    transition: opacity .45s ease, transform .7s ease, visibility 0s linear .5s;
+}
+.tx-intro.is-playing .tx-intro-stage { opacity: 0; transform: scale(1.04); visibility: hidden; pointer-events: none; }
+.tx-intro-eyebrow {
+    font-size: .72rem; letter-spacing: .38em; text-transform: uppercase; color: #cbd5e1; opacity: .85;
+}
+.tx-intro-logo { width: min(88vw, 560px); height: auto; filter: drop-shadow(0 8px 28px rgba(255, 51, 51, .35)) drop-shadow(0 4px 18px rgba(0, 0, 0, .9)); }
+.tx-intro-tag { margin: 0; font-style: italic; color: #cbd5e1; opacity: .8; letter-spacing: .04em; }
+.tx-intro-enter {
+    margin-top: .6rem; padding: 1rem 2.6rem; cursor: pointer;
+    font: 600 .86rem/1 var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif);
+    letter-spacing: .32em; text-indent: .32em; color: #fff;
+    background: rgba(255, 51, 51, .10); border: 1px solid var(--accent); border-radius: 2px;
+    box-shadow: 0 0 0 rgba(255, 51, 51, 0), inset 0 0 18px rgba(255, 51, 51, .15);
+    transition: background .25s ease, box-shadow .25s ease, transform .25s ease;
+    animation: tx-intro-pulse 2.8s ease-in-out infinite;
+}
+.tx-intro-enter:hover, .tx-intro-enter:focus-visible {
+    background: var(--accent); box-shadow: 0 0 34px rgba(255, 51, 51, .55); transform: translateY(-1px); outline: none;
+}
+@keyframes tx-intro-pulse { 50% { box-shadow: 0 0 22px rgba(255, 51, 51, .35), inset 0 0 18px rgba(255, 51, 51, .15); } }
+.tx-intro-stage > * { animation: tx-intro-rise .9s cubic-bezier(.2, .8, .2, 1) both; }
+.tx-intro-stage > :nth-child(2) { animation-delay: .15s; }
+.tx-intro-stage > :nth-child(3) { animation-delay: .35s; }
+.tx-intro-stage > :nth-child(4) { animation-delay: .6s; }
+@keyframes tx-intro-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* Stage 2: the video (original aspect ratio, black bars if needed, no controls) */
+.tx-intro-video {
+    position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;
+    object-fit: contain; background: #000; pointer-events: none;
+    opacity: 0; transition: opacity .5s ease;
+}
+.tx-intro.is-playing .tx-intro-video { opacity: 1; }
+
+.tx-intro-skip {
+    position: absolute; z-index: 3; right: max(1.25rem, env(safe-area-inset-right)); bottom: max(1.25rem, env(safe-area-inset-bottom));
+    padding: .5rem .95rem; cursor: pointer;
+    font: 600 .68rem/1 var(--sans, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif);
+    letter-spacing: .24em; text-indent: .24em; color: #cbd5e1;
+    background: rgba(0, 0, 0, .35); border: 1px solid rgba(203, 213, 225, .35); border-radius: 2px;
+    opacity: 0; visibility: hidden; transition: opacity .25s ease, border-color .25s ease, color .25s ease;
+}
+.tx-intro.is-playing .tx-intro-skip { visibility: visible; opacity: .6; transition: opacity .8s ease .9s, border-color .25s ease, color .25s ease; }
+.tx-intro-skip:hover, .tx-intro-skip:focus-visible { opacity: 1 !important; color: #fff; border-color: var(--accent); outline: none; }
+
+/* Stage 3: black fade with a red-and-silver glow (about 0.67 s), revealing the page underneath */
+.tx-intro.is-leaving { pointer-events: none; animation: tx-intro-out var(--tx-fade) cubic-bezier(.4, 0, .2, 1) forwards; }
+@keyframes tx-intro-out { from { opacity: 1; } to { opacity: 0; } }
+.tx-intro-glow {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0;
+    box-shadow: inset 0 0 170px 40px rgba(255, 51, 51, .55), inset 0 0 70px 6px rgba(203, 213, 225, .35);
+}
+.tx-intro.is-leaving .tx-intro-glow { animation: tx-intro-glow var(--tx-fade) ease-out forwards; }
+@keyframes tx-intro-glow { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .tx-intro::after, .tx-intro-enter, .tx-intro-stage > * { animation: none; }
+}
