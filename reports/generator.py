@@ -44,8 +44,11 @@ def _styles():
 
 
 def _p(text, style):
-    """Paragraph with escaped text (ReportLab treats < and & as markup)."""
-    return Paragraph(escape(str(text if text not in (None, "") else "-")).replace("\n", "<br/>"), style)
+    """Paragraph with escaped text and sanitized dashes to prevent black square rendering bugs."""
+    clean_text = str(text if text not in (None, "") else "-")
+    for char in ["–", "—", "‐", "‑"]:
+        clean_text = clean_text.replace(char, "-")
+    return Paragraph(escape(clean_text).replace("\n", "<br/>"), style)
 
 
 def _kv_table(rows, styles, widths=(42 * mm, 128 * mm)):
@@ -95,7 +98,7 @@ def build_report_pdf(path, bundle, summary_text, summary_source, generated_by):
         ("Incident date", case["incident_date"] or "Not recorded"), ("Location", case["location"] or "Not recorded"),
         ("Date opened", case["created_at"]),
         ("Assigned detectives", ", ".join(f"{t['full_name']} ({t['badge_id']}, {t['permission_level']})"
-                                          for t in bundle["team"]) or "None assigned"),
+                                         for t in bundle["team"]) or "None assigned"),
     ], s))
 
     story.append(_p("Case description (recorded)", s["h2"]))
@@ -106,15 +109,13 @@ def build_report_pdf(path, bundle, summary_text, summary_source, generated_by):
 
     label = ("AUTOMATED SUMMARY - AI-GENERATED INTERPRETATION" if summary_source.startswith("ai")
              else "AUTOMATED SUMMARY - RULE-BASED, FROM STORED RECORDS (NO AI)")
-    box = Table([[_p(label, s["kicker"])], [_p(summary_text, s["body"])],
-                 [_p("This summary is produced automatically. It is not evidence and does not determine guilt. "
-                     "Check every statement against the recorded sections below.", s["small"])]],
-                colWidths=[170 * mm])
-    box.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), TINT), ("BOX", (0, 0), (-1, -1), 0.6, ACCENT),
-                             ("LEFTPADDING", (0, 0), (-1, -1), 8), ("RIGHTPADDING", (0, 0), (-1, -1), 8),
-                             ("TOPPADDING", (0, 0), (-1, -1), 4), ("BOTTOMPADDING", (0, 0), (-1, -1), 4)]))
+    
     story.append(Spacer(1, 8))
-    story.append(box)
+    story.append(_p(label, s["kicker"]))
+    story.append(_p(summary_text, s["body"]))
+    story.append(Spacer(1, 4))
+    story.append(_p("This summary is produced automatically. It is not evidence and does not determine guilt. "
+                    "Check every statement against the recorded sections below.", s["small"]))
 
     story.append(_p(f"Suspects ({len(bundle['suspects'])})", s["h2"]))
     for suspect in bundle["suspects"]:
@@ -186,7 +187,7 @@ def build_report_pdf(path, bundle, summary_text, summary_source, generated_by):
     story.append(_p(f"Investigator notes ({len(bundle['notes'])})", s["h2"]))
     for note in bundle["notes"]:
         story.append(KeepTogether([_p(f"{note['title']} - {note['author_name']}, {note['updated_at']}", s["h3"]),
-                                   _p(note["content"], s["body"])]))
+                                    _p(note["content"], s["body"])]))
     if not bundle["notes"]:
         story.append(_p("No notes recorded.", s["body"]))
 
@@ -226,6 +227,7 @@ def create_case_report(case_id, user, use_ai=True):
             summary_text = generate(SYSTEM_PROMPT, build_llm_prompt(question, llm_case_context(bundle)))
             summary_source = f"ai:{status['name']}"
         except AIProviderError as error:
+            print(">>> CRITICAL AI REPORT GENERATION ERROR:", repr(error))
             summary_text += f"\n\n(AI summary unavailable: {error})"
 
     folder = current_app.config["REPORTS_DIR"]

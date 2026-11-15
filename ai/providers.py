@@ -5,7 +5,7 @@ import urllib.request
 from flask import current_app
 
 OPENAI_COMPATIBLE = {
-    "groq": ("https://api.groq.com/openai/v1", "llama-3.3-70b-versatile"),
+    "groq": ("https://api.groq.com/openai/v1", "openai/gpt-oss-20b"),
     "openrouter": ("https://openrouter.ai/api/v1", "meta-llama/llama-3.3-70b-instruct:free"),
     "openai": ("https://api.openai.com/v1", "gpt-4o-mini"),
 }
@@ -56,12 +56,15 @@ def generate(system_prompt, user_prompt):
 def _post_json(url, payload, headers):
     request = urllib.request.Request(
         url, data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json", **headers}, method="POST")
+        headers={
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            **headers
+        }, method="POST")
     try:
         with urllib.request.urlopen(request, timeout=current_app.config["AI_TIMEOUT"]) as response:
             return json.loads(response.read().decode("utf-8"))
     except urllib.error.HTTPError as error:
-        # Read a short part of the provider's error text; it never contains our key.
         detail = error.read().decode("utf-8", errors="replace")[:200]
         raise AIProviderError(f"AI provider returned HTTP {error.code}. {detail}") from None
     except (urllib.error.URLError, TimeoutError, OSError) as error:
@@ -111,6 +114,3 @@ def _ollama(system_prompt, user_prompt, model):
         return data["message"]["content"].strip()
     except (KeyError, TypeError):
         raise AIProviderError("Unexpected response format from Ollama.") from None
-
-
-

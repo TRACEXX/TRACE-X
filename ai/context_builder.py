@@ -100,7 +100,7 @@ def _clip(value):
 
 def llm_case_context(bundle, parts=("case", "suspects", "witnesses", "evidence", "timeline", "notes",
                                     "relationships", "findings")):
-    """Reduce a case bundle to the fields the LLM needs, with long text clipped."""
+    """Reduce a case bundle to the fields the LLM needs, with long text clipped and lists capped for token limits."""
     case = bundle["case"]
     context = {}
     if "case" in parts:
@@ -115,35 +115,35 @@ def llm_case_context(bundle, parts=("case", "suspects", "witnesses", "evidence",
             "id": s["code"], "name": s["name"], "relationship_to_incident": _clip(s["relationship"]),
             "background": _clip(s["background"]), "possible_motive": _clip(s["motive"]),
             "alibi": _clip(s["alibi"]), "statements": _clip(s["statements"]),
-        } for s in bundle["suspects"]]
+        } for s in bundle["suspects"][:10]]  # Capped to 10 suspects
     if "witnesses" in parts:
         context["witness_statements"] = [{
             "id": w["code"], "name": w["name"], "recorded_at": w["recorded_at"],
             "statement": _clip(w["statement"]), "mentions_suspect": w["related_suspect_name"],
             "related_evidence": w["related_evidence_code"],
-        } for w in bundle["witnesses"]]
+        } for w in bundle["witnesses"][:12]]  # Capped to 12 witnesses
     if "evidence" in parts:
         context["evidence"] = [{
             "id": e["evidence_code"], "file": e["filename"], "type": e["file_type"],
             "description": _clip(e["description"]), "investigator_notes": _clip(e["notes"]),
             "uploaded_to_system_at": e["uploaded_at"], "recording_time_if_known": e["recorded_at"],
             "camera": e["camera_id"], "integrity_status": e["integrity_status"],
-        } for e in bundle["evidence"]]
+        } for e in bundle["evidence"][:15]]  # Capped to 15 evidence items
     if "timeline" in parts:
         context["timeline_sorted"] = [{
             "time": t["time"], "type": t["type"], "description": _clip(t["description"]), "source": t["source"],
-        } for t in bundle["timeline"]]
+        } for t in bundle["timeline"][:15]]  # Capped to 15 timeline events
     if "notes" in parts:
         context["investigator_notes"] = [{"title": n["title"], "author": n["author_name"],
-                                          "content": _clip(n["content"])} for n in bundle["notes"]]
+                                          "content": _clip(n["content"])} for n in bundle["notes"][:10]]  # Capped to 10 notes
     if "relationships" in parts:
         context["recorded_relationships"] = [{
             "from": r["source_label"], "to": r["target_label"], "type": r["relationship_type"],
             "basis": _clip(r["description"]),
-        } for r in bundle["relationships"]]
+        } for r in bundle["relationships"][:15]]  # Capped to 15 relationships
     if "findings" in parts:
         context["submitted_findings"] = [{"by": f["submitted_by_name"], "at": f["submitted_at"],
-                                          "text": _clip(f["findings_text"])} for f in bundle["findings"]]
+                                         "text": _clip(f["findings_text"])} for f in bundle["findings"][:10]]  # Capped to 10 findings
     return context
 
 
